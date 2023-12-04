@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "6199474c65bcf27b80cfe56e",
+    "name": "Laptops",
+    "slug": "laptops"
+  },
+  {
+    "_id": "6199475165bcf27b80cfe571",
+    "name": "Food",
+    "slug": "food"
+  },
+  {
+    "_id": "6199475565bcf27b80cfe574",
+    "name": "Drinks",
+    "slug": "drinks"
+  },
+  {
+    "_id": "6199476765bcf27b80cfe57a",
+    "name": "Fashion",
+    "slug": "fashion"
+  },
+  {
+    "_id": "619a5b86aabbae42fc6b8253",
+    "name": "Clothes",
+    "slug": "clothes"
+  },
+  {
+    "_id": "63ac94c1cdc1fa5f101c139d",
+    "name": "Cameras",
+    "slug": "cameras"
+  }
+]
