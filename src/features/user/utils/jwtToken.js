@@ -8,4 +8,4 @@ const signJwtToken = (userId, expiresIn = '1d') => {
   return token;
 };
 
-module.exports = signJwtToken;
+module.exports = { signJwtToken };

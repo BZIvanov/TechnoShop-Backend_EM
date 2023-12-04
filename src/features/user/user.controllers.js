@@ -2,8 +2,8 @@ const status = require('http-status');
 
 const User = require('./user.model');
 const catchAsync = require('../../middlewares/catch-async');
-const signJwtToken = require('./utils/signJwtToken');
-const setJwtCookie = require('./utils/setJwtCookie');
+const { signJwtToken } = require('./utils/jwtToken');
+const { setJwtCookie, clearJwtCookie } = require('./utils/jwtCookie');
 
 module.exports.register = catchAsync(async (req, res) => {
   const { username, email, password } = req.body;
@@ -45,4 +45,10 @@ module.exports.login = catchAsync(async (req, res, next) => {
     success: true,
     user: { _id: user._id, username: user.username, role: user.role },
   });
+});
+
+module.exports.logout = catchAsync(async (req, res, next) => {
+  clearJwtCookie(res);
+
+  res.status(status.OK).json({ success: true });
 });
