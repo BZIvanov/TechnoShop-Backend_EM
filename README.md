@@ -14,7 +14,7 @@ Prerequisites:
 2. Click _Add Project_ if you don't have one already.
 3. Under the project click _Add Inbox_.
 4. Now after you have Project and Inbox click the settings icon for the Inbox.
-5. From the _SMTP Settings_ tab from the _Integrations_ dropdown, select Node.js nodemailer and there you can find the values you need for the .env file.
+5. From the _SMTP Settings_ tab from the _Integrations_ dropdown, select Node.js nodemailer and there you can find the username and password for the .env file.
 
 ## Cloudinary setup
 

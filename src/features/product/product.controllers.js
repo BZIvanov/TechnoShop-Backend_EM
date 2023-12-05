@@ -1,17 +1,11 @@
 const status = require('http-status');
 const slugify = require('slugify');
-const cloudinary = require('cloudinary');
 
 const Product = require('./product.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 const Subcategory = require('../subcategory/subcategory.model');
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const cloudinary = require('../../providers/cloudinary');
 
 const handleRating = (rating) =>
   Product.aggregate([
