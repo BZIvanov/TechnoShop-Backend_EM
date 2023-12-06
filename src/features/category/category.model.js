@@ -19,7 +19,7 @@ const schema = new Schema(
       index: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = model(Category, schema);

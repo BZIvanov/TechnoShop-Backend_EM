@@ -3,7 +3,7 @@ const request = require('supertest');
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
 const app = require('../../app/express');
 const User = require('./user.model');
-const { signJwtToken } = require('../user/utils/jwtToken');
+const { signJwtToken } = require('./utils/jwtToken');
 const users = require('../../../data-seed/users.json');
 
 describe('User routes', () => {

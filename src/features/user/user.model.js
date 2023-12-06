@@ -40,7 +40,7 @@ const schema = new Schema(
       type: Date,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 schema.pre('save', async function hashUserPassword(next) {
@@ -53,7 +53,7 @@ schema.pre('save', async function hashUserPassword(next) {
 });
 
 schema.methods.comparePassword = async function comparePasswords(
-  incomingPassword
+  incomingPassword,
 ) {
   return bcrypt.compare(incomingPassword, this.password);
 };

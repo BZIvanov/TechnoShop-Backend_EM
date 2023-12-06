@@ -9,8 +9,8 @@ module.exports =
       return next(
         new AppError(
           'User is not authorized to access this route',
-          status.FORBIDDEN
-        )
+          status.FORBIDDEN,
+        ),
       );
     }
 
