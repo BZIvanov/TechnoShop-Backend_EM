@@ -1,0 +1,66 @@
+[
+  {
+    "_id": "619ea4b3ae78a567254055f7",
+    "username": "admin",
+    "email": "admin@mail.com",
+    "password": "12345678",
+    "address": "Sofia, Cherni vrah 100",
+    "role": "admin"
+  },
+  {
+    "_id": "6171c360168d11250b4e15d9",
+    "username": "Iva",
+    "email": "iva@mail.com",
+    "password": "12345678",
+    "address": "Sofia, Cherni vrah 100"
+  },
+  {
+    "_id": "6171c8cf168d11250b4e15dc",
+    "username": "Mira",
+    "email": "mira@mail.com",
+    "password": "12345678",
+    "address": "Sofia, bul Bulgaria 99"
+  },
+  {
+    "_id": "6171cb4b168d11250b4e15df",
+    "username": "Dimo",
+    "email": "dimo@mail.com",
+    "password": "12345678",
+    "address": "Plovidv, ul Svoboda 21"
+  },
+  {
+    "_id": "63ac935cf2bb507ce39da8a2",
+    "username": "Jeni",
+    "email": "jeni@mail.com",
+    "password": "12345678",
+    "address": "Sofia, blvd Sofia 129"
+  },
+  {
+    "_id": "63ac93eeb6693b670ebb1e6c",
+    "username": "Misho",
+    "email": "misho@mail.com",
+    "password": "12345678",
+    "address": "Sofia, blvd Sofia 151"
+  },
+  {
+    "_id": "63bdc0e114e911b1a4333eb6",
+    "username": "Eva",
+    "email": "eva@mail.com",
+    "password": "12345678",
+    "address": "Sofia, Some cool str. 23"
+  },
+  {
+    "_id": "63cd0626c4b3aeaf0ac560b4",
+    "username": "Pepi",
+    "email": "pepi@mail.com",
+    "password": "1Uio!#689",
+    "address": "Sofia, blvd Mall 123"
+  },
+  {
+    "_id": "63cd07939f2a0f56206c55b3",
+    "username": "Elena",
+    "email": "elena@mail.com",
+    "password": "1Cio!$589",
+    "address": "Sofia, blvd Mall 124"
+  }
+]

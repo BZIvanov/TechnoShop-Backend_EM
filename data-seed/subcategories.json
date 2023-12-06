@@ -1,0 +1,122 @@
+[
+  {
+    "_id": "6199477765bcf27b80cfe57f",
+    "name": "Vodka",
+    "slug": "vodka",
+    "categoryId": "6199475565bcf27b80cfe574"
+  },
+  {
+    "_id": "61b2835c75d5581f5508836a",
+    "name": "Alcohol",
+    "slug": "alcohol",
+    "categoryId": "6199475565bcf27b80cfe574"
+  },
+  {
+    "_id": "6199478a65bcf27b80cfe585",
+    "name": "Water",
+    "slug": "water",
+    "categoryId": "6199475565bcf27b80cfe574"
+  },
+  {
+    "_id": "6199479265bcf27b80cfe588",
+    "name": "Juice",
+    "slug": "juice",
+    "categoryId": "6199475565bcf27b80cfe574"
+  },
+  {
+    "_id": "61994f541cba2ad4dea614ef",
+    "name": "Lasagna",
+    "slug": "lasagna",
+    "categoryId": "6199475165bcf27b80cfe571"
+  },
+  {
+    "_id": "619a5b94aabbae42fc6b8259",
+    "name": "Croissants",
+    "slug": "croissants",
+    "categoryId": "6199475165bcf27b80cfe571"
+  },
+  {
+    "_id": "619ec482ae78a56725405654",
+    "name": "Chocolate",
+    "slug": "chocolate",
+    "categoryId": "6199475165bcf27b80cfe571"
+  },
+  {
+    "_id": "61b27f4a8c18d90664b9b7f3",
+    "name": "Shoes",
+    "slug": "shoes",
+    "categoryId": "619a5b86aabbae42fc6b8253"
+  },
+  {
+    "_id": "61b27f4e8c18d90664b9b7f9",
+    "name": "Shirts",
+    "slug": "shirts",
+    "categoryId": "619a5b86aabbae42fc6b8253"
+  },
+  {
+    "_id": "61b27f528c18d90664b9b7fc",
+    "name": "Skirts",
+    "slug": "skirts",
+    "categoryId": "619a5b86aabbae42fc6b8253"
+  },
+  {
+    "_id": "61b27f548c18d90664b9b7ff",
+    "name": "Blouses",
+    "slug": "blouses",
+    "categoryId": "619a5b86aabbae42fc6b8253"
+  },
+  {
+    "_id": "63ac8c84a5ea72fd475748ab",
+    "name": "Other clothes",
+    "slug": "other-clothes",
+    "categoryId": "619a5b86aabbae42fc6b8253"
+  },
+  {
+    "_id": "61b27f568c18d90664b9b802",
+    "name": "Parfums",
+    "slug": "parfums",
+    "categoryId": "6199476765bcf27b80cfe57a"
+  },
+  {
+    "_id": "61b2eb3c8026fa02fca82724",
+    "name": "Watches",
+    "slug": "watches",
+    "categoryId": "6199476765bcf27b80cfe57a"
+  },
+  {
+    "_id": "61b2ecfcdf32b367e09fd7fd",
+    "name": "Men",
+    "slug": "men",
+    "categoryId": "6199476765bcf27b80cfe57a"
+  },
+  {
+    "_id": "61b2ecfedf32b367e09fd800",
+    "name": "Women",
+    "slug": "women",
+    "categoryId": "6199476765bcf27b80cfe57a"
+  },
+  {
+    "_id": "61b2ee7f1bee8d2b7644b6e0",
+    "name": "High-Tech",
+    "slug": "high-tech",
+    "categoryId": "6199474c65bcf27b80cfe56e"
+  },
+  {
+    "_id": "63ac83fec7d4970364449974",
+    "name": "Personal laptops",
+    "slug": "personal-laptops",
+    "categoryId": "6199474c65bcf27b80cfe56e"
+  },
+  {
+    "_id": "63ac95020fc52bfb9ff5910f",
+    "name": "Web cameras",
+    "slug": "web-cameras",
+    "categoryId": "63ac94c1cdc1fa5f101c139d"
+  },
+  {
+    "_id": "63ac9521e08d67c60a6ea76c",
+    "name": "Surveillance cameras",
+    "slug": "surveillance-cameras",
+    "categoryId": "63ac94c1cdc1fa5f101c139d"
+  }
+]

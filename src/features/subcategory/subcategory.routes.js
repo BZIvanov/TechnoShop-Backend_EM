@@ -16,9 +16,12 @@ const validateRequestBody = require('../../middlewares/validate-request-body');
 const {
   upsertSubcategoryValidationSchema,
 } = require('./subcategory.validationSchema');
+const productRoutes = require('../product/product.routes');
 
 // set mergeParams to true to receive the params from the category router
 const router = express.Router({ mergeParams: true });
+
+router.use('/:subcategoryId/products', productRoutes);
 
 router
   .route('/')
