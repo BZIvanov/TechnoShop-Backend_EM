@@ -1,0 +1,259 @@
+[
+  {
+    "_id": "61b280ee8cbd2875f94ed9fb",
+    "title": "Milky Chocolate",
+    "slug": "milky-chocolate",
+    "description": "Delicious chocolate made with a lot of milk. Best chocolate you ever had.",
+    "price": 3.45,
+    "quantity": 2265,
+    "sold": 235,
+    "shipping": "No",
+    "color": "Brown",
+    "brand": "Milky Dream",
+    "ratings": [],
+    "images": [],
+    "category": "6199475165bcf27b80cfe571",
+    "subcategories": ["619ec482ae78a56725405654"]
+  },
+  {
+    "_id": "61b2835a75d5581f55088367",
+    "title": "Alaskian",
+    "slug": "alaskian",
+    "description": "The best and most clean vodka in the world. It carries the spring of the north lands.",
+    "price": 12.15,
+    "quantity": 45,
+    "sold": 11,
+    "shipping": "No",
+    "color": "Ice transparent",
+    "brand": "Alaskian drinks",
+    "ratings": [],
+    "images": [],
+    "category": "6199475565bcf27b80cfe574",
+    "subcategories": ["6199477765bcf27b80cfe57f", "61b2835c75d5581f5508836a"]
+  },
+  {
+    "_id": "61b2eb398026fa02fca82721",
+    "title": "Winter blouse",
+    "slug": "winter-blouse",
+    "description": "Perfect for the winter and the cold months. Very warm and comfortable.",
+    "price": 39.99,
+    "quantity": 22,
+    "sold": 35,
+    "shipping": "Yes",
+    "color": "Light blue",
+    "brand": "Comfy clothes",
+    "ratings": [],
+    "images": [],
+    "category": "619a5b86aabbae42fc6b8253",
+    "subcategories": ["61b27f548c18d90664b9b7ff"]
+  },
+  {
+    "_id": "61b2eb3e8026fa02fca82727",
+    "title": "Watch Timesey 23",
+    "slug": "watch-timesey-23",
+    "description": "Best watches you could have. Very good looking and very comfortable. Outstanding quality.",
+    "price": 78.49,
+    "quantity": 5,
+    "sold": 1,
+    "shipping": "Yes",
+    "color": "Cyan",
+    "brand": "Timesey",
+    "ratings": [],
+    "images": [],
+    "category": "6199476765bcf27b80cfe57a",
+    "subcategories": [
+      "61b2eb3c8026fa02fca82724",
+      "61b2ecfcdf32b367e09fd7fd",
+      "61b2ecfedf32b367e09fd800"
+    ]
+  },
+  {
+    "_id": "61b2edd54e7a9ba6a1d20753",
+    "title": "Laptop Fastey ASG-24",
+    "slug": "laptop-fastey-asg-24",
+    "description": "The best performering laptop. Suitable for work and gaming. This is the laptop with the best display on the market at the moment.",
+    "price": 1799,
+    "quantity": 12,
+    "sold": 3,
+    "shipping": "Yes",
+    "color": "Red",
+    "brand": "Fastey",
+    "ratings": [],
+    "images": [],
+    "category": "6199474c65bcf27b80cfe56e",
+    "subcategories": ["61b2ee7f1bee8d2b7644b6e0"]
+  },
+  {
+    "_id": "61b2f043da40b3a0c6597c51",
+    "title": "Cotton T-shirts",
+    "slug": "cotton-t-shirts",
+    "description": "T-shirts of different sizes and stamps. Perfect for a gift. Buy them now for an incredible price.",
+    "price": 18.88,
+    "quantity": 279,
+    "sold": 51,
+    "shipping": "Yes",
+    "color": "Multiple",
+    "brand": "Cool clothes",
+    "ratings": [],
+    "images": [],
+    "category": "619a5b86aabbae42fc6b8253",
+    "subcategories": ["61b2ecfcdf32b367e09fd7fd", "61b2ecfedf32b367e09fd800"]
+  },
+  {
+    "_id": "61b3c1ba2e08a393a510a3f2",
+    "title": "Asius ZXC-213",
+    "slug": "asius-zxc-213",
+    "description": "New generation laptops. Fastest video card, very good on RAM. Limited fans edition.",
+    "price": 2579.99,
+    "quantity": 25,
+    "sold": 2,
+    "shipping": "Yes",
+    "color": "Black",
+    "brand": "Asius",
+    "ratings": [],
+    "images": [
+      {
+        "publicId": "f52b174b",
+        "imageUrl": "https://my-images.com/bb92ccb81c31.jpg"
+      }
+    ],
+    "category": "6199474c65bcf27b80cfe56e",
+    "subcategories": ["61b2ee7f1bee8d2b7644b6e0"]
+  },
+  {
+    "_id": "63ac82d5930fb240f96f813b",
+    "title": "Thin iP 3x56",
+    "slug": "thin-ip-3x56",
+    "description": "Laptop for general usage. it is built for all use cases.",
+    "price": 2150.5,
+    "quantity": 80,
+    "sold": 5,
+    "shipping": "Yes",
+    "color": "Dark green",
+    "brand": "Think itt",
+    "ratings": [
+      { "stars": 4, "postedBy": "6171c8cf168d11250b4e15dc" },
+      { "stars": 3, "postedBy": "6171cb4b168d11250b4e15df" }
+    ],
+    "images": [
+      {
+        "publicId": "a52b174b",
+        "imageUrl": "https://my-images.com/aa92ccb21c31.jpg"
+      }
+    ],
+    "category": "6199474c65bcf27b80cfe56e",
+    "subcategories": ["61b2ee7f1bee8d2b7644b6e0", "63ac83fec7d4970364449974"]
+  },
+  {
+    "_id": "63ac8839f93c9f9c90e0430c",
+    "title": "Herb liqueur",
+    "slug": "herb-liqueur",
+    "description": "Very nice drink. It contains specially selected mix of herbs which are good for both winter and the summer.",
+    "price": 99,
+    "quantity": 500,
+    "sold": 120,
+    "shipping": "No",
+    "color": "Dark brown",
+    "brand": "Herb herb herb",
+    "ratings": [{ "stars": 5, "postedBy": "6171c360168d11250b4e15d9" }],
+    "images": [],
+    "category": "6199475565bcf27b80cfe574",
+    "subcategories": ["61b2835c75d5581f5508836a"]
+  },
+  {
+    "_id": "63ac8bd9077389c9bf2aba6d",
+    "title": "Garden Gloves",
+    "slug": "garden-gloves",
+    "description": "Very nice garden gloves. Make the work pleasure using this gloves. They are soft and comfortable.",
+    "price": 35.8,
+    "quantity": 75,
+    "sold": 11,
+    "shipping": "No",
+    "color": "Light green",
+    "brand": "Comfy gloves",
+    "ratings": [
+      { "stars": 3, "postedBy": "6171c360168d11250b4e15d9" },
+      { "stars": 3, "postedBy": "6171c8cf168d11250b4e15dc" },
+      { "stars": 4, "postedBy": "6171cb4b168d11250b4e15df" }
+    ],
+    "images": [],
+    "category": "619a5b86aabbae42fc6b8253",
+    "subcategories": ["63ac8c84a5ea72fd475748ab"]
+  },
+  {
+    "_id": "63ac929bc5f6d4c21a4d3b49",
+    "title": "Cherry cake",
+    "slug": "cherry-cake",
+    "description": "The most delicious cake in the world.",
+    "price": 72.55,
+    "quantity": 38,
+    "sold": 21,
+    "shipping": "Yes",
+    "color": "Red",
+    "brand": "Sweetestest",
+    "ratings": [
+      { "stars": 5, "postedBy": "6171c360168d11250b4e15d9" },
+      { "stars": 4, "postedBy": "6171c8cf168d11250b4e15dc" },
+      { "stars": 3, "postedBy": "6171cb4b168d11250b4e15df" },
+      { "stars": 5, "postedBy": "63ac935cf2bb507ce39da8a2" }
+    ],
+    "images": [],
+    "category": "6199475165bcf27b80cfe571",
+    "subcategories": ["619ec482ae78a56725405654"]
+  },
+  {
+    "_id": "63ac99572e4016415dd814ed",
+    "title": "Blueberry cake",
+    "slug": "blueberry-cake",
+    "description": "Just amazing.",
+    "price": 103.5,
+    "quantity": 54,
+    "sold": 32,
+    "shipping": "Yes",
+    "color": "Blue",
+    "brand": "Sweetestest",
+    "ratings": [
+      { "stars": 4, "postedBy": "6171c360168d11250b4e15d9" },
+      { "stars": 3, "postedBy": "6171c8cf168d11250b4e15dc" },
+      { "stars": 3, "postedBy": "6171cb4b168d11250b4e15df" }
+    ],
+    "images": [],
+    "category": "6199475165bcf27b80cfe571",
+    "subcategories": ["619ec482ae78a56725405654"]
+  },
+  {
+    "_id": "63ac958faa47b0f59a4dc4eb",
+    "title": "Cam 23-XPS Long Zoom",
+    "slug": "cam-23-xps-long-zoom",
+    "description": "The best surveillance camera in the world.",
+    "price": 3620.9,
+    "quantity": 130,
+    "sold": 28,
+    "shipping": "Yes",
+    "color": "White",
+    "brand": "Cam Survcam",
+    "ratings": [{ "stars": 5, "postedBy": "63ac935cf2bb507ce39da8a2" }],
+    "images": [],
+    "category": "63ac94c1cdc1fa5f101c139d",
+    "subcategories": ["63ac9521e08d67c60a6ea76c"]
+  },
+  {
+    "_id": "63ac981d3ee1fed08f8b7977",
+    "title": "Cam 52-LTS Mid range",
+    "slug": "cam-52-lts-mid-range",
+    "description": "Very good surveillance camera.",
+    "price": 1215.78,
+    "quantity": 200,
+    "sold": 44,
+    "shipping": "Yes",
+    "color": "Dark blue",
+    "brand": "Cam Survcam",
+    "ratings": [
+      { "stars": 5, "postedBy": "63ac935cf2bb507ce39da8a2" },
+      { "stars": 4, "postedBy": "6171cb4b168d11250b4e15df" }
+    ],
+    "images": [],
+    "category": "63ac94c1cdc1fa5f101c139d",
+    "subcategories": ["63ac9521e08d67c60a6ea76c"]
+  }
+]

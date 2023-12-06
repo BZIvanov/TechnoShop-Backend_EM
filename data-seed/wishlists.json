@@ -1,0 +1,30 @@
+[
+  {
+    "_id": "63da223de94e5fdb863a5253",
+    "owner": "6171cb4b168d11250b4e15df",
+    "products": [
+      "61b2eb3e8026fa02fca82727",
+      "61b3c1ba2e08a393a510a3f2",
+      "63ac8839f93c9f9c90e0430c"
+    ]
+  },
+  {
+    "_id": "63da22a8da24cc539364c946",
+    "owner": "63cd0626c4b3aeaf0ac560b4",
+    "products": ["63ac8bd9077389c9bf2aba6d"]
+  },
+  {
+    "_id": "63da22d559826052e3a6e3ef",
+    "owner": "63ac935cf2bb507ce39da8a2",
+    "products": ["61b280ee8cbd2875f94ed9fb", "61b2eb398026fa02fca82721"]
+  },
+  {
+    "_id": "63da2306c9316c28b87f6814",
+    "owner": "63ac93eeb6693b670ebb1e6c",
+    "products": [
+      "63ac981d3ee1fed08f8b7977",
+      "63ac8839f93c9f9c90e0430c",
+      "63ac82d5930fb240f96f813b"
+    ]
+  }
+]

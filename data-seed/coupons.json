@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "63bdbc5f6807c6aa01da0269",
+    "name": "Great deal",
+    "discount": 15,
+    "expirationDate": "2029-01-31T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbcaa8651a8452410a55e",
+    "name": "XC351234",
+    "discount": 12.55,
+    "expirationDate": "2029-01-23T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbcb2febf8fae06927545",
+    "name": "Low discount",
+    "discount": 5,
+    "expirationDate": "2029-01-24T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbcbba6735509ef3fdc67",
+    "name": "Christmas",
+    "discount": 50,
+    "expirationDate": "2028-01-24T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbcc10498459fbbbfbb9a",
+    "name": "Happy Friday",
+    "discount": 25,
+    "expirationDate": "2028-02-24T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbcc83d4afead36db58e1",
+    "name": "893123122",
+    "discount": 12.5,
+    "expirationDate": "2028-03-15T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbf1e1d78436e73ed4c19",
+    "name": "Winter Gifts",
+    "discount": 8,
+    "expirationDate": "2027-04-15T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbf4a0b5e3cad00e32ca1",
+    "name": "934-9856-22",
+    "discount": 32.1,
+    "expirationDate": "2027-04-11T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbf737a473251c14e2603",
+    "name": "Green Travel",
+    "discount": 70,
+    "expirationDate": "2028-05-11T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbfa9602f27268700b505",
+    "name": "atef-fwef-ewrw",
+    "discount": 3,
+    "expirationDate": "2028-02-11T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbfc6b09c611309741279",
+    "name": "Active sport",
+    "discount": 18,
+    "expirationDate": "2028-02-09T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdbff85c8359c3b83d74b6",
+    "name": "Dress 101",
+    "discount": 10.1,
+    "expirationDate": "2029-05-09T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdc03c10ae994172121ad4",
+    "name": "Dress 1",
+    "discount": 11,
+    "expirationDate": "2029-05-10T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdc0611e48c5ef188de328",
+    "name": "20232024",
+    "discount": 22,
+    "expirationDate": "2028-01-10T19:16:45.000Z"
+  },
+  {
+    "_id": "63bdc081063d922cffae2ec3",
+    "name": "Premiere11",
+    "discount": 30,
+    "expirationDate": "2026-08-10T19:16:45.000Z"
+  }
+]

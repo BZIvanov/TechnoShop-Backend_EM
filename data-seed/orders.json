@@ -1,0 +1,51 @@
+[
+  {
+    "_id": "63dab1f372ea2415c76ac4cc",
+    "orderedBy": "6171c360168d11250b4e15d9",
+    "deliveryAddress": "My cool street 23.",
+    "products": [
+      {
+        "count": 1,
+        "product": "61b2eb398026fa02fca82721"
+      }
+    ],
+    "totalAmount": 39.99
+  },
+  {
+    "_id": "63dabee61d02e47f7f499458",
+    "orderedBy": "6171c360168d11250b4e15d9",
+    "deliveryAddress": "My cool street 23.",
+    "products": [
+      {
+        "count": 2,
+        "product": "63ac8bd9077389c9bf2aba6d"
+      },
+      {
+        "count": 3,
+        "product": "63ac929bc5f6d4c21a4d3b49"
+      }
+    ],
+    "totalAmount": 289.25
+  },
+  {
+    "_id": "63db6f698c56ee62f2876b5c",
+    "orderedBy": "6171c8cf168d11250b4e15dc",
+    "deliveryAddress": "My cool street 25.",
+    "coupon": "63bdbcc10498459fbbbfbb9a",
+    "products": [
+      {
+        "count": 1,
+        "product": "61b2eb3e8026fa02fca82727"
+      },
+      {
+        "count": 1,
+        "product": "61b2edd54e7a9ba6a1d20753"
+      },
+      {
+        "count": 3,
+        "product": "61b2f043da40b3a0c6597c51"
+      }
+    ],
+    "totalAmount": 1450.5975
+  }
+]

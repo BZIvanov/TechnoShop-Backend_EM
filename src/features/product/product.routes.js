@@ -36,7 +36,7 @@ router
 router
   .route('/:productId')
   .get(getProduct)
-  .put(
+  .patch(
     validateRequestBody(productUpdateValidationSchema),
     authenticate,
     authorize(admin),
@@ -46,7 +46,7 @@ router
 
 router
   .route('/:productId/rate')
-  .put(
+  .patch(
     validateRequestBody(productRateValidationSchema),
     authenticate,
     rateProduct,
