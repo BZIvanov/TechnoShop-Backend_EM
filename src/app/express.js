@@ -10,9 +10,15 @@ const globalError = require('../middlewares/global-error');
 
 const app = express();
 
+const corsOptions = {
+  origin: process.env.FRONTEND_ORIGIN,
+  credentials: true, // Important for allowing credentials (cookies) in the response
+  exposedHeaders: ['Set-Cookie'],
+};
+
 // helmet should be on top of middlewares chain, because we want it to be applied for all our routes
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '5mb' }));
 // cookie parser middleware will attach the cookies to the request object
 app.use(cookieParser());

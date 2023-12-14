@@ -164,7 +164,7 @@ describe('User routes', () => {
       await request(app)
         .post('/v1/users/login')
         .send({ email: 'pepi@mail.com', password: '1Uio!#689' })
-        .expect('access-control-allow-origin', '*');
+        .expect('access-control-allow-origin', 'http://localhost:5173');
     });
 
     test('it should not allow to login with invalid email', async () => {
