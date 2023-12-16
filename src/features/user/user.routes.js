@@ -25,7 +25,7 @@ router
   .post(validateRequestBody(registerValidationSchema), register);
 router.route('/login').post(validateRequestBody(loginValidationSchema), login);
 router.route('/logout').post(authenticate, logout);
-router.route('/current-user').get(authenticate, currentUser);
+router.route('/current-user').get(currentUser);
 router
   .route('/update-password')
   .patch(

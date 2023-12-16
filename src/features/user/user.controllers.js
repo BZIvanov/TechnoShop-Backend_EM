@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const status = require('http-status');
+const jwt = require('jsonwebtoken');
 
 const sendEmail = require('../../providers/mailer');
 const User = require('./user.model');
@@ -57,7 +58,18 @@ module.exports.logout = catchAsync(async (req, res, next) => {
 });
 
 module.exports.currentUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.user.id);
+  const token = req.cookies.jwt;
+
+  if (!token) {
+    return res.status(status.OK).json({ success: true, user: null });
+  }
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const user = await User.findById(decoded.id);
+
+  if (!user) {
+    res.status(status.OK).json({ success: true, user: null });
+  }
 
   res.status(status.OK).json({
     success: true,
@@ -94,7 +106,7 @@ module.exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+  const resetUrl = `${process.env.FRONTEND_ORIGIN}/reset-password/${resetToken}`;
   const text = `Here is your password reset URL:\n\n${resetUrl}`;
 
   try {
@@ -140,11 +152,8 @@ module.exports.resetPassword = catchAsync(async (req, res, next) => {
   user.resetPasswordExpire = undefined;
   await user.save();
 
-  const jwtToken = signJwtToken(user._id);
-  setJwtCookie(res, jwtToken);
-
   res.status(status.OK).json({
     success: true,
-    user: { _id: user._id, username: user.username, role: user.role },
+    message: 'Your password was successfully reset. Try to login now',
   });
 });
