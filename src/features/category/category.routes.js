@@ -36,7 +36,7 @@ router
     createCategory,
   );
 router
-  .route('/:id')
+  .route('/:categoryId')
   .get(getCategory)
   .patch(
     validateRequestBody(upsertCategoryValidationSchema),

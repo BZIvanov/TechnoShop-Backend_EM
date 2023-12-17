@@ -12,7 +12,7 @@ module.exports.getAllCategories = catchAsync(async (req, res) => {
 });
 
 module.exports.getCategory = catchAsync(async (req, res, next) => {
-  const category = await Category.findById(req.params.id);
+  const category = await Category.findById(req.params.categoryId);
 
   if (!category) {
     return next(new AppError('Category not found', status.NOT_FOUND));
@@ -32,7 +32,7 @@ module.exports.updateCategory = catchAsync(async (req, res, next) => {
   const { name } = req.body;
 
   const category = await Category.findByIdAndUpdate(
-    req.params.id,
+    req.params.categoryId,
     { name, slug: slugify(name) },
     {
       new: true,
@@ -48,7 +48,7 @@ module.exports.updateCategory = catchAsync(async (req, res, next) => {
 });
 
 module.exports.deleteCategory = catchAsync(async (req, res, next) => {
-  const category = await Category.findByIdAndDelete(req.params.id);
+  const category = await Category.findByIdAndDelete(req.params.categoryId);
 
   if (!category) {
     return next(new AppError('Category not found', status.NOT_FOUND));

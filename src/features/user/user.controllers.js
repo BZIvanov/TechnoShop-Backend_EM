@@ -83,7 +83,7 @@ module.exports.updatePassword = catchAsync(async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
 
   if (!(await user.comparePassword(oldPassword))) {
-    return next(new AppError('Incorrect password', status.UNAUTHORIZED));
+    return next(new AppError('Incorrect password', status.BAD_REQUEST));
   }
 
   user.password = newPassword;
@@ -106,7 +106,7 @@ module.exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetUrl = `${process.env.FRONTEND_ORIGIN}/reset-password/${resetToken}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
   const text = `Here is your password reset URL:\n\n${resetUrl}`;
 
   try {
