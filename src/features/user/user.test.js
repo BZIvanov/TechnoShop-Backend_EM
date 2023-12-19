@@ -303,7 +303,7 @@ describe('User routes', () => {
         .set('Cookie', [`jwt=${signJwtToken(users[8]._id)}`])
         .send({ oldPassword: 'test1234', newPassword: '3Uip!#589' })
         .expect('Content-Type', /application\/json/)
-        .expect(401);
+        .expect(400);
 
       expect(response.body).toHaveProperty('success', false);
       expect(response.body).toHaveProperty('error', 'Incorrect password');

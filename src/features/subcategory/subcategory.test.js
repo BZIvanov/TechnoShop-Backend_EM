@@ -149,7 +149,7 @@ describe('Subcategory routes', () => {
     test('it should update subcategory successfully', async () => {
       const subcategoryId = subcategories[0]._id;
       const response = await request(app)
-        .put(`/v1/subcategories/${subcategoryId}`)
+        .patch(`/v1/subcategories/${subcategoryId}`)
         .send({
           name: 'New subcat name',
           categoryId: subcategories[0].categoryId,

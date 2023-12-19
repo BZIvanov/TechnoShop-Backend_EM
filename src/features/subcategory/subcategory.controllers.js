@@ -18,7 +18,7 @@ module.exports.getSubcategories = catchAsync(async (req, res) => {
 });
 
 module.exports.getSubcategory = catchAsync(async (req, res, next) => {
-  const subcategory = await Subcategory.findById(req.params.id);
+  const subcategory = await Subcategory.findById(req.params.subcategoryId);
 
   if (!subcategory) {
     return next(new AppError('Subcategory not found', status.NOT_FOUND));
@@ -45,7 +45,7 @@ module.exports.updateSubcategory = catchAsync(async (req, res, next) => {
   const { name, categoryId } = req.body;
 
   const subcategory = await Subcategory.findByIdAndUpdate(
-    req.params.id,
+    req.params.subcategoryId,
     { name, categoryId, slug: slugify(name) },
     {
       new: true,
@@ -61,7 +61,9 @@ module.exports.updateSubcategory = catchAsync(async (req, res, next) => {
 });
 
 module.exports.deleteSubcategory = catchAsync(async (req, res, next) => {
-  const subcategory = await Subcategory.findByIdAndDelete(req.params.id);
+  const subcategory = await Subcategory.findByIdAndDelete(
+    req.params.subcategoryId,
+  );
 
   if (!subcategory) {
     return next(new AppError('Subcategory not found', status.NOT_FOUND));

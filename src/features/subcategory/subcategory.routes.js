@@ -33,9 +33,9 @@ router
     createSubcategory,
   );
 router
-  .route('/:id')
+  .route('/:subcategoryId')
   .get(getSubcategory)
-  .put(
+  .patch(
     validateRequestBody(upsertSubcategoryValidationSchema),
     authenticate,
     authorize(admin),
