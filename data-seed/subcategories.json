@@ -118,5 +118,17 @@
     "name": "Surveillance cameras",
     "slug": "surveillance-cameras",
     "categoryId": "63ac94c1cdc1fa5f101c139d"
+  },
+  {
+    "_id": "65847a1f0bcf4aae15b56f3d",
+    "name": "Healthy",
+    "slug": "healthy",
+    "categoryId": "6199475165bcf27b80cfe571"
+  },
+  {
+    "_id": "65847c6e94b7f49f65683bc1",
+    "name": "Phones",
+    "slug": "phones",
+    "categoryId": "65847c2d1d02915686907446"
   }
 ]

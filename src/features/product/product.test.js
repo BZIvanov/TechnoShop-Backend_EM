@@ -34,7 +34,7 @@ describe('Product routes', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('totalCount', 14);
+      expect(response.body).toHaveProperty('totalCount', 16);
       expect(response.body.products[0]).toHaveProperty('title');
     });
 
@@ -45,7 +45,7 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 14);
+      expect(response.body).toHaveProperty('totalCount', 16);
       expect(response.body.products.length).toBe(2);
     });
 
@@ -56,7 +56,7 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 14);
+      expect(response.body).toHaveProperty('totalCount', 16);
       expect(response.body.products.length).toBe(0);
     });
 
@@ -144,8 +144,8 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 10);
-      expect(response.body.products.length).toBe(10);
+      expect(response.body).toHaveProperty('totalCount', 11);
+      expect(response.body.products.length).toBe(11);
 
       const productsShippingOption = response.body.products
         .map((product) => product.shipping)
@@ -160,8 +160,8 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 4);
-      expect(response.body.products.length).toBe(4);
+      expect(response.body).toHaveProperty('totalCount', 5);
+      expect(response.body.products.length).toBe(5);
 
       const productsShippingOption = response.body.products
         .map((product) => product.shipping)
@@ -197,6 +197,17 @@ describe('Product routes', () => {
         expect(productSubcategoriesIds.includes(subcategoryId)).toBe(true);
       });
       expect(response.body.products.length).toBe(2);
+    });
+
+    test('it should get products sorted by sold column', async () => {
+      const response = await request(app)
+        .get('/v1/products')
+        .query({ sortColumn: 'sold', perPage: 3 });
+
+      expect(response.body.products.length).toBe(3);
+      expect(response.body.products[0].sold).toBe(250);
+      expect(response.body.products[0].title).toBe('Watermelon');
+      expect(response.body.products[1].sold).toBe(235);
     });
   });
 

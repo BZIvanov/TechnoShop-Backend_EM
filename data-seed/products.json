@@ -255,5 +255,37 @@
     "images": [],
     "category": "63ac94c1cdc1fa5f101c139d",
     "subcategories": ["63ac9521e08d67c60a6ea76c"]
+  },
+  {
+    "_id": "65847977e75142439b745622",
+    "title": "Watermelon",
+    "slug": "watermelon",
+    "description": "Staying hydrated is important for your body to function properly.",
+    "price": 1.59,
+    "quantity": 5800,
+    "sold": 250,
+    "shipping": "No",
+    "color": "Green",
+    "brand": "Delicious foods",
+    "ratings": [],
+    "images": [],
+    "category": "6199475165bcf27b80cfe571",
+    "subcategories": ["6199479265bcf27b80cfe588"]
+  },
+  {
+    "_id": "65847d214ab354f9cf0be2a9",
+    "title": "Xoiyami NS245",
+    "slug": "xoiyami-ns245",
+    "description": "Get one of the latest and the best phones.",
+    "price": 590.9,
+    "quantity": 45,
+    "sold": 3,
+    "shipping": "Yes",
+    "color": "Blue",
+    "brand": "Xoiyami",
+    "ratings": [],
+    "images": [],
+    "category": "65847c2d1d02915686907446",
+    "subcategories": ["65847c6e94b7f49f65683bc1"]
   }
 ]

@@ -28,5 +28,20 @@
     "_id": "63ac94c1cdc1fa5f101c139d",
     "name": "Cameras",
     "slug": "cameras"
+  },
+  {
+    "_id": "65847bb1303c2690cc25ca02",
+    "name": "TVs",
+    "slug": "tvs"
+  },
+  {
+    "_id": "65847bf665490cddb8e21fe1",
+    "name": "Sport",
+    "slug": "sport"
+  },
+  {
+    "_id": "65847c2d1d02915686907446",
+    "name": "Smartphones",
+    "slug": "smartphones"
   }
 ]
