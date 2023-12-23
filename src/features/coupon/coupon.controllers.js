@@ -7,8 +7,8 @@ const AppError = require('../../utils/app-error');
 module.exports.getCoupons = catchAsync(async (req, res) => {
   const { sortColumn = 'createdAt', order = 'desc', page, perPage } = req.query;
 
-  const pageNumber = parseInt(page || 0, 10);
-  const perPageNumber = parseInt(perPage || 5, 10);
+  const pageNumber = parseInt(page, 10) || 0;
+  const perPageNumber = parseInt(perPage, 10) || 5;
 
   const coupons = await Coupon.find()
     .skip(pageNumber * perPageNumber)

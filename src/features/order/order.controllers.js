@@ -12,8 +12,8 @@ const {
 module.exports.getOrders = catchAsync(async (req, res) => {
   const { sortColumn = 'createdAt', order = 'desc', page, perPage } = req.query;
 
-  const pageNumber = parseInt(page || 0, 10);
-  const perPageNumber = parseInt(perPage || 5, 10);
+  const pageNumber = parseInt(page, 10) || 0;
+  const perPageNumber = parseInt(perPage, 10) || 5;
 
   const builder = { orderedBy: req.user._id };
   if (req.user.role === admin) {

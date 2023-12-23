@@ -77,8 +77,8 @@ module.exports.getProducts = catchAsync(async (req, res) => {
     ...rest,
   });
 
-  const pageNumber = parseInt(page || 1, 10);
-  const perPageNumber = parseInt(perPage || 12, 10);
+  const pageNumber = parseInt(page, 10) || 1;
+  const perPageNumber = parseInt(perPage, 10) || 12;
 
   const products = await Product.find(builder)
     .skip((pageNumber - 1) * perPageNumber)
@@ -144,18 +144,19 @@ module.exports.deleteProduct = catchAsync(async (req, res, next) => {
 });
 
 module.exports.rateProduct = catchAsync(async (req, res) => {
+  const { productId } = req.params;
   const { rating: userRating } = req.body;
 
-  const product = await Product.findById(req.params.productId);
+  const product = await Product.findById(productId);
 
-  const existingRatingObject = product.ratings.find(
+  const existingRating = product.ratings.find(
     (rating) => rating.postedBy.toString() === req.user._id.toString(),
   );
 
-  if (existingRatingObject) {
+  if (existingRating) {
     await Product.updateOne(
       {
-        ratings: { $elemMatch: existingRatingObject },
+        ratings: { $elemMatch: existingRating },
       },
       { $set: { 'ratings.$.stars': userRating } },
       { new: true },
@@ -170,7 +171,7 @@ module.exports.rateProduct = catchAsync(async (req, res) => {
     );
   }
 
-  const updatedProduct = await Product.findById(req.params.productId)
+  const updatedProduct = await Product.findById(productId)
     .populate('category')
     .populate('subcategories');
 
