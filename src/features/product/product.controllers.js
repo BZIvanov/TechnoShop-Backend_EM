@@ -179,25 +179,31 @@ module.exports.rateProduct = catchAsync(async (req, res) => {
 });
 
 module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
+  const { perPage } = req.query;
+
   const product = await Product.findById(req.params.productId);
 
   if (!product) {
     return next(new AppError('Product not found', status.NOT_FOUND));
   }
 
-  const PRODUCTS_COUNT = 3;
+  const perPageNumber = parseInt(perPage, 10) || 3;
 
-  const similarProducts = await Product.find({
+  const builder = {
     _id: { $ne: product._id },
     category: product.category,
-  })
-    .limit(PRODUCTS_COUNT)
+  };
+
+  const similarProducts = await Product.find(builder)
+    .limit(perPageNumber)
     .populate('category')
     .populate('subcategories');
+
+  const totalCount = await Product.where(builder).countDocuments();
 
   res.status(status.OK).json({
     success: true,
     products: similarProducts,
-    totalCount: similarProducts.length,
+    totalCount,
   });
 });

@@ -84,6 +84,22 @@
     "subcategories": ["61b2ee7f1bee8d2b7644b6e0"]
   },
   {
+    "_id": "65886459dc4a2af87ea9320f",
+    "title": "Laptop ThinP12",
+    "slug": "laptop-thinp12",
+    "description": "Thin laptop of new generation.",
+    "price": 2450.5,
+    "quantity": 200,
+    "sold": 18,
+    "shipping": "Yes",
+    "color": "Gray",
+    "brand": "Future2050",
+    "ratings": [],
+    "images": [],
+    "category": "6199474c65bcf27b80cfe56e",
+    "subcategories": ["61b2ee7f1bee8d2b7644b6e0", "63ac83fec7d4970364449974"]
+  },
+  {
     "_id": "61b2f043da40b3a0c6597c51",
     "title": "Cotton T-shirts",
     "slug": "cotton-t-shirts",
