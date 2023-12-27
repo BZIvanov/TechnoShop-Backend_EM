@@ -209,6 +209,23 @@ describe('Product routes', () => {
       expect(response.body.products[0].title).toBe('Watermelon');
       expect(response.body.products[1].sold).toBe(235);
     });
+
+    test('it should not get any products if incomplete search text is provided', async () => {
+      const response = await request(app)
+        .get('/v1/products')
+        .query({ perPage: 12, text: 'lapt' });
+
+      expect(response.body.products.length).toBe(0);
+    });
+
+    test('it should get products if complete search text is provided', async () => {
+      const response = await request(app)
+        .get('/v1/products')
+        .query({ perPage: 12, text: 'laptop' });
+
+      expect(response.body.products.length).toBe(2);
+      expect(response.body.products[0].title).toContain('Laptop');
+    });
   });
 
   describe('Get product controller', () => {
@@ -534,6 +551,21 @@ describe('Product routes', () => {
         .map((product) => product._id)
         .filter((productId) => productId === selectedProductId);
       expect(productsIds.length).toBe(0);
+    });
+  });
+
+  describe('Get products brands controller', () => {
+    test('it should return all products unique brands names', async () => {
+      const response = await request(app)
+        .get('/v1/products/brands')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+
+      expect(response.body).toHaveProperty('success', true);
+      expect(Array.isArray(response.body.brands)).toBe(true);
+      expect(response.body.brands.length).toBe(15);
+      expect(response.body.brands).toContain('Asius');
+      expect(response.body.brands).toContain('Future2050');
     });
   });
 });

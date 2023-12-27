@@ -17,7 +17,7 @@ const handleRating = (rating) =>
         },
       },
     },
-    { $match: { ceiledAverage: parseInt(rating, 10) } },
+    { $match: { ceiledAverage: parseInt(rating, 10) } }, // filter only products matching our calculated stars average
   ]);
 
 const handleQueryParams = async (params) => {
@@ -205,5 +205,14 @@ module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
     success: true,
     products: similarProducts,
     totalCount,
+  });
+});
+
+module.exports.getProductBrands = catchAsync(async (req, res) => {
+  const productBrands = await Product.distinct('brand');
+
+  res.status(status.OK).json({
+    success: true,
+    brands: productBrands,
   });
 });

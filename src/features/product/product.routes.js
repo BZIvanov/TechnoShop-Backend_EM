@@ -8,6 +8,7 @@ const {
   deleteProduct,
   rateProduct,
   getSimilarProducts,
+  getProductBrands,
 } = require('./product.controllers');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
@@ -32,6 +33,8 @@ router
     authorize(admin),
     createProduct,
   );
+
+router.route('/brands').get(getProductBrands);
 
 router
   .route('/:productId')
