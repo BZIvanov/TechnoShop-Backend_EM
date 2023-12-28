@@ -28,6 +28,7 @@ const handleQueryParams = async (params) => {
     subcategories,
     rating,
     shipping,
+    brands,
     category,
     subcategory,
   } = params;
@@ -42,12 +43,13 @@ const handleQueryParams = async (params) => {
         $lte: parseInt(price.split(',')[1], 10),
       },
     }),
-    ...(categories && { category: categories.split(',') }),
+    ...(categories && { category: { $in: categories.split(',') } }),
     ...(subcategories && {
       subcategories: { $in: subcategories.split(',') },
     }),
     ...(rating && { _id: aggregates }),
     ...(shipping && { shipping }),
+    ...(brands && { brand: { $in: brands.split(',') } }),
     ...(category && { category }), // category from params will override categories from query
     ...(subcategory && { subcategories: subcategory }),
   };
