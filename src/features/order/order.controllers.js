@@ -42,10 +42,19 @@ module.exports.createOrder = catchAsync(async (req, res, next) => {
     deliveryAddress: address,
     coupon: undefined,
     orderedBy: currentUser._id,
+    totalAmount: 0,
   };
 
   const coupon = await Coupon.findOne({ name: couponName });
   if (coupon) {
+    const currentDateTime = new Date();
+    const expirationDateTime = new Date(coupon.expirationDate);
+    if (currentDateTime > expirationDateTime) {
+      return next(
+        new AppError('This coupon has already expired.', status.BAD_REQUEST),
+      );
+    }
+
     orderData.coupon = coupon._id;
   }
 

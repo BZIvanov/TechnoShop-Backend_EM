@@ -35,7 +35,7 @@ describe('Order routes', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('totalCount', 3);
+      expect(response.body).toHaveProperty('totalCount', 9);
       expect(response.body).toHaveProperty('orders');
     });
 
@@ -47,7 +47,7 @@ describe('Order routes', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('totalCount', 2);
+      expect(response.body).toHaveProperty('totalCount', 4);
       expect(response.body).toHaveProperty('orders');
     });
   });
@@ -136,6 +136,25 @@ describe('Order routes', () => {
       expect(response.body).toHaveProperty(
         'error',
         'Insufficient product quantity',
+      );
+    });
+
+    test('it should return an error for expired coupon', async () => {
+      const response = await request(app)
+        .post('/v1/orders')
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
+        .send({
+          cart: [{ count: 1, product: products[2]._id }],
+          address: 'Some test street 23',
+          coupon: coupons[15].name,
+        })
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty(
+        'error',
+        'This coupon has already expired.',
       );
     });
   });

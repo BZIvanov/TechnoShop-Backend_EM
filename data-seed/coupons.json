@@ -88,5 +88,11 @@
     "name": "Premiere11",
     "discount": 30,
     "expirationDate": "2026-08-10T19:16:45.000Z"
+  },
+  {
+    "_id": "658f3b53ed202e1129adae70",
+    "name": "Expired",
+    "discount": 11,
+    "expirationDate": "2023-11-29T18:25:37.000Z"
   }
 ]

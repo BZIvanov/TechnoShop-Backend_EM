@@ -9,6 +9,7 @@
         "product": "61b2eb398026fa02fca82721"
       }
     ],
+    "orderStatus": "Not Processed",
     "totalAmount": 39.99
   },
   {
@@ -25,6 +26,7 @@
         "product": "63ac929bc5f6d4c21a4d3b49"
       }
     ],
+    "orderStatus": "Not Processed",
     "totalAmount": 289.25
   },
   {
@@ -46,6 +48,96 @@
         "product": "61b2f043da40b3a0c6597c51"
       }
     ],
+    "orderStatus": "Not Processed",
     "totalAmount": 1450.5975
+  },
+  {
+    "_id": "658f048fde6b0dc145e91e0b",
+    "orderedBy": "63ac935cf2bb507ce39da8a2",
+    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 245",
+    "products": [
+      {
+        "count": 2,
+        "product": "61b2eb398026fa02fca82721"
+      }
+    ],
+    "orderStatus": "Not Processed",
+    "totalAmount": 79.98
+  },
+  {
+    "_id": "658f0563d614111c91b4fdda",
+    "orderedBy": "63ac935cf2bb507ce39da8a2",
+    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 245",
+    "products": [
+      {
+        "count": 1,
+        "product": "65886459dc4a2af87ea9320f"
+      }
+    ],
+    "orderStatus": "Not Processed",
+    "coupon": "63bdbcbba6735509ef3fdc67",
+    "totalAmount": 1225.25
+  },
+  {
+    "_id": "658f0653449d96fed86dbc27",
+    "orderedBy": "63ac93eeb6693b670ebb1e6c",
+    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 128",
+    "products": [
+      {
+        "count": 3,
+        "product": "61b2835a75d5581f55088367"
+      },
+      {
+        "count": 4,
+        "product": "63ac8839f93c9f9c90e0430c"
+      },
+      {
+        "count": 8,
+        "product": "63ac929bc5f6d4c21a4d3b49"
+      }
+    ],
+    "orderStatus": "Not Processed",
+    "coupon": "63bdbf1e1d78436e73ed4c19",
+    "totalAmount": 931.822
+  },
+  {
+    "_id": "658f078208f0b50d5fd44bb5",
+    "orderedBy": "6171c8cf168d11250b4e15dc",
+    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 11",
+    "products": [
+      {
+        "count": 4,
+        "product": "65847d214ab354f9cf0be2a9"
+      }
+    ],
+    "orderStatus": "Not Processed",
+    "totalAmount": 2363.6
+  },
+  {
+    "_id": "658f0bd94ef14c8d6c88d747",
+    "orderedBy": "6171c360168d11250b4e15d9",
+    "deliveryAddress": "My cool street 23.",
+    "products": [
+      {
+        "count": 1,
+        "product": "63ac82d5930fb240f96f813b"
+      }
+    ],
+    "orderStatus": "Not Processed",
+    "totalAmount": 2150.5
+  },
+  {
+    "_id": "658f0c7b6e83b818258bb100",
+    "orderedBy": "6171c360168d11250b4e15d9",
+    "deliveryAddress": "My cool street 23.",
+    "products": [
+      {
+        "count": 2,
+        "product": "65847d214ab354f9cf0be2a9"
+      }
+    ],
+    "orderStatus": "Not Processed",
+    "coupon": "63bdc0611e48c5ef188de328",
+    "totalAmount": 921.804
   }
 ]

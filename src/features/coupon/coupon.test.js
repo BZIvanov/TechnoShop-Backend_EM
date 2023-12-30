@@ -29,7 +29,7 @@ describe('Product routes', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('totalCount', 15);
+      expect(response.body).toHaveProperty('totalCount', 16);
       expect(response.body.coupons).toHaveLength(5);
       expect(response.body.coupons[0]).toHaveProperty('name');
       expect(response.body.coupons[0]).toHaveProperty('discount');
@@ -44,7 +44,7 @@ describe('Product routes', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('totalCount', 15);
+      expect(response.body).toHaveProperty('totalCount', 16);
       expect(response.body.coupons).toHaveLength(9);
     });
 
@@ -97,7 +97,7 @@ describe('Product routes', () => {
       expect(response.body).toHaveProperty('error', 'Duplicate field value');
     });
 
-    test('only admin should be able to cvreate a coupon', async () => {
+    test('only admin should be able to create a coupon', async () => {
       const response = await request(app)
         .post('/v1/coupons')
         .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
@@ -150,7 +150,26 @@ describe('Product routes', () => {
       expect(response.body).toHaveProperty('success', false);
       expect(response.body).toHaveProperty(
         'error',
-        '"expirationDate" must be a valid date',
+        '"expirationDate" must be in ISO 8601 date format',
+      );
+    });
+
+    test('should return error if expirationDate is in the past', async () => {
+      const response = await request(app)
+        .post('/v1/coupons')
+        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .send({
+          name: 'AlreadyExpired',
+          discount: 30,
+          expirationDate: new Date('2022-03-15T19:16:45.000Z'),
+        })
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty(
+        'error',
+        '"expirationDate" must be greater than "now"',
       );
     });
   });
