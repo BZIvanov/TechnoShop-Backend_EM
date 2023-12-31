@@ -50,7 +50,7 @@ describe('Wishlist routes', () => {
     });
   });
 
-  describe('Upsert wishlist controller', () => {
+  describe('Add to wishlist controller', () => {
     test('it should create the wishlist with selected product if the user does not have a wishlist', async () => {
       const response = await request(app)
         .post(`/v1/wishlists/${products[10]._id}`)
@@ -64,22 +64,58 @@ describe('Wishlist routes', () => {
       expect(response.body.products[0]).toHaveProperty('title');
     });
 
-    test('it should remove the product from the wishlist, if it is already there', async () => {
-      const addResponse = await request(app)
-        .post(`/v1/wishlists/${products[10]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[6]._id)}`])
+    test('it should return an error if the product is already in the wishlist', async () => {
+      const response = await request(app)
+        .post(`/v1/wishlists/${products[3]._id}`)
+        .set('Cookie', [`jwt=${signJwtToken(users[3]._id)}`])
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty(
+        'error',
+        'This product is already on the wishlist',
+      );
+    });
+  });
+
+  describe('Remove from wishlist controller', () => {
+    test('it should remove the product from the wishlist, if the product was already on the wishlist', async () => {
+      const response = await request(app)
+        .delete(`/v1/wishlists/${products[3]._id}`)
+        .set('Cookie', [`jwt=${signJwtToken(users[3]._id)}`])
+        .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(addResponse.body).toHaveProperty('success', true);
-      expect(addResponse.body.products).toHaveLength(1);
+      expect(response.body).toHaveProperty('success', true);
+      expect(response.body).toHaveProperty('products');
+      expect(response.body.products).toHaveLength(2);
+      expect(response.body.products[1]).toHaveProperty('title');
+    });
 
-      const removeResponse = await request(app)
-        .post(`/v1/wishlists/${products[10]._id}`)
+    test('it should return an error if the user does not have wishlist', async () => {
+      const response = await request(app)
+        .delete(`/v1/wishlists/${products[1]._id}`)
         .set('Cookie', [`jwt=${signJwtToken(users[6]._id)}`])
-        .expect(200);
+        .expect('Content-Type', /application\/json/)
+        .expect(404);
 
-      expect(removeResponse.body).toHaveProperty('success', true);
-      expect(removeResponse.body.products).toHaveLength(0);
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty('error', 'Wishlist not found');
+    });
+
+    test('it should return an error if the product is not in the wishlist', async () => {
+      const response = await request(app)
+        .delete(`/v1/wishlists/${products[11]._id}`)
+        .set('Cookie', [`jwt=${signJwtToken(users[3]._id)}`])
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty(
+        'error',
+        'This product is not on the wishlist',
+      );
     });
   });
 });

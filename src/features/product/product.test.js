@@ -34,7 +34,7 @@ describe('Product routes', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('totalCount', 17);
+      expect(response.body).toHaveProperty('totalCount', 18);
       expect(response.body.products[0]).toHaveProperty('title');
     });
 
@@ -45,7 +45,7 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 17);
+      expect(response.body).toHaveProperty('totalCount', 18);
       expect(response.body.products.length).toBe(2);
     });
 
@@ -56,7 +56,7 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 17);
+      expect(response.body).toHaveProperty('totalCount', 18);
       expect(response.body.products.length).toBe(0);
     });
 
@@ -160,8 +160,8 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 5);
-      expect(response.body.products.length).toBe(5);
+      expect(response.body).toHaveProperty('totalCount', 6);
+      expect(response.body.products.length).toBe(6);
 
       const productsShippingOption = response.body.products
         .map((product) => product.shipping)

@@ -303,5 +303,21 @@
     "images": [],
     "category": "65847c2d1d02915686907446",
     "subcategories": ["65847c6e94b7f49f65683bc1"]
+  },
+  {
+    "_id": "6590022b06bb0f180787a4da",
+    "title": "Out of Stock XYZ",
+    "slug": "out-of-stock-xyz",
+    "description": "This is a test product with 0 quantity left in stock.",
+    "price": 590,
+    "quantity": 0,
+    "sold": 80,
+    "shipping": "No",
+    "color": "Red",
+    "brand": "Think itt",
+    "ratings": [],
+    "images": [],
+    "category": "65847c2d1d02915686907446",
+    "subcategories": ["65847c6e94b7f49f65683bc1"]
   }
 ]
