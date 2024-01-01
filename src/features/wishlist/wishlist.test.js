@@ -1,7 +1,7 @@
 const request = require('supertest');
 
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
-const app = require('../../app/express');
+const getApp = require('../../app/express');
 const User = require('../user/user.model');
 const Product = require('../product/product.model');
 const Wishlist = require('./wishlist.model');
@@ -9,6 +9,8 @@ const { signJwtToken } = require('../user/utils/jwtToken');
 const users = require('../../../data-seed/users.json');
 const products = require('../../../data-seed/products.json');
 const wishlists = require('../../../data-seed/wishlists.json');
+
+const app = getApp();
 
 describe('Wishlist routes', () => {
   beforeAll(async () => {

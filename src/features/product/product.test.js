@@ -1,7 +1,7 @@
 const request = require('supertest');
 
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
-const app = require('../../app/express');
+const getApp = require('../../app/express');
 const User = require('../user/user.model');
 const Category = require('../category/category.model');
 const Subcategory = require('../subcategory/subcategory.model');
@@ -11,6 +11,8 @@ const users = require('../../../data-seed/users.json');
 const categories = require('../../../data-seed/categories.json');
 const subcategories = require('../../../data-seed/subcategories.json');
 const products = require('../../../data-seed/products.json');
+
+const app = getApp();
 
 describe('Product routes', () => {
   beforeAll(async () => {

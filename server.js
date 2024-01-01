@@ -2,7 +2,9 @@ const http = require('http');
 require('dotenv').config();
 
 const { mongoDbConnect } = require('./src/db/mongo');
-const app = require('./src/app/express');
+const getApp = require('./src/app/express');
+
+const app = getApp();
 
 const server = http.createServer(app);
 

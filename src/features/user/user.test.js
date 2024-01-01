@@ -1,10 +1,12 @@
 const request = require('supertest');
 
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
-const app = require('../../app/express');
+const getApp = require('../../app/express');
 const User = require('./user.model');
 const { signJwtToken } = require('./utils/jwtToken');
 const users = require('../../../data-seed/users.json');
+
+const app = getApp();
 
 describe('User routes', () => {
   beforeAll(async () => {

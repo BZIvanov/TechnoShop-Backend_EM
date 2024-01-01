@@ -1,6 +1,8 @@
 const request = require('supertest');
 
-const app = require('../../app/express');
+const getApp = require('../../app/express');
+
+const app = getApp();
 
 describe('Not found routes', () => {
   describe('Not found controller', () => {

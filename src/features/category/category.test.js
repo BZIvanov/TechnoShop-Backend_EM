@@ -1,12 +1,14 @@
 const request = require('supertest');
 
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
-const app = require('../../app/express');
+const getApp = require('../../app/express');
 const User = require('../user/user.model');
 const Category = require('./category.model');
 const { signJwtToken } = require('../user/utils/jwtToken');
 const users = require('../../../data-seed/users.json');
 const categories = require('../../../data-seed/categories.json');
+
+const app = getApp();
 
 describe('Category routes', () => {
   beforeAll(async () => {
@@ -61,6 +63,39 @@ describe('Category routes', () => {
         .expect(200);
 
       expect(response.headers).toHaveProperty('strict-transport-security');
+    });
+
+    test('it should return an error for too many requests', async () => {
+      // TODO there are not many tests so the default limit of 100 is fine, but if many more tests are added future refactoring might be needed, where enhancedApp is used for all the tests with bigger limit
+      const enhancedApp = getApp({
+        limiterOptions: {
+          windowMs: 1 * 60 * 1000,
+          max: 2,
+          message: 'Too many requests from this IP, please try again later',
+          handler: (req, res, next, options) =>
+            res
+              .status(options.statusCode)
+              .json({ success: false, error: options.message }),
+        },
+      });
+      await request(enhancedApp)
+        .get('/v1/categories')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+      await request(enhancedApp)
+        .get('/v1/categories')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+      const response = await request(enhancedApp)
+        .get('/v1/categories')
+        .expect('Content-Type', /application\/json/)
+        .expect(429);
+
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty(
+        'error',
+        'Too many requests from this IP, please try again later',
+      );
     });
   });
 

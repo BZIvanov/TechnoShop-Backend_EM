@@ -1,7 +1,7 @@
 const request = require('supertest');
 
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
-const app = require('../../app/express');
+const getApp = require('../../app/express');
 const User = require('../user/user.model');
 const Product = require('../product/product.model');
 const Coupon = require('../coupon/coupon.model');
@@ -11,6 +11,8 @@ const users = require('../../../data-seed/users.json');
 const products = require('../../../data-seed/products.json');
 const coupons = require('../../../data-seed/coupons.json');
 const orders = require('../../../data-seed/orders.json');
+
+const app = getApp();
 
 describe('Order routes', () => {
   beforeAll(async () => {
