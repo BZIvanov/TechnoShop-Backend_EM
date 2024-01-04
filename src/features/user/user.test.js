@@ -5,8 +5,11 @@ const getApp = require('../../app/express');
 const User = require('./user.model');
 const { signJwtToken } = require('./utils/jwtToken');
 const users = require('../../../data-seed/users.json');
+const sendEmail = require('../../providers/mailer');
 
 const app = getApp();
+
+jest.mock('../../providers/mailer');
 
 describe('User routes', () => {
   beforeAll(async () => {
@@ -251,6 +254,22 @@ describe('User routes', () => {
   });
 
   describe('Forgot password controller', () => {
+    test('it should send an email if valid email was provided', async () => {
+      sendEmail.mockResolvedValue({});
+
+      const response = await request(app)
+        .post('/v1/users/forgot-password')
+        .send({ email: users[8].email })
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+
+      expect(response.body).toHaveProperty('success', true);
+      expect(response.body).toHaveProperty(
+        'message',
+        'You will soon receive an email, if the provided email was valid.',
+      );
+    });
+
     test('it should return success response for not existing email', async () => {
       const response = await request(app)
         .post('/v1/users/forgot-password')
@@ -326,7 +345,7 @@ describe('User routes', () => {
       );
     });
 
-    test('it should return error if authentication header is not provided', async () => {
+    test('it should return error if authentication/cookie header is not provided', async () => {
       const response = await request(app)
         .patch('/v1/users/update-password')
         .send({ oldPassword: '1Uty!#689', newPassword: '1Eio!#689' })
@@ -335,6 +354,43 @@ describe('User routes', () => {
 
       expect(response.body).toHaveProperty('success', false);
       expect(response.body).toHaveProperty('error', 'You are not logged in');
+    });
+  });
+
+  describe('Reset password controller', () => {
+    test('it should return error if no user matches the provided token', async () => {
+      const user = await User.findOne({ email: users[8].email });
+      const resetToken = user.getResetPasswordToken();
+      await user.save({ validateBeforeSave: false });
+
+      const response = await request(app)
+        .post('/v1/users/reset-password')
+        .send({
+          token: resetToken,
+          newPassword: '3Eio!#689',
+        })
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+
+      expect(response.body).toHaveProperty('success', true);
+      expect(response.body).toHaveProperty(
+        'message',
+        'Your password was successfully reset. Try to login now',
+      );
+    });
+
+    test('it should return error if no user matches the provided token', async () => {
+      const response = await request(app)
+        .post('/v1/users/reset-password')
+        .send({
+          token: '4ba681b26bb397ebebf16315cc821c8d723c4813',
+          newPassword: '1Eio!#689',
+        })
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty('error', 'Invalid token');
     });
   });
 });
