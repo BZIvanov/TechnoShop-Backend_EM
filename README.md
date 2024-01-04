@@ -34,3 +34,7 @@ Run `npm run seed-data` in the root folder (package.json) to seed dummy data. No
 ## Versioning
 
 Currently all endpoints are prefixed with `/v1`, if at some point you want to introduce breaking changes to the current endpoints and at the same time to keep the existing behaviour, you can create `/v2` endpoints by adding another version of routes in the versioning folder.
+
+## Tech Stack
+
+`Express`, `Mongoose`
