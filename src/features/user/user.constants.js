@@ -7,4 +7,4 @@ module.exports.userTypes = {
   admin: 'admin',
 };
 
-module.exports.cookieName = 'jwt';
+module.exports.cookieName = 'jwt'; // not the best name, but it works for a demo project

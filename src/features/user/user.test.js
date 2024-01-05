@@ -234,6 +234,16 @@ describe('User routes', () => {
       expect(response.body).toHaveProperty('user.role', 'user');
     });
 
+    test('it should still return success response in case no user is found', async () => {
+      const response = await request(app)
+        .get('/v1/users/current-user')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+
+      expect(response.body).toHaveProperty('success', true);
+      expect(response.body).toHaveProperty('user', null);
+    });
+
     test('it should return error if the token expired', async () => {
       const token = signJwtToken('6171c360168d11250b4e15d9', '1s');
 
