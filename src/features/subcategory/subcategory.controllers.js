@@ -17,6 +17,62 @@ module.exports.getSubcategories = catchAsync(async (req, res) => {
   res.status(status.OK).json({ success: true, subcategories });
 });
 
+module.exports.getGroupedSubcategories = catchAsync(async (req, res) => {
+  const subcategories = await Subcategory.aggregate([
+    {
+      $lookup: {
+        from: 'categories',
+        localField: 'categoryId',
+        foreignField: '_id',
+        as: 'category',
+      },
+    },
+    {
+      $unwind: '$category',
+    },
+    {
+      $sort: {
+        categoryName: -1,
+      },
+    },
+    {
+      $group: {
+        _id: '$categoryId',
+        categoryName: { $first: '$category.name' },
+        subcategories: { $push: '$$ROOT' },
+      },
+    },
+    {
+      $sort: {
+        categoryName: 1,
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        categoryName: 1,
+        subcategories: {
+          $map: {
+            input: '$subcategories',
+            as: 'subcategory',
+            in: {
+              _id: '$$subcategory._id',
+              name: '$$subcategory.name',
+              slug: '$$subcategory.slug',
+              categoryId: '$$subcategory.categoryId',
+              createdAt: '$$subcategory.createdAt',
+              updatedAt: '$$subcategory.updatedAt',
+              __v: '$$subcategory.__v',
+            },
+          },
+        },
+      },
+    },
+  ]);
+
+  res.status(status.OK).json({ success: true, subcategories });
+});
+
 module.exports.getSubcategory = catchAsync(async (req, res, next) => {
   const { subcategoryId } = req.params;
 

@@ -2,6 +2,7 @@ const status = require('http-status');
 const slugify = require('slugify');
 
 const Category = require('./category.model');
+const Subcategory = require('../subcategory/subcategory.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 
@@ -59,6 +60,8 @@ module.exports.deleteCategory = catchAsync(async (req, res, next) => {
   if (!category) {
     return next(new AppError('Category not found', status.NOT_FOUND));
   }
+
+  await Subcategory.deleteMany({ categoryId: category._id });
 
   res.status(status.NO_CONTENT).json();
 });

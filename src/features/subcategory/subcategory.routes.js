@@ -6,6 +6,7 @@ const {
   createSubcategory,
   updateSubcategory,
   deleteSubcategory,
+  getGroupedSubcategories,
 } = require('./subcategory.controllers');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
@@ -32,6 +33,7 @@ router
     authorize(admin),
     createSubcategory,
   );
+router.route('/grouped').get(getGroupedSubcategories);
 router
   .route('/:subcategoryId')
   .get(getSubcategory)
