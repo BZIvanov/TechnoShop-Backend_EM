@@ -107,9 +107,10 @@ module.exports.getProduct = catchAsync(async (req, res, next) => {
 });
 
 module.exports.createProduct = catchAsync(async (req, res) => {
-  req.body.slug = slugify(req.body.title);
+  const productData = { ...req.body };
+  productData.slug = slugify(req.body.title);
 
-  const product = await Product.create(req.body);
+  const product = await Product.create(productData);
 
   res.status(status.CREATED).json({ success: true, product });
 });

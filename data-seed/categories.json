@@ -43,5 +43,30 @@
     "_id": "65847c2d1d02915686907446",
     "name": "Smartphones",
     "slug": "smartphones"
+  },
+  {
+    "_id": "659d1818779e8c11789b5bda",
+    "name": "Gaming",
+    "slug": "gaming"
+  },
+  {
+    "_id": "659d187551f8161f43bbd0f6",
+    "name": "Outdoors",
+    "slug": "outdoors"
+  },
+  {
+    "_id": "659d18cea9813470e436308a",
+    "name": "PC peripherials",
+    "slug": "pc-peripherials"
+  },
+  {
+    "_id": "659d18fb5fc0774b04a67b80",
+    "name": "Machines",
+    "slug": "machines"
+  },
+  {
+    "_id": "659d19005fc0774b04a67b84",
+    "name": "Tools",
+    "slug": "tools"
   }
 ]

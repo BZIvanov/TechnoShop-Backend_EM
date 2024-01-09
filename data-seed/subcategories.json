@@ -130,5 +130,41 @@
     "name": "Phones",
     "slug": "phones",
     "categoryId": "65847c2d1d02915686907446"
+  },
+  {
+    "_id": "659d267eaba7b01a9c7f9ef6",
+    "name": "Drill Machines",
+    "slug": "drill-machines",
+    "categoryId": "659d18fb5fc0774b04a67b80"
+  },
+  {
+    "_id": "659d26c143919004530aafbe",
+    "name": "Electrical Screwdrivers",
+    "slug": "electrical-screwdrivers",
+    "categoryId": "659d18fb5fc0774b04a67b80"
+  },
+  {
+    "_id": "659d26f5fa356b65bc1f39ad",
+    "name": "Hand Tools",
+    "slug": "hand-tools",
+    "categoryId": "659d19005fc0774b04a67b84"
+  },
+  {
+    "_id": "659d27294cfefa69bce76716",
+    "name": "Printers",
+    "slug": "printers",
+    "categoryId": "659d18cea9813470e436308a"
+  },
+  {
+    "_id": "659d27304cfefa69bce7671b",
+    "name": "Scanners",
+    "slug": "scanners",
+    "categoryId": "659d18cea9813470e436308a"
+  },
+  {
+    "_id": "659d27ab0c8567fc7a2c8a1d",
+    "name": "Flashlights",
+    "slug": "flashlights",
+    "categoryId": "659d187551f8161f43bbd0f6"
   }
 ]
