@@ -37,6 +37,7 @@ const productUpdateValidationSchema = Joi.object({
   quantity: Joi.number().positive(),
   images: Joi.array().items(
     Joi.object({
+      _id: Joi.string(), // it will be added by mongodb and available, when editing images
       publicId: Joi.string(),
       imageUrl: Joi.string(),
     }),
