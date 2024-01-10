@@ -1,6 +1,9 @@
 {
   "name": "techno-shop-backend",
   "version": "1.0.0",
+  "engines": {
+    "node": "20.x"
+  },
   "description": "Techno Shop Backend",
   "main": "server.js",
   "scripts": {
