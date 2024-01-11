@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
+const { environment } = require('../config/environment');
+
 mongoose.connection.once('open', () => {
   console.log('Connected to Mongo DB');
 });
@@ -12,14 +14,14 @@ mongoose.connection.on('error', (error) => {
 let memoryServer = null;
 
 const mongoDbConnect = async () => {
-  let { DATABASE_URI } = process.env;
+  let URI = environment.DATABASE_URI;
 
-  if (process.env.NODE_ENV === 'test') {
+  if (environment.NODE_ENV === 'test') {
     memoryServer = await MongoMemoryServer.create();
-    DATABASE_URI = memoryServer.getUri();
+    URI = memoryServer.getUri();
   }
 
-  await mongoose.connect(DATABASE_URI);
+  await mongoose.connect(URI);
 };
 
 const mongoDbDisconnect = async () => {

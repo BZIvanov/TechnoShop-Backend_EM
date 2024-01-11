@@ -1,4 +1,3 @@
-require('dotenv').config(); // here the dotenv variables are also loaded, because of the unit tests
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');

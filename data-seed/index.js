@@ -1,6 +1,6 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
 
+const { environment } = require('../src/config/environment');
 const User = require('../src/features/user/user.model');
 const Category = require('../src/features/category/category.model');
 const Subcategory = require('../src/features/subcategory/subcategory.model');
@@ -16,7 +16,7 @@ const coupons = require('./coupons.json');
 const wishlists = require('./wishlists.json');
 const orders = require('./orders.json');
 
-mongoose.connect(process.env.DATABASE_URI, {});
+mongoose.connect(environment.DATABASE_URI, {});
 
 const seedData = async () => {
   try {

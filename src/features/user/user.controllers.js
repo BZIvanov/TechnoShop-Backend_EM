@@ -9,6 +9,7 @@ const catchAsync = require('../../middlewares/catch-async');
 const { signJwtToken } = require('./utils/jwtToken');
 const { setJwtCookie, clearJwtCookie } = require('./utils/jwtCookie');
 const { cookieName } = require('./user.constants');
+const { environment } = require('../../config/environment');
 
 module.exports.register = catchAsync(async (req, res) => {
   const { username, email, password } = req.body;
@@ -65,7 +66,7 @@ module.exports.currentUser = catchAsync(async (req, res, next) => {
     return res.status(status.OK).json({ success: true, user: null });
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const decoded = jwt.verify(token, environment.JWT_SECRET);
   const user = await User.findById(decoded.id);
 
   if (!user) {
@@ -107,7 +108,7 @@ module.exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+  const resetUrl = `${environment.FRONTEND_URL}/reset-password/${resetToken}`;
   const text = `Here is your password reset URL:\n\n${resetUrl}`;
 
   try {
