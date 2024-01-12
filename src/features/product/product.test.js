@@ -36,7 +36,7 @@ describe('Product routes', () => {
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('totalCount', 18);
+      expect(response.body).toHaveProperty('totalCount', 20);
       expect(response.body.products[0]).toHaveProperty('title');
     });
 
@@ -47,7 +47,7 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 18);
+      expect(response.body).toHaveProperty('totalCount', 20);
       expect(response.body.products.length).toBe(2);
     });
 
@@ -58,7 +58,7 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 18);
+      expect(response.body).toHaveProperty('totalCount', 20);
       expect(response.body.products.length).toBe(0);
     });
 
@@ -82,8 +82,8 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 3);
-      expect(response.body.products.length).toBe(3);
+      expect(response.body).toHaveProperty('totalCount', 4);
+      expect(response.body.products.length).toBe(4);
 
       response.body.products.forEach((product) => {
         const productRatings = product.ratings.map((rating) => rating.stars);
@@ -146,7 +146,7 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 12);
+      expect(response.body).toHaveProperty('totalCount', 14);
       expect(response.body.products.length).toBe(12);
 
       const productsShippingOption = response.body.products
@@ -565,7 +565,7 @@ describe('Product routes', () => {
 
       expect(response.body).toHaveProperty('success', true);
       expect(Array.isArray(response.body.brands)).toBe(true);
-      expect(response.body.brands.length).toBe(15);
+      expect(response.body.brands.length).toBe(17);
       expect(response.body.brands).toContain('Asius');
       expect(response.body.brands).toContain('Future2050');
     });

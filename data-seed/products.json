@@ -319,5 +319,55 @@
     "images": [],
     "category": "65847c2d1d02915686907446",
     "subcategories": ["65847c6e94b7f49f65683bc1"]
+  },
+  {
+    "_id": "65a18e3636e41b27639e2650",
+    "title": "Torch HMA Pro 258909",
+    "slug": "torch-hma-pro-258909",
+    "description": "High quality product. Perfect for any working conditions",
+    "price": 44.99,
+    "quantity": 180,
+    "sold": 18,
+    "shipping": "Yes",
+    "color": "Black",
+    "brand": "HMA",
+    "ratings": [
+      { "stars": 3, "postedBy": "63ac935cf2bb507ce39da8a2" },
+      { "stars": 4, "postedBy": "63bdc0e114e911b1a4333eb6" },
+      { "stars": 4, "postedBy": "63cd0626c4b3aeaf0ac560b4" }
+    ],
+    "images": [
+      {
+        "publicId": "b52b174y91",
+        "imageUrl": "https://my-images.com/43434ergeg654.jpg"
+      },
+      {
+        "publicId": "b89b12344c00",
+        "imageUrl": "https://my-images.com/hrthrtyty5645678.jpg"
+      }
+    ],
+    "category": "659d187551f8161f43bbd0f6",
+    "subcategories": ["659d27ab0c8567fc7a2c8a1d"]
+  },
+  {
+    "_id": "65a1903d693b6e69a3cae3db",
+    "title": "Heineil TUD-48435 912",
+    "slug": "heineil-tud-48435-912",
+    "description": "The perfect machine for your needs",
+    "price": 89.99,
+    "quantity": 290,
+    "sold": 3,
+    "shipping": "Yes",
+    "color": "Red",
+    "brand": "Heineil",
+    "ratings": [],
+    "images": [
+      {
+        "publicId": "y51a1324y988",
+        "imageUrl": "https://my-images.com/bevferer53345.jpg"
+      }
+    ],
+    "category": "659d18fb5fc0774b04a67b80",
+    "subcategories": ["659d267eaba7b01a9c7f9ef6"]
   }
 ]
