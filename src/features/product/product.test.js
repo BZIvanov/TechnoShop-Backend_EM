@@ -523,6 +523,17 @@ describe('Product routes', () => {
         '"rating" must be an integer',
       );
     });
+
+    test('should return error if rating is not provided', async () => {
+      const response = await request(app)
+        .patch(`/v1/products/${products[6]._id}/rate`)
+        .set('Cookie', [`jwt=${signJwtToken(users[2]._id)}`])
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty('error', '"rating" is required');
+    });
   });
 
   describe('Get similar products controller', () => {
