@@ -27,7 +27,9 @@ module.exports.createCoupon = catchAsync(async (req, res) => {
 });
 
 module.exports.deleteCoupon = catchAsync(async (req, res, next) => {
-  const coupon = await Coupon.findByIdAndDelete(req.params.couponId).exec();
+  const { couponId } = req.params;
+
+  const coupon = await Coupon.findByIdAndDelete(couponId).exec();
 
   if (!coupon) {
     return next(new AppError('Coupon not found', status.NOT_FOUND));

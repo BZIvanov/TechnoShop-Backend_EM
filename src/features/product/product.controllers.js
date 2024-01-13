@@ -95,7 +95,9 @@ module.exports.getProducts = catchAsync(async (req, res) => {
 });
 
 module.exports.getProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.findById(req.params.productId)
+  const { productId } = req.params;
+
+  const product = await Product.findById(productId)
     .populate('category')
     .populate('subcategories');
 
@@ -116,14 +118,12 @@ module.exports.createProduct = catchAsync(async (req, res) => {
 });
 
 module.exports.updateProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.findByIdAndUpdate(
-    req.params.productId,
-    req.body,
-    {
-      new: true,
-      runValidators: true,
-    },
-  );
+  const { productId } = req.params;
+
+  const product = await Product.findByIdAndUpdate(productId, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
   if (!product) {
     return next(new AppError('Product not found', status.NOT_FOUND));
@@ -133,7 +133,9 @@ module.exports.updateProduct = catchAsync(async (req, res, next) => {
 });
 
 module.exports.deleteProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.findByIdAndDelete(req.params.productId);
+  const { productId } = req.params;
+
+  const product = await Product.findByIdAndDelete(productId);
 
   if (!product) {
     return next(new AppError('Product not found', status.NOT_FOUND));
@@ -182,9 +184,10 @@ module.exports.rateProduct = catchAsync(async (req, res) => {
 });
 
 module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
+  const { productId } = req.params;
   const { perPage } = req.query;
 
-  const product = await Product.findById(req.params.productId);
+  const product = await Product.findById(productId);
 
   if (!product) {
     return next(new AppError('Product not found', status.NOT_FOUND));

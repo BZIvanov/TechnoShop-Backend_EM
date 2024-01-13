@@ -53,13 +53,13 @@ module.exports.login = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports.logout = catchAsync(async (req, res, next) => {
+module.exports.logout = catchAsync(async (req, res) => {
   clearJwtCookie(res);
 
   res.status(status.OK).json({ success: true });
 });
 
-module.exports.currentUser = catchAsync(async (req, res, next) => {
+module.exports.currentUser = catchAsync(async (req, res) => {
   const token = req.cookies[cookieName];
 
   if (!token) {
