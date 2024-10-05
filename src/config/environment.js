@@ -1,4 +1,5 @@
-require('dotenv').config(); // reusable file so we don't need to import dtoenv everywhere we need the env variables
+// this file is loading the dotenv file so all environment variables should reexported from this file
+require('dotenv').config();
 
 module.exports.ENV_VARS = {
   NODE_ENV: process.env.NODE_ENV,
