@@ -1,4 +1,4 @@
-const status = require('http-status');
+const httpStatus = require('http-status');
 const { v4: uuidv4 } = require('uuid');
 
 const cloudinary = require('../../providers/cloudinary');
@@ -11,7 +11,7 @@ module.exports.uploadImage = catchAsync(async (req, res) => {
     resource_type: 'auto', // jpeg, png
   });
 
-  res.status(status.OK).json({
+  res.status(httpStatus.OK).json({
     success: true,
     publicId: image.public_id,
     imageUrl: image.secure_url,
@@ -22,8 +22,8 @@ module.exports.removeImage = catchAsync(async (req, res, next) => {
   const { result } = await cloudinary.uploader.destroy(req.body.publicId);
 
   if (result !== 'ok') {
-    return next(new AppError('Remove image error', status.BAD_REQUEST));
+    return next(new AppError('Remove image error', httpStatus.BAD_REQUEST));
   }
 
-  res.status(status.NO_CONTENT).json();
+  res.status(httpStatus.NO_CONTENT).json();
 });

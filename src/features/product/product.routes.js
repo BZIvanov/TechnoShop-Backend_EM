@@ -12,9 +12,7 @@ const {
 } = require('./product.controllers');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
-const {
-  userTypes: { admin },
-} = require('../user/user.constants');
+const { userRoles } = require('../user/user.constants');
 const validateRequestBody = require('../../middlewares/validate-request-body');
 const {
   productCreateValidationSchema,
@@ -30,7 +28,7 @@ router
   .post(
     validateRequestBody(productCreateValidationSchema),
     authenticate,
-    authorize(admin),
+    authorize(userRoles.admin),
     createProduct,
   );
 
@@ -42,10 +40,10 @@ router
   .patch(
     validateRequestBody(productUpdateValidationSchema),
     authenticate,
-    authorize(admin),
+    authorize(userRoles.admin),
     updateProduct,
   )
-  .delete(authenticate, authorize(admin), deleteProduct);
+  .delete(authenticate, authorize(userRoles.admin), deleteProduct);
 
 router
   .route('/:productId/rate')

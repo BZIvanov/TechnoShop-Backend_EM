@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { environment } = require('../src/config/environment');
+const { ENV_VARS } = require('../src/config/environment');
 const User = require('../src/features/user/user.model');
 const Category = require('../src/features/category/category.model');
 const Subcategory = require('../src/features/subcategory/subcategory.model');
@@ -16,7 +16,7 @@ const coupons = require('./coupons.json');
 const wishlists = require('./wishlists.json');
 const orders = require('./orders.json');
 
-mongoose.connect(environment.DATABASE_URI, {});
+mongoose.connect(ENV_VARS.DATABASE_URI, {});
 
 const seedData = async () => {
   try {

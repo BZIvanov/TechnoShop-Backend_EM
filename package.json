@@ -14,7 +14,7 @@
     "test-watch": "set NODE_ENV=test&& jest --watch",
     "seed-data": "node data-seed"
   },
-  "author": "BI",
+  "author": "B.Ivanov",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -1,7 +1,7 @@
-const { environment } = require('../../config/environment');
+const { ENV_VARS } = require('../../config/environment');
 
 module.exports.corsOptions = {
-  origin: environment.FRONTEND_URL,
+  origin: ENV_VARS.FRONTEND_URL,
   credentials: true, // Important for allowing credentials (cookies) in the response
   exposedHeaders: ['Set-Cookie'],
 };

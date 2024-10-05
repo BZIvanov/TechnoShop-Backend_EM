@@ -10,9 +10,7 @@ const {
 const validateRequestBody = require('../../middlewares/validate-request-body');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
-const {
-  userTypes: { admin },
-} = require('../user/user.constants');
+const { userRoles } = require('../user/user.constants');
 const {
   upsertCategoryValidationSchema,
 } = require('./category.validationSchema');
@@ -32,7 +30,7 @@ router
   .post(
     validateRequestBody(upsertCategoryValidationSchema),
     authenticate,
-    authorize(admin),
+    authorize(userRoles.admin),
     createCategory,
   );
 router
@@ -41,9 +39,9 @@ router
   .patch(
     validateRequestBody(upsertCategoryValidationSchema),
     authenticate,
-    authorize(admin),
+    authorize(userRoles.admin),
     updateCategory,
   )
-  .delete(authenticate, authorize(admin), deleteCategory);
+  .delete(authenticate, authorize(userRoles.admin), deleteCategory);
 
 module.exports = router;

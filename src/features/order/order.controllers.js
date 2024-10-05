@@ -1,13 +1,11 @@
-const status = require('http-status');
+const httpStatus = require('http-status');
 
 const Order = require('./order.model');
 const Coupon = require('../coupon/coupon.model');
 const Product = require('../product/product.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
-const {
-  userTypes: { admin },
-} = require('../user/user.constants');
+const { userRoles } = require('../user/user.constants');
 
 module.exports.getOrders = catchAsync(async (req, res) => {
   const { sortColumn = 'createdAt', order = 'desc', page, perPage } = req.query;
@@ -16,7 +14,7 @@ module.exports.getOrders = catchAsync(async (req, res) => {
   const perPageNumber = parseInt(perPage, 10) || 5;
 
   const builder = { orderedBy: req.user._id };
-  if (req.user.role === admin) {
+  if (req.user.role === userRoles.admin) {
     delete builder.orderedBy;
   }
 
@@ -30,7 +28,7 @@ module.exports.getOrders = catchAsync(async (req, res) => {
     .exec();
   const totalCount = await Order.where(builder).countDocuments();
 
-  res.status(status.OK).json({ success: true, orders, totalCount });
+  res.status(httpStatus.OK).json({ success: true, orders, totalCount });
 });
 
 module.exports.createOrder = catchAsync(async (req, res, next) => {
@@ -51,7 +49,10 @@ module.exports.createOrder = catchAsync(async (req, res, next) => {
     const expirationDateTime = new Date(coupon.expirationDate);
     if (currentDateTime > expirationDateTime) {
       return next(
-        new AppError('This coupon has already expired.', status.BAD_REQUEST),
+        new AppError(
+          'This coupon has already expired.',
+          httpStatus.BAD_REQUEST,
+        ),
       );
     }
 
@@ -72,7 +73,7 @@ module.exports.createOrder = catchAsync(async (req, res, next) => {
 
   if (insufficientQuantityProduct) {
     return next(
-      new AppError('Insufficient product quantity', status.BAD_REQUEST),
+      new AppError('Insufficient product quantity', httpStatus.BAD_REQUEST),
     );
   }
 
@@ -97,7 +98,7 @@ module.exports.createOrder = catchAsync(async (req, res, next) => {
 
   const order = await new Order(orderData).save();
 
-  res.status(status.CREATED).json({ success: true, order });
+  res.status(httpStatus.CREATED).json({ success: true, order });
 });
 
 module.exports.updateOrderStatus = catchAsync(async (req, res) => {
@@ -114,5 +115,5 @@ module.exports.updateOrderStatus = catchAsync(async (req, res) => {
     .populate('products.product', '_id title price')
     .exec();
 
-  res.status(status.OK).json({ success: true, order });
+  res.status(httpStatus.OK).json({ success: true, order });
 });

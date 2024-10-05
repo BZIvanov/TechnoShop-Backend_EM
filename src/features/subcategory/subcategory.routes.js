@@ -10,9 +10,7 @@ const {
 } = require('./subcategory.controllers');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
-const {
-  userTypes: { admin },
-} = require('../user/user.constants');
+const { userRoles } = require('../user/user.constants');
 const validateRequestBody = require('../../middlewares/validate-request-body');
 const {
   upsertSubcategoryValidationSchema,
@@ -30,7 +28,7 @@ router
   .post(
     validateRequestBody(upsertSubcategoryValidationSchema),
     authenticate,
-    authorize(admin),
+    authorize(userRoles.admin),
     createSubcategory,
   );
 router.route('/grouped').get(getGroupedSubcategories);
@@ -40,9 +38,9 @@ router
   .patch(
     validateRequestBody(upsertSubcategoryValidationSchema),
     authenticate,
-    authorize(admin),
+    authorize(userRoles.admin),
     updateSubcategory,
   )
-  .delete(authenticate, authorize(admin), deleteSubcategory);
+  .delete(authenticate, authorize(userRoles.admin), deleteSubcategory);
 
 module.exports = router;

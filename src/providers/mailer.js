@@ -1,19 +1,19 @@
 const nodemailer = require('nodemailer');
 
-const { environment } = require('../config/environment');
+const { ENV_VARS } = require('../config/environment');
 
 const sendEmail = async (options) => {
   const transporter = nodemailer.createTransport({
-    host: environment.SMTP_HOST,
-    port: environment.SMTP_PORT,
+    host: ENV_VARS.SMTP_HOST,
+    port: ENV_VARS.SMTP_PORT,
     auth: {
-      user: environment.SMTP_USERNAME,
-      pass: environment.SMTP_PASSWORD,
+      user: ENV_VARS.SMTP_USERNAME,
+      pass: ENV_VARS.SMTP_PASSWORD,
     },
   });
 
   const message = {
-    from: `${environment.FROM_NAME} <${environment.FROM_EMAIL}>`,
+    from: `${ENV_VARS.FROM_NAME} <${ENV_VARS.FROM_EMAIL}>`,
     to: options.email,
     subject: options.subject,
     text: options.text,

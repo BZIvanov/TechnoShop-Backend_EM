@@ -1,4 +1,4 @@
-const status = require('http-status');
+const httpStatus = require('http-status');
 
 const Coupon = require('./coupon.model');
 const catchAsync = require('../../middlewares/catch-async');
@@ -17,13 +17,13 @@ module.exports.getCoupons = catchAsync(async (req, res) => {
     .exec();
   const totalCount = await Coupon.countDocuments();
 
-  res.status(status.OK).json({ success: true, coupons, totalCount });
+  res.status(httpStatus.OK).json({ success: true, coupons, totalCount });
 });
 
 module.exports.createCoupon = catchAsync(async (req, res) => {
   const coupon = await new Coupon(req.body).save();
 
-  res.status(status.CREATED).json({ success: true, coupon });
+  res.status(httpStatus.CREATED).json({ success: true, coupon });
 });
 
 module.exports.deleteCoupon = catchAsync(async (req, res, next) => {
@@ -32,8 +32,8 @@ module.exports.deleteCoupon = catchAsync(async (req, res, next) => {
   const coupon = await Coupon.findByIdAndDelete(couponId).exec();
 
   if (!coupon) {
-    return next(new AppError('Coupon not found', status.NOT_FOUND));
+    return next(new AppError('Coupon not found', httpStatus.NOT_FOUND));
   }
 
-  res.status(status.NO_CONTENT).json();
+  res.status(httpStatus.NO_CONTENT).json();
 });

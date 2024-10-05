@@ -8,15 +8,13 @@ const {
 const validateRequestBody = require('../../middlewares/validate-request-body');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
-const {
-  userTypes: { admin },
-} = require('../user/user.constants');
+const { userRoles } = require('../user/user.constants');
 const { createCouponValidationSchema } = require('./coupon.validationSchema');
 
 const router = express.Router();
 
 // the below 2 middlewares will apply to all coupon routes
-router.use(authenticate, authorize(admin));
+router.use(authenticate, authorize(userRoles.admin));
 
 router
   .route('/')

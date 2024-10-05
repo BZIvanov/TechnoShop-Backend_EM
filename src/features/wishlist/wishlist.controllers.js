@@ -1,4 +1,4 @@
-const status = require('http-status');
+const httpStatus = require('http-status');
 
 const Wishlist = require('./wishlist.model');
 const catchAsync = require('../../middlewares/catch-async');
@@ -10,7 +10,7 @@ module.exports.getWishlist = catchAsync(async (req, res, next) => {
     .exec();
 
   res
-    .status(status.OK)
+    .status(httpStatus.OK)
     .json({ success: true, products: (wishlist && wishlist.products) || [] });
 });
 
@@ -29,7 +29,7 @@ module.exports.addToWishlist = catchAsync(async (req, res, next) => {
     return next(
       new AppError(
         'This product is already on the wishlist',
-        status.BAD_REQUEST,
+        httpStatus.BAD_REQUEST,
       ),
     );
   }
@@ -42,7 +42,7 @@ module.exports.addToWishlist = catchAsync(async (req, res, next) => {
     .populate('products')
     .exec();
 
-  res.status(status.OK).json({
+  res.status(httpStatus.OK).json({
     success: true,
     products: wishlistProducts.products,
   });
@@ -54,14 +54,17 @@ module.exports.removeFromWishlist = catchAsync(async (req, res, next) => {
   const wishlist = await Wishlist.findOne({ owner: req.user._id }).exec();
 
   if (!wishlist) {
-    return next(new AppError('Wishlist not found', status.NOT_FOUND));
+    return next(new AppError('Wishlist not found', httpStatus.NOT_FOUND));
   }
 
   const isExistingProduct = wishlist.products.includes(productId);
 
   if (!isExistingProduct) {
     return next(
-      new AppError('This product is not on the wishlist', status.BAD_REQUEST),
+      new AppError(
+        'This product is not on the wishlist',
+        httpStatus.BAD_REQUEST,
+      ),
     );
   }
 
@@ -73,7 +76,7 @@ module.exports.removeFromWishlist = catchAsync(async (req, res, next) => {
     .populate('products')
     .exec();
 
-  res.status(status.OK).json({
+  res.status(httpStatus.OK).json({
     success: true,
     products: wishlistProducts.products,
   });

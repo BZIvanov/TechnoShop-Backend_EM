@@ -6,7 +6,9 @@ Run `npm install` in the root folder (package.json) to install dependencies.
 
 Update `.env` file with correct values. The current ones are fake serving as an example.
 
-Prerequisites:
+Run `npm run dev` to start the server in development mode.
+
+### Prerequisites
 
 - MongoDB local installation
 

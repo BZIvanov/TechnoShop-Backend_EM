@@ -1,4 +1,4 @@
-const status = require('http-status');
+const httpStatus = require('http-status');
 const slugify = require('slugify');
 
 const Product = require('./product.model');
@@ -91,7 +91,7 @@ module.exports.getProducts = catchAsync(async (req, res) => {
 
   const totalCount = await Product.where(builder).countDocuments();
 
-  res.status(status.OK).json({ success: true, products, totalCount });
+  res.status(httpStatus.OK).json({ success: true, products, totalCount });
 });
 
 module.exports.getProduct = catchAsync(async (req, res, next) => {
@@ -102,10 +102,10 @@ module.exports.getProduct = catchAsync(async (req, res, next) => {
     .populate('subcategories');
 
   if (!product) {
-    return next(new AppError('Product not found', status.NOT_FOUND));
+    return next(new AppError('Product not found', httpStatus.NOT_FOUND));
   }
 
-  res.status(status.OK).json({ success: true, product });
+  res.status(httpStatus.OK).json({ success: true, product });
 });
 
 module.exports.createProduct = catchAsync(async (req, res) => {
@@ -114,7 +114,7 @@ module.exports.createProduct = catchAsync(async (req, res) => {
 
   const product = await Product.create(productData);
 
-  res.status(status.CREATED).json({ success: true, product });
+  res.status(httpStatus.CREATED).json({ success: true, product });
 });
 
 module.exports.updateProduct = catchAsync(async (req, res, next) => {
@@ -126,10 +126,10 @@ module.exports.updateProduct = catchAsync(async (req, res, next) => {
   });
 
   if (!product) {
-    return next(new AppError('Product not found', status.NOT_FOUND));
+    return next(new AppError('Product not found', httpStatus.NOT_FOUND));
   }
 
-  res.status(status.OK).json({ success: true, product });
+  res.status(httpStatus.OK).json({ success: true, product });
 });
 
 module.exports.deleteProduct = catchAsync(async (req, res, next) => {
@@ -138,14 +138,14 @@ module.exports.deleteProduct = catchAsync(async (req, res, next) => {
   const product = await Product.findByIdAndDelete(productId);
 
   if (!product) {
-    return next(new AppError('Product not found', status.NOT_FOUND));
+    return next(new AppError('Product not found', httpStatus.NOT_FOUND));
   }
 
   product.images.forEach(async (image) => {
     await cloudinary.uploader.destroy(image.publicId);
   });
 
-  res.status(status.NO_CONTENT).json();
+  res.status(httpStatus.NO_CONTENT).json();
 });
 
 module.exports.rateProduct = catchAsync(async (req, res) => {
@@ -180,7 +180,7 @@ module.exports.rateProduct = catchAsync(async (req, res) => {
     .populate('category')
     .populate('subcategories');
 
-  res.status(status.OK).json({ success: true, product: updatedProduct });
+  res.status(httpStatus.OK).json({ success: true, product: updatedProduct });
 });
 
 module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
@@ -190,7 +190,7 @@ module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
   const product = await Product.findById(productId);
 
   if (!product) {
-    return next(new AppError('Product not found', status.NOT_FOUND));
+    return next(new AppError('Product not found', httpStatus.NOT_FOUND));
   }
 
   const perPageNumber = parseInt(perPage, 10) || 3;
@@ -207,7 +207,7 @@ module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
 
   const totalCount = await Product.where(builder).countDocuments();
 
-  res.status(status.OK).json({
+  res.status(httpStatus.OK).json({
     success: true,
     products: similarProducts,
     totalCount,
@@ -217,7 +217,7 @@ module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
 module.exports.getProductBrands = catchAsync(async (req, res) => {
   const productBrands = await Product.distinct('brand');
 
-  res.status(status.OK).json({
+  res.status(httpStatus.OK).json({
     success: true,
     brands: productBrands,
   });

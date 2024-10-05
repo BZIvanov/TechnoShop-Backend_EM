@@ -4,15 +4,16 @@ const bcrypt = require('bcryptjs');
 
 const {
   model: { User },
-  userTypes,
+  userRoles,
+  registerMethods,
 } = require('./user.constants');
 
 const schema = new Schema(
   {
     username: {
       type: String,
-      required: [true, 'Please provide a name'],
-      maxLength: [50, 'User name should be at most 50 characters'],
+      required: [true, 'Please provide a username'],
+      maxLength: [50, 'Username should be at most 50 characters'],
     },
     email: {
       type: String,
@@ -23,15 +24,28 @@ const schema = new Schema(
       type: String,
       required: [true, 'Please provide a password'],
       minLength: [6, 'Password must be at least 6 characters'],
-      select: false,
+      select: false, // by default password should be excluded from queries
     },
     address: {
       type: String,
     },
     role: {
       type: String,
-      enum: Object.values(userTypes),
-      default: userTypes.user,
+      enum: Object.values(userRoles),
+      default: userRoles.user,
+    },
+    registerMethod: {
+      type: String,
+      enum: Object.values(registerMethods),
+      default: registerMethods.email,
+    },
+    avatar: {
+      publicId: {
+        type: String,
+      },
+      imageUrl: {
+        type: String,
+      },
     },
     resetPasswordToken: {
       type: String,

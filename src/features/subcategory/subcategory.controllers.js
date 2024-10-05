@@ -1,4 +1,4 @@
-const status = require('http-status');
+const httpStatus = require('http-status');
 const slugify = require('slugify');
 
 const Subcategory = require('./subcategory.model');
@@ -14,7 +14,7 @@ module.exports.getSubcategories = catchAsync(async (req, res) => {
     .populate('categoryId')
     .sort({ createdAt: -1 });
 
-  res.status(status.OK).json({ success: true, subcategories });
+  res.status(httpStatus.OK).json({ success: true, subcategories });
 });
 
 module.exports.getGroupedSubcategories = catchAsync(async (req, res) => {
@@ -70,7 +70,7 @@ module.exports.getGroupedSubcategories = catchAsync(async (req, res) => {
     },
   ]);
 
-  res.status(status.OK).json({ success: true, subcategories });
+  res.status(httpStatus.OK).json({ success: true, subcategories });
 });
 
 module.exports.getSubcategory = catchAsync(async (req, res, next) => {
@@ -79,10 +79,10 @@ module.exports.getSubcategory = catchAsync(async (req, res, next) => {
   const subcategory = await Subcategory.findById(subcategoryId);
 
   if (!subcategory) {
-    return next(new AppError('Subcategory not found', status.NOT_FOUND));
+    return next(new AppError('Subcategory not found', httpStatus.NOT_FOUND));
   }
 
-  res.status(status.OK).json({ success: true, subcategory });
+  res.status(httpStatus.OK).json({ success: true, subcategory });
 });
 
 module.exports.createSubcategory = catchAsync(async (req, res) => {
@@ -97,7 +97,7 @@ module.exports.createSubcategory = catchAsync(async (req, res) => {
   // important to populate here, because the frontend relies on this data
   subcategory = await subcategory.populate('categoryId');
 
-  res.status(status.CREATED).json({ success: true, subcategory });
+  res.status(httpStatus.CREATED).json({ success: true, subcategory });
 });
 
 module.exports.updateSubcategory = catchAsync(async (req, res, next) => {
@@ -114,10 +114,10 @@ module.exports.updateSubcategory = catchAsync(async (req, res, next) => {
   ).populate('categoryId'); // important to populate here, because the frontend relies on this data
 
   if (!subcategory) {
-    return next(new AppError('Subcategory not found', status.NOT_FOUND));
+    return next(new AppError('Subcategory not found', httpStatus.NOT_FOUND));
   }
 
-  res.status(status.OK).json({ success: true, subcategory });
+  res.status(httpStatus.OK).json({ success: true, subcategory });
 });
 
 module.exports.deleteSubcategory = catchAsync(async (req, res, next) => {
@@ -126,8 +126,8 @@ module.exports.deleteSubcategory = catchAsync(async (req, res, next) => {
   const subcategory = await Subcategory.findByIdAndDelete(subcategoryId);
 
   if (!subcategory) {
-    return next(new AppError('Subcategory not found', status.NOT_FOUND));
+    return next(new AppError('Subcategory not found', httpStatus.NOT_FOUND));
   }
 
-  res.status(status.NO_CONTENT).json();
+  res.status(httpStatus.NO_CONTENT).json();
 });

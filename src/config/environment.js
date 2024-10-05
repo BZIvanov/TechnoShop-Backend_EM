@@ -1,6 +1,6 @@
 require('dotenv').config(); // reusable file so we don't need to import dtoenv everywhere we need the env variables
 
-module.exports.environment = {
+module.exports.ENV_VARS = {
   NODE_ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   DATABASE_URI: process.env.DATABASE_URI,
