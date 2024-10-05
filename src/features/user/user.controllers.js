@@ -59,6 +59,7 @@ module.exports.logout = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true });
 });
 
+// do not use the authenticate middleware, because in case of no user, we want to return success response with no user
 module.exports.currentUser = catchAsync(async (req, res) => {
   const token = req.cookies[cookieName];
 
@@ -70,7 +71,7 @@ module.exports.currentUser = catchAsync(async (req, res) => {
   const user = await User.findById(decoded.id);
 
   if (!user) {
-    res.status(httpStatus.OK).json({ success: true, user: null });
+    return res.status(httpStatus.OK).json({ success: true, user: null });
   }
 
   res.status(httpStatus.OK).json({
