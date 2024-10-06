@@ -11,4 +11,4 @@ module.exports.registerMethods = {
   email: 'email',
 };
 
-module.exports.cookieName = 'jwt'; // not the best name, but it works for a demo project
+module.exports.cookieName = 'jwt'; // not the best name, it is just for this demo project

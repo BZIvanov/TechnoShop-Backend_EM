@@ -10,7 +10,7 @@ Run `npm run dev` to start the server in development mode.
 
 ### Prerequisites
 
-- MongoDB local installation
+- MongoDB v7.0.11 local installation
 
 ## Mailtrap setup
 

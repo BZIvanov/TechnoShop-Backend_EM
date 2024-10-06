@@ -23,7 +23,7 @@ const schema = new Schema(
     password: {
       type: String,
       required: [true, 'Please provide a password'],
-      minLength: [6, 'Password must be at least 6 characters'],
+      minLength: [8, 'Password must be at least 8 characters'],
       select: false, // by default password should be excluded from queries
     },
     address: {
