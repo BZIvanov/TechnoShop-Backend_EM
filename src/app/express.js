@@ -4,7 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
-const { corsOptions, expressJson, limiterOptions } = require('./config');
+const { corsOptions, expressJson, limiterOptions } = require('./app-config');
 const routesV1 = require('./versioning/v1');
 const notFoundRoutes = require('../features/not-found/not-found.routes');
 const globalError = require('../middlewares/global-error');
