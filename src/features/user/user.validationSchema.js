@@ -3,37 +3,50 @@ const Joi = require('joi');
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,30})/;
 
+const usernameSchema = Joi.string().min(2).max(30).required();
+
+const emailSchema = Joi.string().max(100).required().email();
+
+const passwordSchema = Joi.string().regex(passwordRegex).required().messages({
+  // rewrite the default message, so the password will not be included in the message
+  'string.pattern.base':
+    'Password must contain at least one uppercase, lowercase, number, special char and legnth 8-30',
+});
+
+const addressSchema = Joi.string().max(200);
+
+const tokenSchema = Joi.string().min(5).max(50).required();
+
 const registerValidationSchema = Joi.object({
-  username: Joi.string().min(2).max(30).required(),
-  email: Joi.string().max(100).required().email(),
-  password: Joi.string().regex(passwordRegex).required().messages({
-    // rewrite the default message, so the password will not be included in the message
-    'string.pattern.base':
-      'Password must contain at least one uppercase, lowercase, number, special char and legnth 8-30',
-  }),
-  address: Joi.string().max(200),
+  username: usernameSchema,
+  email: emailSchema,
+  password: passwordSchema,
+  address: addressSchema,
 });
 
 const loginValidationSchema = Joi.object({
-  email: Joi.string().max(100).required().email(),
-  password: Joi.string().min(5).max(50).required(),
+  email: emailSchema,
+  password: passwordSchema,
 });
 
 const forgotPasswordValidationSchema = Joi.object({
-  email: Joi.string().max(100).required().email(),
+  email: emailSchema,
+});
+
+const resetPasswordValidationSchema = Joi.object({
+  newPassword: passwordSchema,
+  token: tokenSchema,
 });
 
 const updatePasswordValidationSchema = Joi.object({
-  oldPassword: Joi.string().min(8).max(30).required(),
-  newPassword: Joi.string().regex(passwordRegex).required().messages({
-    'string.pattern.base':
-      'Password must contain at least one uppercase, lowercase, number, special char and legnth 8-30',
-  }),
+  oldPassword: passwordSchema,
+  newPassword: passwordSchema,
 });
 
 module.exports = {
   registerValidationSchema,
   loginValidationSchema,
   forgotPasswordValidationSchema,
+  resetPasswordValidationSchema,
   updatePasswordValidationSchema,
 };

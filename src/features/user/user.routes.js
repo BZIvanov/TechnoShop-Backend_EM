@@ -15,6 +15,7 @@ const {
   registerValidationSchema,
   loginValidationSchema,
   forgotPasswordValidationSchema,
+  resetPasswordValidationSchema,
   updatePasswordValidationSchema,
 } = require('./user.validationSchema');
 
@@ -36,6 +37,8 @@ router
 router
   .route('/forgot-password')
   .post(validateRequestBody(forgotPasswordValidationSchema), forgotPassword);
-router.route('/reset-password').post(resetPassword);
+router
+  .route('/reset-password')
+  .post(validateRequestBody(resetPasswordValidationSchema), resetPassword);
 
 module.exports = router;
