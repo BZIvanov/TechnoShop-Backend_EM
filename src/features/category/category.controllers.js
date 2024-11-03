@@ -6,13 +6,13 @@ const Subcategory = require('../subcategory/subcategory.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 
-module.exports.getCategories = catchAsync(async (req, res) => {
+const getCategories = catchAsync(async (req, res) => {
   const categories = await Category.find().sort({ createdAt: -1 });
 
   res.status(httpStatus.OK).json({ success: true, categories });
 });
 
-module.exports.getCategory = catchAsync(async (req, res, next) => {
+const getCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
 
   const category = await Category.findById(categoryId);
@@ -24,7 +24,7 @@ module.exports.getCategory = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, category });
 });
 
-module.exports.createCategory = catchAsync(async (req, res) => {
+const createCategory = catchAsync(async (req, res) => {
   const { name } = req.body;
 
   const category = await Category.create({ name, slug: slugify(name) });
@@ -32,7 +32,7 @@ module.exports.createCategory = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).json({ success: true, category });
 });
 
-module.exports.updateCategory = catchAsync(async (req, res, next) => {
+const updateCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
   const { name } = req.body;
 
@@ -52,7 +52,7 @@ module.exports.updateCategory = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, category });
 });
 
-module.exports.deleteCategory = catchAsync(async (req, res, next) => {
+const deleteCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
 
   const category = await Category.findByIdAndDelete(categoryId);
@@ -65,3 +65,11 @@ module.exports.deleteCategory = catchAsync(async (req, res, next) => {
 
   res.status(httpStatus.NO_CONTENT).json();
 });
+
+module.exports = {
+  getCategories,
+  getCategory,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+};

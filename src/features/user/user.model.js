@@ -2,11 +2,7 @@ const crypto = require('crypto');
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const {
-  model: { User },
-  userRoles,
-  registerMethods,
-} = require('./user.constants');
+const { userModel, userRoles, registerMethods } = require('./user.constants');
 
 const schema = new Schema(
   {
@@ -32,7 +28,7 @@ const schema = new Schema(
     role: {
       type: String,
       enum: Object.values(userRoles),
-      default: userRoles.user,
+      default: userRoles.buyer,
     },
     registerMethod: {
       type: String,
@@ -85,4 +81,4 @@ schema.methods.getResetPasswordToken = function generateResetPasswordToken() {
   return resetToken;
 };
 
-module.exports = model(User, schema);
+module.exports = model(userModel, schema);

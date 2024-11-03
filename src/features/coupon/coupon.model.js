@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const {
-  model: { Coupon },
-} = require('./coupon.constants');
+const { couponModel } = require('./coupon.constants');
 
 const schema = new Schema(
   {
@@ -26,4 +24,4 @@ const schema = new Schema(
   { timestamps: true },
 );
 
-module.exports = model(Coupon, schema);
+module.exports = model(couponModel, schema);

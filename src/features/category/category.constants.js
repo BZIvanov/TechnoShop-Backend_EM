@@ -1,3 +1,5 @@
-module.exports.model = {
-  Category: 'Category',
+const categoryModel = 'category';
+
+module.exports = {
+  categoryModel,
 };

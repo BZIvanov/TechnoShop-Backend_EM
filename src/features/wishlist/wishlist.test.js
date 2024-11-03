@@ -29,7 +29,7 @@ describe('Wishlist routes', () => {
     test('it should return user wishlist successfully', async () => {
       const response = await request(app)
         .get('/v1/wishlists')
-        .set('Cookie', [`jwt=${signJwtToken(users[3]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[6]._id)}`])
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
@@ -69,7 +69,7 @@ describe('Wishlist routes', () => {
     test('it should return an error if the product is already in the wishlist', async () => {
       const response = await request(app)
         .post(`/v1/wishlists/${products[3]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[3]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[6]._id)}`])
         .expect('Content-Type', /application\/json/)
         .expect(400);
 
@@ -85,7 +85,7 @@ describe('Wishlist routes', () => {
     test('it should remove the product from the wishlist, if the product was already on the wishlist', async () => {
       const response = await request(app)
         .delete(`/v1/wishlists/${products[3]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[3]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[6]._id)}`])
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
@@ -98,7 +98,7 @@ describe('Wishlist routes', () => {
     test('it should return an error if the user does not have wishlist', async () => {
       const response = await request(app)
         .delete(`/v1/wishlists/${products[1]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[6]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[9]._id)}`])
         .expect('Content-Type', /application\/json/)
         .expect(404);
 
@@ -109,7 +109,7 @@ describe('Wishlist routes', () => {
     test('it should return an error if the product is not in the wishlist', async () => {
       const response = await request(app)
         .delete(`/v1/wishlists/${products[11]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[3]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[6]._id)}`])
         .expect('Content-Type', /application\/json/)
         .expect(400);
 

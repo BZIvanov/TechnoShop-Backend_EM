@@ -1,14 +1,20 @@
-module.exports.model = {
-  User: 'User',
-};
+const userModel = 'user';
 
-module.exports.userRoles = {
+const userRoles = {
   admin: 'admin',
-  user: 'user',
+  seller: 'seller',
+  buyer: 'buyer',
 };
 
-module.exports.registerMethods = {
+const registerMethods = {
   email: 'email',
 };
 
-module.exports.cookieName = 'jwt'; // not the best name, it is just for this demo project
+const cookieName = 'jwt'; // not the best name, it is just for this demo project
+
+module.exports = {
+  userModel,
+  userRoles,
+  registerMethods,
+  cookieName,
+};

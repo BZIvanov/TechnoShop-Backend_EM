@@ -38,7 +38,40 @@ describe('User routes', () => {
       expect(response.body).toHaveProperty('user');
       expect(response.body).not.toHaveProperty('email');
       expect(response.body).toHaveProperty('user.username', 'Ivo');
+      expect(response.body).toHaveProperty('user.role', 'buyer');
       expect(response.body).not.toHaveProperty('user.password');
+    });
+
+    test('it should register as seller successfully', async () => {
+      const response = await request(app)
+        .post('/v1/users/register')
+        .send({
+          username: 'TestSeller',
+          email: 'test.seller123@mail.com',
+          password: '1Uio!#689',
+          role: 'seller',
+        })
+        .expect('Content-Type', /application\/json/)
+        .expect(201);
+
+      expect(response.body).toHaveProperty('user.role', 'seller');
+    });
+
+    test('it should not allow to register with exisitng email', async () => {
+      const response = await request(app)
+        .post('/v1/users/register')
+        .send({
+          username: 'NewAdmin',
+          email: 'admin@mail.com',
+          password: '1Uio!#689',
+        })
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toMatchObject({
+        success: false,
+        error: 'User already exists',
+      });
     });
 
     test('it should not allow to register with incorrect email', async () => {
@@ -51,6 +84,24 @@ describe('User routes', () => {
       expect(response.body).toMatchObject({
         success: false,
         error: '"email" must be a valid email',
+      });
+    });
+
+    test('it should not allow to register with incorrect role', async () => {
+      const response = await request(app)
+        .post('/v1/users/register')
+        .send({
+          username: 'TestAdmin',
+          email: 'test.admin@mail.com',
+          password: '1Uio!#689',
+          role: 'admin',
+        })
+        .expect('Content-Type', /application\/json/)
+        .expect(400);
+
+      expect(response.body).toMatchObject({
+        success: false,
+        error: 'Role must be either "buyer" or "seller"',
       });
     });
 
@@ -79,14 +130,14 @@ describe('User routes', () => {
           username: 'Ivelina',
           email: 'ivelina@mail.com',
           password: '1Uio!#689',
-          role: 'admin', // joi will reject any key which is not part of the validation schema
+          testProp: 'admin', // joi will reject any key which is not part of the validation schema
         })
         .expect('Content-Type', /application\/json/)
         .expect(400);
 
       expect(response.body).toMatchObject({
         success: false,
-        error: '"role" is not allowed',
+        error: '"testProp" is not allowed',
       });
     });
 
@@ -149,8 +200,7 @@ describe('User routes', () => {
     test('it should login an user successfully', async () => {
       const response = await request(app)
         .post('/v1/users/login')
-        // we will have this user from the register tests
-        .send({ email: 'pepi@mail.com', password: '1Uio!#689' })
+        .send({ email: users[2].email, password: '12qwAS!@' })
         .expect('Content-Type', /application\/json/)
         .expect(
           'Set-Cookie',
@@ -161,7 +211,7 @@ describe('User routes', () => {
       expect(response.body).toHaveProperty('success', true);
       expect(response.body).toHaveProperty('user');
       expect(response.body).not.toHaveProperty('email');
-      expect(response.body).toHaveProperty('user.username', 'Pepi');
+      expect(response.body).toHaveProperty('user.username', 'seller1');
       expect(response.body).not.toHaveProperty('user.password');
     });
 
@@ -231,7 +281,7 @@ describe('User routes', () => {
       expect(response.body).toHaveProperty('success', true);
       expect(response.body).toHaveProperty('user._id', users[1]._id);
       expect(response.body).toHaveProperty('user.username', users[1].username);
-      expect(response.body).toHaveProperty('user.role', 'user');
+      expect(response.body).toHaveProperty('user.role', 'seller');
     });
 
     test('it should still return success response in case no user is found', async () => {

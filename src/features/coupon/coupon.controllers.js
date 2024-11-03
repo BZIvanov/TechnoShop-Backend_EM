@@ -4,7 +4,7 @@ const Coupon = require('./coupon.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 
-module.exports.getCoupons = catchAsync(async (req, res) => {
+const getCoupons = catchAsync(async (req, res) => {
   const { sortColumn = 'createdAt', order = 'desc', page, perPage } = req.query;
 
   const pageNumber = parseInt(page, 10) || 0;
@@ -20,13 +20,13 @@ module.exports.getCoupons = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, coupons, totalCount });
 });
 
-module.exports.createCoupon = catchAsync(async (req, res) => {
+const createCoupon = catchAsync(async (req, res) => {
   const coupon = await new Coupon(req.body).save();
 
   res.status(httpStatus.CREATED).json({ success: true, coupon });
 });
 
-module.exports.deleteCoupon = catchAsync(async (req, res, next) => {
+const deleteCoupon = catchAsync(async (req, res, next) => {
   const { couponId } = req.params;
 
   const coupon = await Coupon.findByIdAndDelete(couponId).exec();
@@ -37,3 +37,9 @@ module.exports.deleteCoupon = catchAsync(async (req, res, next) => {
 
   res.status(httpStatus.NO_CONTENT).json();
 });
+
+module.exports = {
+  getCoupons,
+  createCoupon,
+  deleteCoupon,
+};

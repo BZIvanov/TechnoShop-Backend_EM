@@ -5,7 +5,7 @@ const Subcategory = require('./subcategory.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 
-module.exports.getSubcategories = catchAsync(async (req, res) => {
+const getSubcategories = catchAsync(async (req, res) => {
   const { categoryId } = req.params;
 
   const subcategories = await Subcategory.find({
@@ -17,7 +17,7 @@ module.exports.getSubcategories = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, subcategories });
 });
 
-module.exports.getGroupedSubcategories = catchAsync(async (req, res) => {
+const getGroupedSubcategories = catchAsync(async (req, res) => {
   const subcategories = await Subcategory.aggregate([
     {
       $lookup: {
@@ -73,7 +73,7 @@ module.exports.getGroupedSubcategories = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, subcategories });
 });
 
-module.exports.getSubcategory = catchAsync(async (req, res, next) => {
+const getSubcategory = catchAsync(async (req, res, next) => {
   const { subcategoryId } = req.params;
 
   const subcategory = await Subcategory.findById(subcategoryId);
@@ -85,7 +85,7 @@ module.exports.getSubcategory = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, subcategory });
 });
 
-module.exports.createSubcategory = catchAsync(async (req, res) => {
+const createSubcategory = catchAsync(async (req, res) => {
   const { name, categoryId } = req.body;
 
   let subcategory = await Subcategory.create({
@@ -100,7 +100,7 @@ module.exports.createSubcategory = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).json({ success: true, subcategory });
 });
 
-module.exports.updateSubcategory = catchAsync(async (req, res, next) => {
+const updateSubcategory = catchAsync(async (req, res, next) => {
   const { subcategoryId } = req.params;
   const { name, categoryId } = req.body;
 
@@ -120,7 +120,7 @@ module.exports.updateSubcategory = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, subcategory });
 });
 
-module.exports.deleteSubcategory = catchAsync(async (req, res, next) => {
+const deleteSubcategory = catchAsync(async (req, res, next) => {
   const { subcategoryId } = req.params;
 
   const subcategory = await Subcategory.findByIdAndDelete(subcategoryId);
@@ -131,3 +131,12 @@ module.exports.deleteSubcategory = catchAsync(async (req, res, next) => {
 
   res.status(httpStatus.NO_CONTENT).json();
 });
+
+module.exports = {
+  getSubcategories,
+  getGroupedSubcategories,
+  getSubcategory,
+  createSubcategory,
+  updateSubcategory,
+  deleteSubcategory,
+};

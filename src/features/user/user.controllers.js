@@ -8,24 +8,40 @@ const AppError = require('../../utils/app-error');
 const catchAsync = require('../../middlewares/catch-async');
 const { signJwtToken } = require('./utils/jwtToken');
 const { setJwtCookie, clearJwtCookie } = require('./utils/jwtCookie');
-const { cookieName } = require('./user.constants');
+const { cookieName, userRoles } = require('./user.constants');
 const { ENV_VARS } = require('../../config/environment');
 
-module.exports.register = catchAsync(async (req, res) => {
-  const { username, email, password } = req.body;
+const register = catchAsync(async (req, res, next) => {
+  const { username, email, password, role, registerMethod } = req.body;
 
-  const user = await User.create({ username, email, password });
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return next(new AppError('User already exists', httpStatus.BAD_REQUEST));
+  }
+
+  const user = await User.create({
+    username,
+    email,
+    password,
+    role: role === userRoles.seller ? userRoles.seller : userRoles.buyer,
+    registerMethod,
+  });
 
   const token = signJwtToken(user._id);
   setJwtCookie(res, token);
 
   res.status(httpStatus.CREATED).json({
     success: true,
-    user: { _id: user._id, username: user.username, role: user.role },
+    user: {
+      _id: user._id,
+      username: user.username,
+      role: user.role,
+      avatar: user.avatar,
+    },
   });
 });
 
-module.exports.login = catchAsync(async (req, res, next) => {
+const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -49,18 +65,23 @@ module.exports.login = catchAsync(async (req, res, next) => {
 
   res.status(httpStatus.OK).json({
     success: true,
-    user: { _id: user._id, username: user.username, role: user.role },
+    user: {
+      _id: user._id,
+      username: user.username,
+      role: user.role,
+      avatar: user.avatar,
+    },
   });
 });
 
-module.exports.logout = catchAsync(async (req, res) => {
+const logout = catchAsync(async (req, res) => {
   clearJwtCookie(res);
 
   res.status(httpStatus.OK).json({ success: true });
 });
 
 // do not use the authenticate middleware, because in case of no user, we want to return success response with no user
-module.exports.currentUser = catchAsync(async (req, res) => {
+const currentUser = catchAsync(async (req, res) => {
   const token = req.cookies[cookieName];
 
   if (!token) {
@@ -76,11 +97,16 @@ module.exports.currentUser = catchAsync(async (req, res) => {
 
   res.status(httpStatus.OK).json({
     success: true,
-    user: { _id: user._id, username: user.username, role: user.role },
+    user: {
+      _id: user._id,
+      username: user.username,
+      role: user.role,
+      avatar: user.avatar,
+    },
   });
 });
 
-module.exports.updatePassword = catchAsync(async (req, res, next) => {
+const updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id).select('+password');
 
   const { oldPassword, newPassword } = req.body;
@@ -94,7 +120,7 @@ module.exports.updatePassword = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true });
 });
 
-module.exports.forgotPassword = catchAsync(async (req, res, next) => {
+const forgotPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -133,7 +159,7 @@ module.exports.forgotPassword = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports.resetPassword = catchAsync(async (req, res, next) => {
+const resetPassword = catchAsync(async (req, res, next) => {
   const { token, newPassword } = req.body;
 
   const resetPasswordToken = crypto
@@ -160,3 +186,13 @@ module.exports.resetPassword = catchAsync(async (req, res, next) => {
     message: 'Your password was successfully reset. Try to login now',
   });
 });
+
+module.exports = {
+  register,
+  login,
+  logout,
+  currentUser,
+  updatePassword,
+  forgotPassword,
+  resetPassword,
+};

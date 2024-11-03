@@ -1,10 +1,6 @@
 const { Schema, model } = require('mongoose');
-const {
-  model: { Category },
-} = require('../category/category.constants');
-const {
-  model: { Subcategory },
-} = require('./subcategory.constants');
+const { categoryModel } = require('../category/category.constants');
+const { subcategoryModel } = require('./subcategory.constants');
 
 const schema = new Schema(
   {
@@ -23,11 +19,11 @@ const schema = new Schema(
     },
     categoryId: {
       type: Schema.ObjectId,
-      ref: Category,
+      ref: categoryModel,
       required: true,
     },
   },
   { timestamps: true },
 );
 
-module.exports = model(Subcategory, schema);
+module.exports = model(subcategoryModel, schema);

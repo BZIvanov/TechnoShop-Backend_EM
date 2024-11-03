@@ -57,7 +57,7 @@ const handleQueryParams = async (params) => {
   return build;
 };
 
-module.exports.getProducts = catchAsync(async (req, res) => {
+const getProducts = catchAsync(async (req, res) => {
   const { categoryId, subcategoryId } = req.params;
 
   let subcategory;
@@ -94,7 +94,7 @@ module.exports.getProducts = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, products, totalCount });
 });
 
-module.exports.getProduct = catchAsync(async (req, res, next) => {
+const getProduct = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
 
   const product = await Product.findById(productId)
@@ -108,7 +108,7 @@ module.exports.getProduct = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, product });
 });
 
-module.exports.createProduct = catchAsync(async (req, res) => {
+const createProduct = catchAsync(async (req, res) => {
   const productData = { ...req.body };
   productData.slug = slugify(req.body.title);
 
@@ -117,7 +117,7 @@ module.exports.createProduct = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).json({ success: true, product });
 });
 
-module.exports.updateProduct = catchAsync(async (req, res, next) => {
+const updateProduct = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
 
   const product = await Product.findByIdAndUpdate(productId, req.body, {
@@ -132,7 +132,7 @@ module.exports.updateProduct = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, product });
 });
 
-module.exports.deleteProduct = catchAsync(async (req, res, next) => {
+const deleteProduct = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
 
   const product = await Product.findByIdAndDelete(productId);
@@ -148,7 +148,7 @@ module.exports.deleteProduct = catchAsync(async (req, res, next) => {
   res.status(httpStatus.NO_CONTENT).json();
 });
 
-module.exports.rateProduct = catchAsync(async (req, res) => {
+const rateProduct = catchAsync(async (req, res) => {
   const { productId } = req.params;
   const { rating: userRating } = req.body;
 
@@ -183,7 +183,7 @@ module.exports.rateProduct = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, product: updatedProduct });
 });
 
-module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
+const getSimilarProducts = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
   const { perPage } = req.query;
 
@@ -214,7 +214,7 @@ module.exports.getSimilarProducts = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports.getProductBrands = catchAsync(async (req, res) => {
+const getProductBrands = catchAsync(async (req, res) => {
   const productBrands = await Product.distinct('brand');
 
   res.status(httpStatus.OK).json({
@@ -222,3 +222,14 @@ module.exports.getProductBrands = catchAsync(async (req, res) => {
     brands: productBrands,
   });
 });
+
+module.exports = {
+  getProducts,
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  rateProduct,
+  getSimilarProducts,
+  getProductBrands,
+};

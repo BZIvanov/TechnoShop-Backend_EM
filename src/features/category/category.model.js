@@ -1,7 +1,5 @@
 const { Schema, model } = require('mongoose');
-const {
-  model: { Category },
-} = require('./category.constants');
+const { categoryModel } = require('./category.constants');
 
 const schema = new Schema(
   {
@@ -22,4 +20,4 @@ const schema = new Schema(
   { timestamps: true },
 );
 
-module.exports = model(Category, schema);
+module.exports = model(categoryModel, schema);

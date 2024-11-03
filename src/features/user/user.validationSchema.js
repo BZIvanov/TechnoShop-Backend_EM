@@ -1,5 +1,7 @@
 const Joi = require('joi');
 
+const { userRoles } = require('./user.constants');
+
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,30})/;
 
@@ -13,6 +15,12 @@ const passwordSchema = Joi.string().regex(passwordRegex).required().messages({
     'Password must contain at least one uppercase, lowercase, number, special char and legnth 8-30',
 });
 
+const roleSchema = Joi.string()
+  .valid(userRoles.buyer, userRoles.seller)
+  .messages({
+    'any.only': 'Role must be either "buyer" or "seller"',
+  });
+
 const addressSchema = Joi.string().max(200);
 
 const tokenSchema = Joi.string().min(5).max(50).required();
@@ -22,6 +30,7 @@ const registerValidationSchema = Joi.object({
   email: emailSchema,
   password: passwordSchema,
   address: addressSchema,
+  role: roleSchema,
 });
 
 const loginValidationSchema = Joi.object({

@@ -1,3 +1,5 @@
-module.exports.model = {
-  Coupon: 'Coupon',
+const couponModel = 'coupon';
+
+module.exports = {
+  couponModel,
 };

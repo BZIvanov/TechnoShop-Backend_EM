@@ -3,64 +3,113 @@
     "_id": "619ea4b3ae78a567254055f7",
     "username": "admin",
     "email": "admin@mail.com",
-    "password": "12345678",
-    "address": "Sofia, Cherni vrah 100",
-    "role": "admin"
+    "password": "12qwAS!@",
+    "address": "Some city 1, Some street 1",
+    "role": "admin",
+    "registerMethod": "email"
+  },
+  {
+    "_id": "6717cf9b37759d96eaf2dccb",
+    "username": "seller",
+    "email": "seller@mail.com",
+    "password": "12qwAS!@",
+    "role": "seller",
+    "registerMethod": "email"
+  },
+  {
+    "_id": "6717d0d0c28f835782943df5",
+    "username": "seller1",
+    "email": "seller1@mail.com",
+    "password": "12qwAS!@",
+    "role": "seller",
+    "registerMethod": "email",
+    "avatar": {
+      "publicId": "avatars/253ede0a-8e99-4fb1-8a60-73d7b096b523",
+      "imageUrl": "https://picsum.photos/200/300"
+    }
+  },
+  {
+    "_id": "6717d0d1c28f835782943df7",
+    "username": "buyer",
+    "email": "buyer@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 1, Some street 123",
+    "role": "buyer",
+    "registerMethod": "email"
   },
   {
     "_id": "6171c360168d11250b4e15d9",
-    "username": "Iva",
-    "email": "iva@mail.com",
-    "password": "12345678",
-    "address": "Sofia, Cherni vrah 100"
+    "username": "buyer1",
+    "email": "buyer1@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 2, Some street 1",
+    "role": "buyer",
+    "registerMethod": "email"
   },
   {
     "_id": "6171c8cf168d11250b4e15dc",
-    "username": "Mira",
-    "email": "mira@mail.com",
-    "password": "12345678",
-    "address": "Sofia, bul Bulgaria 99"
+    "username": "buyer2",
+    "email": "buyer2@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 1, Some street 3",
+    "role": "buyer",
+    "avatar": {
+      "publicId": "avatars/253ede0a-8e99-4fb1-8a60-73d7b096b523",
+      "imageUrl": "https://picsum.photos/200/300"
+    },
+    "registerMethod": "email"
   },
   {
     "_id": "6171cb4b168d11250b4e15df",
-    "username": "Dimo",
-    "email": "dimo@mail.com",
-    "password": "12345678",
-    "address": "Plovidv, ul Svoboda 21"
+    "username": "buyer3",
+    "email": "buyer3@mail.com",
+    "password": "12qwAS!@",
+    "role": "buyer",
+    "registerMethod": "email"
   },
   {
     "_id": "63ac935cf2bb507ce39da8a2",
-    "username": "Jeni",
-    "email": "jeni@mail.com",
-    "password": "12345678",
-    "address": "Sofia, blvd Sofia 129"
+    "username": "buyer4",
+    "email": "buyer4@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 5, Some street 2",
+    "role": "buyer",
+    "registerMethod": "email"
   },
   {
     "_id": "63ac93eeb6693b670ebb1e6c",
-    "username": "Misho",
-    "email": "misho@mail.com",
-    "password": "12345678",
-    "address": "Sofia, blvd Sofia 151"
+    "username": "buyer5",
+    "email": "buyer5@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 11, Some street 12",
+    "role": "buyer",
+    "registerMethod": "email"
   },
   {
     "_id": "63bdc0e114e911b1a4333eb6",
-    "username": "Eva",
-    "email": "eva@mail.com",
-    "password": "12345678",
-    "address": "Sofia, Some cool str. 23"
+    "username": "buyer6",
+    "email": "buyer6@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 5, Some street 22",
+    "role": "buyer",
+    "registerMethod": "email"
   },
   {
     "_id": "63cd0626c4b3aeaf0ac560b4",
-    "username": "Pepi",
-    "email": "pepi@mail.com",
-    "password": "1Uio!#689",
-    "address": "Sofia, blvd Mall 123"
+    "username": "buyer7",
+    "email": "buyer7@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 8, Some street 3",
+    "role": "buyer",
+    "registerMethod": "email"
   },
   {
     "_id": "63cd07939f2a0f56206c55b3",
-    "username": "Elena",
-    "email": "elena@mail.com",
-    "password": "1Cio!$589",
-    "address": "Sofia, blvd Mall 124"
+    "username": "buyer8",
+    "email": "buyer8@mail.com",
+    "password": "12qwAS!@",
+    "address": "Some city 8, Some street 1",
+    "role": "buyer",
+    "registerMethod": "email"
   }
 ]

@@ -4,7 +4,7 @@ const Wishlist = require('./wishlist.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 
-module.exports.getWishlist = catchAsync(async (req, res, next) => {
+const getWishlist = catchAsync(async (req, res, next) => {
   const wishlist = await Wishlist.findOne({ owner: req.user._id })
     .populate('products')
     .exec();
@@ -14,7 +14,7 @@ module.exports.getWishlist = catchAsync(async (req, res, next) => {
     .json({ success: true, products: (wishlist && wishlist.products) || [] });
 });
 
-module.exports.addToWishlist = catchAsync(async (req, res, next) => {
+const addToWishlist = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
 
   let wishlist = await Wishlist.findOne({ owner: req.user._id }).exec();
@@ -48,7 +48,7 @@ module.exports.addToWishlist = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports.removeFromWishlist = catchAsync(async (req, res, next) => {
+const removeFromWishlist = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
 
   const wishlist = await Wishlist.findOne({ owner: req.user._id }).exec();
@@ -81,3 +81,9 @@ module.exports.removeFromWishlist = catchAsync(async (req, res, next) => {
     products: wishlistProducts.products,
   });
 });
+
+module.exports = {
+  getWishlist,
+  addToWishlist,
+  removeFromWishlist,
+};

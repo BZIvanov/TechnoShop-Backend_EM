@@ -1,18 +1,9 @@
 const { Schema, model } = require('mongoose');
 
-const {
-  model: { Order },
-  orderStatuses,
-} = require('./order.constants');
-const {
-  model: { Product },
-} = require('../product/product.constants');
-const {
-  model: { User },
-} = require('../user/user.constants');
-const {
-  model: { Coupon },
-} = require('../coupon/coupon.constants');
+const { orderModel, orderStatuses } = require('./order.constants');
+const { productModel } = require('../product/product.constants');
+const { userModel } = require('../user/user.constants');
+const { couponModel } = require('../coupon/coupon.constants');
 
 const schema = new Schema(
   {
@@ -20,7 +11,7 @@ const schema = new Schema(
       {
         product: {
           type: Schema.ObjectId,
-          ref: Product,
+          ref: productModel,
         },
         count: {
           type: Number,
@@ -34,11 +25,11 @@ const schema = new Schema(
     },
     coupon: {
       type: Schema.ObjectId,
-      ref: Coupon,
+      ref: couponModel,
     },
     orderedBy: {
       type: Schema.ObjectId,
-      ref: User,
+      ref: userModel,
     },
     deliveryAddress: {
       type: String,
@@ -50,4 +41,4 @@ const schema = new Schema(
   { timestamps: true },
 );
 
-module.exports = model(Order, schema);
+module.exports = model(orderModel, schema);

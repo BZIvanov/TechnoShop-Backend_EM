@@ -1,3 +1,5 @@
-module.exports.model = {
-  Wishlist: 'Wishlist',
+const wishlistModel = 'wishlist';
+
+module.exports = {
+  wishlistModel,
 };

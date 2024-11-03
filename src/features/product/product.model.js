@@ -1,17 +1,8 @@
 const { Schema, model } = require('mongoose');
-const {
-  model: { Product },
-  yesNo,
-} = require('./product.constants');
-const {
-  model: { User },
-} = require('../user/user.constants');
-const {
-  model: { Category },
-} = require('../category/category.constants');
-const {
-  model: { Subcategory },
-} = require('../subcategory/subcategory.constants');
+const { productModel, yesNo } = require('./product.constants');
+const { userModel } = require('../user/user.constants');
+const { categoryModel } = require('../category/category.constants');
+const { subcategoryModel } = require('../subcategory/subcategory.constants');
 
 const schema = new Schema(
   {
@@ -41,12 +32,12 @@ const schema = new Schema(
     },
     category: {
       type: Schema.ObjectId,
-      ref: Category,
+      ref: categoryModel,
     },
     subcategories: [
       {
         type: Schema.ObjectId,
-        ref: Subcategory,
+        ref: subcategoryModel,
       },
     ],
     quantity: {
@@ -84,7 +75,7 @@ const schema = new Schema(
         },
         postedBy: {
           type: Schema.ObjectId,
-          ref: User,
+          ref: userModel,
         },
       },
     ],
@@ -92,4 +83,4 @@ const schema = new Schema(
   { timestamps: true },
 );
 
-module.exports = model(Product, schema);
+module.exports = model(productModel, schema);

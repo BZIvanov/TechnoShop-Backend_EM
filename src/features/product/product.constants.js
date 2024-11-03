@@ -1,8 +1,11 @@
-module.exports.model = {
-  Product: 'Product',
-};
+const productModel = 'product';
 
-module.exports.yesNo = {
+const yesNo = {
   yes: 'Yes',
   no: 'No',
+};
+
+module.exports = {
+  productModel,
+  yesNo,
 };

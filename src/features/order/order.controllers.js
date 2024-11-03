@@ -7,7 +7,7 @@ const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 const { userRoles } = require('../user/user.constants');
 
-module.exports.getOrders = catchAsync(async (req, res) => {
+const getOrders = catchAsync(async (req, res) => {
   const { sortColumn = 'createdAt', order = 'desc', page, perPage } = req.query;
 
   const pageNumber = parseInt(page, 10) || 0;
@@ -31,7 +31,7 @@ module.exports.getOrders = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, orders, totalCount });
 });
 
-module.exports.createOrder = catchAsync(async (req, res, next) => {
+const createOrder = catchAsync(async (req, res, next) => {
   const currentUser = req.user;
   const { cart, address, coupon: couponName } = req.body;
 
@@ -101,7 +101,7 @@ module.exports.createOrder = catchAsync(async (req, res, next) => {
   res.status(httpStatus.CREATED).json({ success: true, order });
 });
 
-module.exports.updateOrderStatus = catchAsync(async (req, res) => {
+const updateOrderStatus = catchAsync(async (req, res) => {
   const { orderId } = req.params;
   const { orderStatus } = req.body;
 
@@ -117,3 +117,9 @@ module.exports.updateOrderStatus = catchAsync(async (req, res) => {
 
   res.status(httpStatus.OK).json({ success: true, order });
 });
+
+module.exports = {
+  getOrders,
+  createOrder,
+  updateOrderStatus,
+};

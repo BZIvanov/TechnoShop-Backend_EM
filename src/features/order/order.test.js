@@ -44,7 +44,7 @@ describe('Order routes', () => {
     test('it should return user orders successfully', async () => {
       const response = await request(app)
         .get('/v1/orders')
-        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[4]._id)}`])
         .expect('Content-Type', /application\/json/)
         .expect(200);
 

@@ -1,10 +1,13 @@
-module.exports.model = {
-  Order: 'Order',
-};
+const orderModel = 'order';
 
-module.exports.orderStatuses = {
+const orderStatuses = {
   NOT_PROCESSED: 'Not Processed',
   PROCESSING: 'Processing',
   CANCELLED: 'Cancelled',
   COMPLETED: 'Completed',
+};
+
+module.exports = {
+  orderModel,
+  orderStatuses,
 };
