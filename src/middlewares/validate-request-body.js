@@ -1,15 +1,23 @@
 const httpStatus = require('http-status');
 const AppError = require('../utils/app-error');
 
-module.exports = (joiSchema) => (req, res, next) => {
-  const { value, error } = joiSchema.validate(req.body);
+module.exports =
+  (schema, fileField = 'file', validateOptions = { abortEarly: true }) =>
+  (req, res, next) => {
+    const dataToValidate = req.file
+      ? { ...req.body, [fileField]: req.file }
+      : req.body;
 
-  if (error) {
-    return next(new AppError(error.details[0].message, httpStatus.BAD_REQUEST));
-  }
+    const { value, error } = schema.validate(dataToValidate, validateOptions);
 
-  // replace the body object with the joi value, which is needed in case we used trim() or similar function
-  req.body = value;
+    if (error) {
+      return next(
+        new AppError(error.details[0].message, httpStatus.BAD_REQUEST),
+      );
+    }
 
-  next();
-};
+    // replace the body object with the joi value, which is needed in case we used trim() or similar function
+    req.body = value;
+
+    next();
+  };

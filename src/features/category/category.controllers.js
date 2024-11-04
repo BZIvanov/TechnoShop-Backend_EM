@@ -7,10 +7,6 @@ const Category = require('./category.model');
 const Subcategory = require('../subcategory/subcategory.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
-const {
-  createCategoryValidationSchema,
-  updateCategoryValidationSchema,
-} = require('./category.validationSchema');
 
 const getCategories = catchAsync(async (req, res) => {
   const categories = await Category.find().sort({ createdAt: -1 });
@@ -37,21 +33,6 @@ const createCategory = catchAsync(async (req, res, next) => {
   if (!categoryImage) {
     return next(
       new AppError('Category image was not provided', httpStatus.BAD_REQUEST),
-    );
-  }
-
-  const { error: schemaValidationError } =
-    createCategoryValidationSchema.validate({
-      ...req.body,
-      categoryImage,
-    });
-
-  if (schemaValidationError) {
-    return next(
-      new AppError(
-        schemaValidationError.details[0].message,
-        httpStatus.BAD_REQUEST,
-      ),
     );
   }
 
@@ -99,21 +80,6 @@ const updateCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
   const { categoryName } = req.body;
   const categoryImage = req.file;
-
-  const { error: schemaValidationError } =
-    updateCategoryValidationSchema.validate({
-      ...req.body,
-      categoryImage,
-    });
-
-  if (schemaValidationError) {
-    return next(
-      new AppError(
-        schemaValidationError.details[0].message,
-        httpStatus.BAD_REQUEST,
-      ),
-    );
-  }
 
   const category = await Category.findById(categoryId);
 

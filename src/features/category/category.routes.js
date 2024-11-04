@@ -7,12 +7,17 @@ const {
   updateCategory,
   deleteCategory,
 } = require('./category.controllers');
+const validateRequestBody = require('../../middlewares/validate-request-body');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
 const fileUpload = require('../../middlewares/file-upload');
 const { userRoles } = require('../user/user.constants');
 const subcategoryRoutes = require('../subcategory/subcategory.routes');
 const productRoutes = require('../product/product.routes');
+const {
+  createCategoryValidationSchema,
+  updateCategoryValidationSchema,
+} = require('./category.validationSchema');
 
 const router = express.Router();
 
@@ -28,6 +33,8 @@ router
     authenticate,
     authorize(userRoles.admin),
     fileUpload.single('categoryImage'),
+    // validateRequestBody must come after fileUpload middleware
+    validateRequestBody(createCategoryValidationSchema, 'categoryImage'),
     createCategory,
   );
 router
@@ -37,6 +44,7 @@ router
     authenticate,
     authorize(userRoles.admin),
     fileUpload.single('categoryImage'),
+    validateRequestBody(updateCategoryValidationSchema, 'categoryImage'),
     updateCategory,
   )
   .delete(authenticate, authorize(userRoles.admin), deleteCategory);

@@ -51,7 +51,7 @@ describe('Subcategory routes', () => {
       expect(response.body.subcategories.length).toBe(2);
       expect(response.body.subcategories[0]).toHaveProperty(
         'categoryId.name',
-        'Laptops',
+        'Category1',
       );
     });
 

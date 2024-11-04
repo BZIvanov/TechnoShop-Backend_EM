@@ -1,8 +1,8 @@
 [
   {
     "_id": "6199474c65bcf27b80cfe56e",
-    "name": "Laptops",
-    "slug": "laptops",
+    "name": "Category1",
+    "slug": "category1",
     "image": {
       "publicId": "categories/123ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -10,8 +10,8 @@
   },
   {
     "_id": "6199475165bcf27b80cfe571",
-    "name": "Food",
-    "slug": "food",
+    "name": "Category2",
+    "slug": "category2",
     "image": {
       "publicId": "categories/124ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -19,8 +19,8 @@
   },
   {
     "_id": "6199475565bcf27b80cfe574",
-    "name": "Drinks",
-    "slug": "drinks",
+    "name": "Category3",
+    "slug": "category3",
     "image": {
       "publicId": "categories/125ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -28,8 +28,8 @@
   },
   {
     "_id": "6199476765bcf27b80cfe57a",
-    "name": "Fashion",
-    "slug": "fashion",
+    "name": "Category4",
+    "slug": "category4",
     "image": {
       "publicId": "categories/126ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -37,8 +37,8 @@
   },
   {
     "_id": "619a5b86aabbae42fc6b8253",
-    "name": "Clothes",
-    "slug": "clothes",
+    "name": "Category5",
+    "slug": "category5",
     "image": {
       "publicId": "categories/127ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -46,8 +46,8 @@
   },
   {
     "_id": "63ac94c1cdc1fa5f101c139d",
-    "name": "Cameras",
-    "slug": "cameras",
+    "name": "Category6",
+    "slug": "category6",
     "image": {
       "publicId": "categories/128ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -55,8 +55,8 @@
   },
   {
     "_id": "65847bb1303c2690cc25ca02",
-    "name": "TVs",
-    "slug": "tvs",
+    "name": "Category7",
+    "slug": "category7",
     "image": {
       "publicId": "categories/129ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -64,8 +64,8 @@
   },
   {
     "_id": "65847bf665490cddb8e21fe1",
-    "name": "Sport",
-    "slug": "sport",
+    "name": "Category8",
+    "slug": "category8",
     "image": {
       "publicId": "categories/1304ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -73,8 +73,8 @@
   },
   {
     "_id": "65847c2d1d02915686907446",
-    "name": "Smartphones",
-    "slug": "smartphones",
+    "name": "Category9",
+    "slug": "category9",
     "image": {
       "publicId": "categories/1314ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -82,8 +82,8 @@
   },
   {
     "_id": "659d1818779e8c11789b5bda",
-    "name": "Gaming",
-    "slug": "gaming",
+    "name": "Category10",
+    "slug": "category10",
     "image": {
       "publicId": "categories/1324ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -91,8 +91,8 @@
   },
   {
     "_id": "659d187551f8161f43bbd0f6",
-    "name": "Outdoors",
-    "slug": "outdoors",
+    "name": "Category11",
+    "slug": "category11",
     "image": {
       "publicId": "categories/1344ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -100,8 +100,8 @@
   },
   {
     "_id": "659d18cea9813470e436308a",
-    "name": "PC peripherials",
-    "slug": "pc-peripherials",
+    "name": "Category12",
+    "slug": "category12",
     "image": {
       "publicId": "categories/1354ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -109,8 +109,8 @@
   },
   {
     "_id": "659d18fb5fc0774b04a67b80",
-    "name": "Machines",
-    "slug": "machines",
+    "name": "Category13",
+    "slug": "category13",
     "image": {
       "publicId": "categories/1364ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
@@ -118,8 +118,8 @@
   },
   {
     "_id": "659d19005fc0774b04a67b84",
-    "name": "Tools",
-    "slug": "tools",
+    "name": "Category14",
+    "slug": "category14",
     "image": {
       "publicId": "categories/1374ede0a-8e99-4fb1-8a60-73d7b096b523",
       "imageUrl": "https://picsum.photos/200/300"
