@@ -16,6 +16,17 @@ const schema = new Schema(
       lowercase: true,
       index: true,
     },
+    image: {
+      publicId: {
+        type: String,
+        required: [true, 'Please provide a public ID for the image'],
+      },
+      imageUrl: {
+        type: String,
+        required: [true, 'Please provide an image URL'],
+        maxLength: [200, 'Category image should be at most 200 characters'],
+      },
+    },
   },
   { timestamps: true },
 );

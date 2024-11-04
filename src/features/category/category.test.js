@@ -1,4 +1,5 @@
 const request = require('supertest');
+const cloudinary = require('cloudinary').v2;
 
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
 const getApp = require('../../app/express');
@@ -9,6 +10,24 @@ const users = require('../../../data-seed/users.json');
 const categories = require('../../../data-seed/categories.json');
 
 const app = getApp();
+
+jest.mock('cloudinary', () => ({
+  v2: {
+    uploader: {
+      upload_stream: jest.fn(),
+    },
+    config: jest.fn(),
+  },
+}));
+
+cloudinary.uploader.upload_stream.mockImplementation((options, callback) => {
+  const mockUploadResult = {
+    public_id: 'fixed-public-id',
+    secure_url: 'http://mock-cloudinary-url.com/category-image.jpg',
+  };
+  callback(null, mockUploadResult);
+  return { end: jest.fn() };
+});
 
 describe('Category routes', () => {
   beforeAll(async () => {
@@ -104,20 +123,26 @@ describe('Category routes', () => {
       const response = await request(app)
         .post('/v1/categories')
         .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`]) // If we were using jwt tokens without cookies, we would set Authorization header instead
-        .send({ name: 'Shoes' })
+        .field({ categoryName: 'Shoes' })
+        .attach('categoryImage', Buffer.from('mock-image-data'), {
+          filename: 'test-image.jpg',
+          contentType: 'image/jpeg',
+        })
         .expect('Content-Type', /application\/json/)
         .expect(201);
 
       expect(response.body).toHaveProperty('success', true);
       expect(response.body).toHaveProperty('category.name', 'Shoes');
       expect(response.body).toHaveProperty('category.slug', 'shoes');
+      expect(response.body.category.image).toHaveProperty('publicId');
+      expect(response.body.category.image).toHaveProperty('imageUrl');
     });
 
     test('it should return error if the user is not admin', async () => {
       const response = await request(app)
         .post('/v1/categories')
         .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({ name: 'Dresses' })
+        .send({ categoryName: 'Dresses' })
         .expect('Content-Type', /application\/json/)
         .expect(403);
 
@@ -132,24 +157,35 @@ describe('Category routes', () => {
       const response = await request(app)
         .post('/v1/categories')
         .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
-        .send({ name: 'Laptops', slug: 'laptops' })
+        .field({ categoryName: 'Test 23456', testProp: 'laptops' })
+        .attach('categoryImage', Buffer.from('mock-image-data'), {
+          filename: 'test-image.jpg',
+          contentType: 'image/jpeg',
+        })
         .expect(400);
 
       expect(response.body).toHaveProperty('success', false);
-      expect(response.body).toHaveProperty('error', '"slug" is not allowed');
+      expect(response.body).toHaveProperty(
+        'error',
+        '"testProp" is not allowed',
+      );
     });
 
     test('it should return error if too long category name is provided', async () => {
       const response = await request(app)
         .post('/v1/categories')
         .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
-        .send({ name: 'Summer clothes for the hot summer' })
+        .field({ categoryName: 'Summer clothes for the hot summer' })
+        .attach('categoryImage', Buffer.from('mock-image-data'), {
+          filename: 'test-image.jpg',
+          contentType: 'image/jpeg',
+        })
         .expect(400);
 
       expect(response.body).toHaveProperty('success', false);
       expect(response.body).toHaveProperty(
         'error',
-        '"name" length must be less than or equal to 32 characters long',
+        '"categoryName" length must be less than or equal to 32 characters long',
       );
     });
   });
@@ -194,7 +230,7 @@ describe('Category routes', () => {
       const categoryId = categories[0]._id;
       const response = await request(app)
         .patch(`/v1/categories/${categoryId}`)
-        .send({ name: 'Updated Name' })
+        .send({ categoryName: 'Updated Name' })
         .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
         .expect('Content-Type', /application\/json/)
         .expect(200);
@@ -210,7 +246,7 @@ describe('Category routes', () => {
       const response = await request(app)
         .patch(`/v1/categories/${categoryId}`)
         .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
-        .send({ name: 'My new name' })
+        .send({ categoryName: 'My new name' })
         .expect('Content-Type', /application\/json/)
         .expect(404);
 
@@ -222,7 +258,7 @@ describe('Category routes', () => {
       const categoryId = '5199473165bcf27b81cae571';
       const response = await request(app)
         .patch(`/v1/categories/${categoryId}`)
-        .send({ name: 'My new category' })
+        .send({ categoryName: 'My new category' })
         .expect('Content-Type', /application\/json/)
         .expect(401);
 
@@ -230,28 +266,20 @@ describe('Category routes', () => {
       expect(response.body).toHaveProperty('error', 'You are not logged in');
     });
 
-    test('it should return bad request error if category name is not provided', async () => {
-      const categoryId = '5199473165bcf27b81cae571';
-      const response = await request(app)
-        .patch(`/v1/categories/${categoryId}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
-        .expect('Content-Type', /application\/json/)
-        .expect(400);
-
-      expect(response.body).toHaveProperty('success', false);
-      expect(response.body).toHaveProperty('error', '"name" is required');
-    });
-
     test('it should return error if category name is too short', async () => {
       const categoryId = categories[0]._id;
       const response = await request(app)
         .patch(`/v1/categories/${categoryId}`)
         .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .send({ categoryName: 'C' })
         .expect('Content-Type', /application\/json/)
         .expect(400);
 
       expect(response.body).toHaveProperty('success', false);
-      expect(response.body).toHaveProperty('error', '"name" is required');
+      expect(response.body).toHaveProperty(
+        'error',
+        '"categoryName" length must be at least 2 characters long',
+      );
     });
   });
 

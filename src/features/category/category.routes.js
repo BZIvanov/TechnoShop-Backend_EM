@@ -7,13 +7,10 @@ const {
   updateCategory,
   deleteCategory,
 } = require('./category.controllers');
-const validateRequestBody = require('../../middlewares/validate-request-body');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
+const fileUpload = require('../../middlewares/file-upload');
 const { userRoles } = require('../user/user.constants');
-const {
-  upsertCategoryValidationSchema,
-} = require('./category.validationSchema');
 const subcategoryRoutes = require('../subcategory/subcategory.routes');
 const productRoutes = require('../product/product.routes');
 
@@ -28,18 +25,18 @@ router
   .route('/')
   .get(getCategories)
   .post(
-    validateRequestBody(upsertCategoryValidationSchema),
     authenticate,
     authorize(userRoles.admin),
+    fileUpload.single('categoryImage'),
     createCategory,
   );
 router
   .route('/:categoryId')
   .get(getCategory)
   .patch(
-    validateRequestBody(upsertCategoryValidationSchema),
     authenticate,
     authorize(userRoles.admin),
+    fileUpload.single('categoryImage'),
     updateCategory,
   )
   .delete(authenticate, authorize(userRoles.admin), deleteCategory);
