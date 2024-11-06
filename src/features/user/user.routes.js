@@ -8,8 +8,10 @@ const {
   updatePassword,
   forgotPassword,
   resetPassword,
+  updateAvatar,
 } = require('./user.controllers');
 const authenticate = require('../../middlewares/authenticate');
+const fileUpload = require('../../middlewares/file-upload');
 const validateRequestBody = require('../../middlewares/validate-request-body');
 const {
   registerValidationSchema,
@@ -40,5 +42,8 @@ router
 router
   .route('/reset-password')
   .post(validateRequestBody(resetPasswordValidationSchema), resetPassword);
+router
+  .route('/update-avatar')
+  .patch(authenticate, fileUpload.single('avatarImage'), updateAvatar);
 
 module.exports = router;

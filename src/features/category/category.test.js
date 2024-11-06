@@ -15,6 +15,7 @@ jest.mock('cloudinary', () => ({
   v2: {
     uploader: {
       upload_stream: jest.fn(),
+      destroy: jest.fn(),
     },
     config: jest.fn(),
   },
@@ -28,6 +29,8 @@ cloudinary.uploader.upload_stream.mockImplementation((options, callback) => {
   callback(null, mockUploadResult);
   return { end: jest.fn() };
 });
+
+cloudinary.uploader.destroy.mockResolvedValue({ result: 'ok' });
 
 describe('Category routes', () => {
   beforeAll(async () => {

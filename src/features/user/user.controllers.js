@@ -1,7 +1,9 @@
 const crypto = require('crypto');
 const httpStatus = require('http-status');
 const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
 
+const cloudinary = require('../../providers/cloudinary');
 const sendEmail = require('../../providers/mailer');
 const User = require('./user.model');
 const AppError = require('../../utils/app-error');
@@ -187,6 +189,61 @@ const resetPassword = catchAsync(async (req, res, next) => {
   });
 });
 
+const updateAvatar = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next(
+      new AppError('Avatar image was not provided', httpStatus.BAD_REQUEST),
+    );
+  }
+
+  if (req.user.avatar.publicId) {
+    const { result: removeResult } = await cloudinary.uploader.destroy(
+      req.user.avatar.publicId,
+    );
+
+    if (removeResult !== 'ok' && removeResult !== 'not found') {
+      return next(
+        new AppError(
+          'Remove avatar image error',
+          httpStatus.INTERNAL_SERVER_ERROR,
+        ),
+      );
+    }
+  }
+
+  const uploadResult = await new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        public_id: uuidv4(),
+        resource_type: 'auto',
+        folder: 'avatars',
+      },
+      (uploadError, uploadCb) => {
+        if (uploadError) {
+          reject(uploadError);
+        } else {
+          resolve(uploadCb);
+        }
+      },
+    );
+
+    uploadStream.end(req.file.buffer);
+  });
+
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      avatar: {
+        publicId: uploadResult.public_id,
+        imageUrl: uploadResult.secure_url,
+      },
+    },
+    { runValidators: true },
+  );
+
+  res.status(httpStatus.OK).json({ success: true, message: 'Avatar updated' });
+});
+
 module.exports = {
   register,
   login,
@@ -195,4 +252,5 @@ module.exports = {
   updatePassword,
   forgotPassword,
   resetPassword,
+  updateAvatar,
 };

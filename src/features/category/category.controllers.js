@@ -146,11 +146,27 @@ const updateCategory = catchAsync(async (req, res, next) => {
 const deleteCategory = catchAsync(async (req, res, next) => {
   const { categoryId } = req.params;
 
-  const category = await Category.findByIdAndDelete(categoryId);
+  const category = await Category.findById(categoryId);
 
   if (!category) {
     return next(new AppError('Category not found', httpStatus.NOT_FOUND));
   }
+
+  const { result: removeResult } = await cloudinary.uploader.destroy(
+    category.image.publicId,
+  );
+
+  // allow 'not found' result for the seeded data
+  if (removeResult !== 'ok' && removeResult !== 'not found') {
+    return next(
+      new AppError(
+        'Remove category image error',
+        httpStatus.INTERNAL_SERVER_ERROR,
+      ),
+    );
+  }
+
+  await Category.findByIdAndDelete(categoryId);
 
   await Subcategory.deleteMany({ categoryId: category._id });
 
