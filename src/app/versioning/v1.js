@@ -1,6 +1,7 @@
 const express = require('express');
 
 const userRoutes = require('../../features/user/user.routes');
+const shopsRoutes = require('../../features/shop/shop.routes');
 const categoryRoutes = require('../../features/category/category.routes');
 const subcategoryRoutes = require('../../features/subcategory/subcategory.routes');
 const productRoutes = require('../../features/product/product.routes');
@@ -12,6 +13,7 @@ const wishlistRoutes = require('../../features/wishlist/wishlist.routes');
 const router = express.Router();
 
 router.use('/users', userRoutes);
+router.use('/shops', shopsRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/subcategories', subcategoryRoutes);
 router.use('/products', productRoutes);

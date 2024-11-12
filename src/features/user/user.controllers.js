@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const cloudinary = require('../../providers/cloudinary');
 const sendEmail = require('../../providers/mailer');
 const User = require('./user.model');
+const Shop = require('../shop/shop.model');
 const AppError = require('../../utils/app-error');
 const catchAsync = require('../../middlewares/catch-async');
 const { signJwtToken } = require('./utils/jwtToken');
@@ -21,7 +22,7 @@ const register = catchAsync(async (req, res, next) => {
     return next(new AppError('User already exists', httpStatus.BAD_REQUEST));
   }
 
-  const user = await User.create({
+  const newUser = await User.create({
     username,
     email,
     password,
@@ -29,16 +30,21 @@ const register = catchAsync(async (req, res, next) => {
     registerMethod,
   });
 
-  const token = signJwtToken(user._id);
+  // create a Shop for newly registered sellers
+  if (role === userRoles.seller) {
+    await Shop.create({ user: newUser._id });
+  }
+
+  const token = signJwtToken(newUser._id);
   setJwtCookie(res, token);
 
   res.status(httpStatus.CREATED).json({
     success: true,
     user: {
-      _id: user._id,
-      username: user.username,
-      role: user.role,
-      avatar: user.avatar,
+      _id: newUser._id,
+      username: newUser.username,
+      role: newUser.role,
+      avatar: newUser.avatar,
     },
   });
 });
