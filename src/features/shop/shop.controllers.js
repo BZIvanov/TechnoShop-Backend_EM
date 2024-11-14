@@ -62,8 +62,47 @@ const getSellerShop = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, shop });
 });
 
+const updateShopInfo = catchAsync(async (req, res, next) => {
+  const { shopName, country, city } = req.body;
+
+  const shop = await Shop.findOne({ user: req.user._id });
+
+  if (!shop) {
+    return next(new AppError('Shop not found', httpStatus.NOT_FOUND));
+  }
+
+  shop.shopInfo = {
+    ...shop.shopInfo,
+    name: shopName,
+    country,
+    city,
+  };
+
+  const updatedShop = await shop.save();
+
+  res.status(httpStatus.OK).json({ success: true, shop: updatedShop });
+});
+
+const updatePaymentStatus = catchAsync(async (req, res, next) => {
+  const { paymentStatus } = req.body;
+
+  const shop = await Shop.findOneAndUpdate(
+    { user: req.user._id },
+    { paymentStatus },
+    { new: true },
+  );
+
+  if (!shop) {
+    return next(new AppError('Shop not found', httpStatus.NOT_FOUND));
+  }
+
+  res.status(httpStatus.OK).json({ success: true, shop });
+});
+
 module.exports = {
   getShops,
   getShop,
   getSellerShop,
+  updateShopInfo,
+  updatePaymentStatus,
 };
