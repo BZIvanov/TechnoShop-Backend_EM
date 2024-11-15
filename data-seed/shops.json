@@ -2,13 +2,13 @@
   {
     "_id": "673388361024072350f03cf1",
     "user": "6717cf9b37759d96eaf2dccb",
-    "activitystatus": "pending",
+    "activityStatus": "pending",
     "paymentStatus": "unpaid"
   },
   {
     "_id": "6733892686021073778fb542",
     "user": "6717d0d0c28f835782943df5",
-    "activitystatus": "pending",
+    "activityStatus": "pending",
     "paymentStatus": "unpaid"
   }
 ]

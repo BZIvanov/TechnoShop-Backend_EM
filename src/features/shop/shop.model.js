@@ -14,10 +14,10 @@ const schema = new Schema(
       ref: userModel,
       required: true,
     },
-    activitystatus: {
+    activityStatus: {
       type: String,
       enum: Object.values(shopActivityStatuses),
-      default: shopActivityStatuses.pending,
+      default: shopActivityStatuses.active,
     },
     paymentStatus: {
       type: String,

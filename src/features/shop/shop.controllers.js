@@ -6,10 +6,10 @@ const catchAsync = require('../../middlewares/catch-async');
 const { shopActivityStatuses } = require('./shop.constants');
 
 const getShopsQueryParams = (params) => {
-  const { activitystatus } = params;
+  const { activityStatus } = params;
 
   const build = {
-    ...(activitystatus && { activitystatus }),
+    ...(activityStatus && { activityStatus }),
   };
 
   return build;
@@ -21,10 +21,10 @@ const getShops = catchAsync(async (req, res, next) => {
     order,
     page,
     perPage,
-    activitystatus = shopActivityStatuses.pending,
+    activityStatus = shopActivityStatuses.pending,
   } = req.query;
 
-  const builder = await getShopsQueryParams({ activitystatus });
+  const builder = await getShopsQueryParams({ activityStatus });
 
   const pageNumber = parseInt(page, 10) || 1;
   const perPageNumber = parseInt(perPage, 10) || 5;
