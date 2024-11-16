@@ -9,9 +9,9 @@ const router = express.Router();
 
 router
   .route('/upload')
-  .post(authenticate, authorize(userRoles.admin), uploadImage);
+  .post(authenticate, authorize(userRoles.seller), uploadImage);
 router
   .route('/remove')
-  .post(authenticate, authorize(userRoles.admin), removeImage);
+  .post(authenticate, authorize(userRoles.seller), removeImage);
 
 module.exports = router;

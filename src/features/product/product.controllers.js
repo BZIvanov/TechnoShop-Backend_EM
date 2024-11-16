@@ -2,10 +2,15 @@ const httpStatus = require('http-status');
 const slugify = require('slugify');
 
 const Product = require('./product.model');
+const Shop = require('../shop/shop.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 const Subcategory = require('../subcategory/subcategory.model');
 const cloudinary = require('../../providers/cloudinary');
+const {
+  shopActivityStatuses,
+  shopPaymentStatuses,
+} = require('../shop/shop.constants');
 
 const handleRating = (rating) =>
   Product.aggregate([
@@ -98,6 +103,7 @@ const getProduct = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
 
   const product = await Product.findById(productId)
+    .populate('shop', '_id shopInfo')
     .populate('category')
     .populate('subcategories');
 
@@ -108,9 +114,29 @@ const getProduct = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, product });
 });
 
-const createProduct = catchAsync(async (req, res) => {
+const createProduct = catchAsync(async (req, res, next) => {
   const productData = { ...req.body };
+
+  const shop = await Shop.findOne({ user: req.user._id });
+
+  if (!shop) {
+    return next(new AppError('Shop not found', httpStatus.NOT_FOUND));
+  }
+
+  if (
+    shop.activityStatus !== shopActivityStatuses.active ||
+    shop.paymentStatus !== shopPaymentStatuses.paid
+  ) {
+    return next(
+      new AppError(
+        'This shop cannot currently have products',
+        httpStatus.BAD_REQUEST,
+      ),
+    );
+  }
+
   productData.slug = slugify(req.body.title);
+  productData.shop = shop._id;
 
   const product = await Product.create(productData);
 

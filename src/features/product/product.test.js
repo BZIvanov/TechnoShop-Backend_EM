@@ -3,11 +3,13 @@ const request = require('supertest');
 const { mongoDbConnect, mongoDbDisconnect } = require('../../db/mongo');
 const getApp = require('../../app/express');
 const User = require('../user/user.model');
+const Shop = require('../shop/shop.model');
 const Category = require('../category/category.model');
 const Subcategory = require('../subcategory/subcategory.model');
 const Product = require('./product.model');
 const { signJwtToken } = require('../user/utils/jwtToken');
 const users = require('../../../data-seed/users.json');
+const shops = require('../../../data-seed/shops.json');
 const categories = require('../../../data-seed/categories.json');
 const subcategories = require('../../../data-seed/subcategories.json');
 const products = require('../../../data-seed/products.json');
@@ -19,6 +21,7 @@ describe('Product routes', () => {
     await mongoDbConnect();
 
     await User.create(users);
+    await Shop.create(shops);
     await Category.create(categories);
     await Subcategory.create(subcategories);
     await Product.create(products);
@@ -265,15 +268,15 @@ describe('Product routes', () => {
     test('it should create a product successfully', async () => {
       const response = await request(app)
         .post('/v1/products')
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .send({
-          title: 'Blue jeans',
-          description: 'Very nice jeans',
+          title: 'Test Product 123456789',
+          description: 'Some test product 123456789',
           price: 21.24,
           quantity: 234,
           shipping: 'No',
           color: 'Blue',
-          brand: 'Milky Dream',
+          brand: 'Test product brand 123456789',
           images: [],
           category: categories[0]._id,
           subcategories: [
@@ -285,22 +288,25 @@ describe('Product routes', () => {
         .expect(201);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('product.title', 'Blue jeans');
+      expect(response.body).toHaveProperty(
+        'product.title',
+        'Test Product 123456789',
+      );
       expect(response.body).toHaveProperty('product.price', 21.24);
     });
 
-    test('it should return error if the user is not admin', async () => {
+    test('it should return error if the user is not seller', async () => {
       const response = await request(app)
         .post('/v1/products')
-        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[8]._id)}`])
         .send({
-          title: 'Blue jeans',
-          description: 'Very nice jeans',
+          title: 'Test product 238900',
+          description: 'Test product description 238900',
           price: 21.24,
           quantity: 234,
           shipping: 'No',
           color: 'Blue',
-          brand: 'Milky Dream',
+          brand: 'Test brand 238900',
           images: [],
           category: categories[0]._id,
           subcategories: ['61b27f4a8c18d90664b9b7f3'],
@@ -351,7 +357,7 @@ describe('Product routes', () => {
     test('it should update the title, rest properties should stay the same', async () => {
       const response = await request(app)
         .patch(`/v1/products/${products[0]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .send({ title: 'Dark Chocolate' })
         .expect('Content-Type', /application\/json/)
         .expect(200);
@@ -409,10 +415,10 @@ describe('Product routes', () => {
       );
     });
 
-    test('it should return error if the user is not admin', async () => {
+    test('it should return error if the user is not seller', async () => {
       const response = await request(app)
         .patch(`/v1/products/${products[0]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[5]._id)}`])
         .send({ title: 'Dark Chocolate' })
         .expect('Content-Type', /application\/json/)
         .expect(403);
@@ -427,7 +433,7 @@ describe('Product routes', () => {
     test('it should return error for not existing product id', async () => {
       const response = await request(app)
         .patch('/v1/products/21b280ee8cbd2875f54ed9ab')
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .send({ title: 'Dark Chocolate' })
         .expect('Content-Type', /application\/json/)
         .expect(404);
@@ -440,8 +446,8 @@ describe('Product routes', () => {
   describe('Delete product controller', () => {
     test('it should delete the product', async () => {
       await request(app)
-        .delete(`/v1/products/${products[0]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .delete(`/v1/products/${products[1]._id}`)
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .expect(204);
     });
   });

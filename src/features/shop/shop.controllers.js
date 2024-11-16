@@ -21,7 +21,7 @@ const getShops = catchAsync(async (req, res, next) => {
     order,
     page,
     perPage,
-    activityStatus = shopActivityStatuses.pending,
+    activityStatus = shopActivityStatuses.active,
   } = req.query;
 
   const builder = await getShopsQueryParams({ activityStatus });

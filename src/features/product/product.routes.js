@@ -28,7 +28,7 @@ router
   .post(
     validateRequestBody(productCreateValidationSchema),
     authenticate,
-    authorize(userRoles.admin),
+    authorize(userRoles.seller),
     createProduct,
   );
 
@@ -40,10 +40,10 @@ router
   .patch(
     validateRequestBody(productUpdateValidationSchema),
     authenticate,
-    authorize(userRoles.admin),
+    authorize(userRoles.seller),
     updateProduct,
   )
-  .delete(authenticate, authorize(userRoles.admin), deleteProduct);
+  .delete(authenticate, authorize(userRoles.seller), deleteProduct);
 
 router
   .route('/:productId/rate')

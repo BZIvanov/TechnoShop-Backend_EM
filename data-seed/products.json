@@ -1,6 +1,7 @@
 [
   {
     "_id": "61b280ee8cbd2875f94ed9fb",
+    "shop": "673388361024072350f03cf1",
     "title": "Milky Chocolate",
     "slug": "milky-chocolate",
     "description": "Delicious chocolate made with a lot of milk. Best chocolate you ever had.",
@@ -17,6 +18,7 @@
   },
   {
     "_id": "61b2835a75d5581f55088367",
+    "shop": "673388361024072350f03cf1",
     "title": "Alaskian",
     "slug": "alaskian",
     "description": "The best and most clean vodka in the world. It carries the spring of the north lands.",
@@ -33,6 +35,7 @@
   },
   {
     "_id": "61b2eb398026fa02fca82721",
+    "shop": "6733892686021073778fb542",
     "title": "Winter blouse",
     "slug": "winter-blouse",
     "description": "Perfect for the winter and the cold months. Very warm and comfortable.",
@@ -49,6 +52,7 @@
   },
   {
     "_id": "61b2eb3e8026fa02fca82727",
+    "shop": "673388361024072350f03cf1",
     "title": "Watch Timesey 23",
     "slug": "watch-timesey-23",
     "description": "Best watches you could have. Very good looking and very comfortable. Outstanding quality.",
@@ -69,6 +73,7 @@
   },
   {
     "_id": "61b2edd54e7a9ba6a1d20753",
+    "shop": "6733892686021073778fb542",
     "title": "Laptop Fastey ASG-24",
     "slug": "laptop-fastey-asg-24",
     "description": "The best performering laptop. Suitable for work and gaming. This is the laptop with the best display on the market at the moment.",
@@ -85,6 +90,7 @@
   },
   {
     "_id": "65886459dc4a2af87ea9320f",
+    "shop": "673388361024072350f03cf1",
     "title": "Laptop ThinP12",
     "slug": "laptop-thinp12",
     "description": "Thin laptop of new generation.",
@@ -101,6 +107,7 @@
   },
   {
     "_id": "61b2f043da40b3a0c6597c51",
+    "shop": "6733892686021073778fb542",
     "title": "Cotton T-shirts",
     "slug": "cotton-t-shirts",
     "description": "T-shirts of different sizes and stamps. Perfect for a gift. Buy them now for an incredible price.",
@@ -117,6 +124,7 @@
   },
   {
     "_id": "61b3c1ba2e08a393a510a3f2",
+    "shop": "673388361024072350f03cf1",
     "title": "Asius ZXC-213",
     "slug": "asius-zxc-213",
     "description": "New generation laptops. Fastest video card, very good on RAM. Limited fans edition.",
@@ -138,6 +146,7 @@
   },
   {
     "_id": "63ac82d5930fb240f96f813b",
+    "shop": "673388361024072350f03cf1",
     "title": "Thin iP 3x56",
     "slug": "thin-ip-3x56",
     "description": "Laptop for general usage. it is built for all use cases.",
@@ -162,6 +171,7 @@
   },
   {
     "_id": "63ac8839f93c9f9c90e0430c",
+    "shop": "673388361024072350f03cf1",
     "title": "Herb liqueur",
     "slug": "herb-liqueur",
     "description": "Very nice drink. It contains specially selected mix of herbs which are good for both winter and the summer.",
@@ -178,6 +188,7 @@
   },
   {
     "_id": "63ac8bd9077389c9bf2aba6d",
+    "shop": "673388361024072350f03cf1",
     "title": "Garden Gloves",
     "slug": "garden-gloves",
     "description": "Very nice garden gloves. Make the work pleasure using this gloves. They are soft and comfortable.",
@@ -198,6 +209,7 @@
   },
   {
     "_id": "63ac929bc5f6d4c21a4d3b49",
+    "shop": "6733892686021073778fb542",
     "title": "Cherry cake",
     "slug": "cherry-cake",
     "description": "The most delicious cake in the world.",
@@ -219,6 +231,7 @@
   },
   {
     "_id": "63ac99572e4016415dd814ed",
+    "shop": "673388361024072350f03cf1",
     "title": "Blueberry cake",
     "slug": "blueberry-cake",
     "description": "Just amazing.",
@@ -239,6 +252,7 @@
   },
   {
     "_id": "63ac958faa47b0f59a4dc4eb",
+    "shop": "6733892686021073778fb542",
     "title": "Cam 23-XPS Long Zoom",
     "slug": "cam-23-xps-long-zoom",
     "description": "The best surveillance camera in the world.",
@@ -255,6 +269,7 @@
   },
   {
     "_id": "63ac981d3ee1fed08f8b7977",
+    "shop": "673388361024072350f03cf1",
     "title": "Cam 52-LTS Mid range",
     "slug": "cam-52-lts-mid-range",
     "description": "Very good surveillance camera.",
@@ -274,6 +289,7 @@
   },
   {
     "_id": "65847977e75142439b745622",
+    "shop": "673388361024072350f03cf1",
     "title": "Watermelon",
     "slug": "watermelon",
     "description": "Staying hydrated is important for your body to function properly.",
@@ -290,6 +306,7 @@
   },
   {
     "_id": "65847d214ab354f9cf0be2a9",
+    "shop": "6733892686021073778fb542",
     "title": "Xoiyami NS245",
     "slug": "xoiyami-ns245",
     "description": "Get one of the latest and the best phones.",
@@ -306,6 +323,7 @@
   },
   {
     "_id": "6590022b06bb0f180787a4da",
+    "shop": "673388361024072350f03cf1",
     "title": "Out of Stock XYZ",
     "slug": "out-of-stock-xyz",
     "description": "This is a test product with 0 quantity left in stock.",
@@ -322,6 +340,7 @@
   },
   {
     "_id": "65a18e3636e41b27639e2650",
+    "shop": "673388361024072350f03cf1",
     "title": "Torch HMA Pro 258909",
     "slug": "torch-hma-pro-258909",
     "description": "High quality product. Perfect for any working conditions",
@@ -351,6 +370,7 @@
   },
   {
     "_id": "65a1903d693b6e69a3cae3db",
+    "shop": "673388361024072350f03cf1",
     "title": "Heineil TUD-48435 912",
     "slug": "heineil-tud-48435-912",
     "description": "The perfect machine for your needs",

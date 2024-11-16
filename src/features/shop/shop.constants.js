@@ -1,7 +1,6 @@
 const shopModel = 'shop';
 
 const shopActivityStatuses = {
-  pending: 'pending',
   active: 'active',
   deactive: 'deactive',
 };
