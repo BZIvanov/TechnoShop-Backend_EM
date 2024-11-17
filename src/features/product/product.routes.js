@@ -12,6 +12,7 @@ const {
 } = require('./product.controllers');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
+const fileUpload = require('../../middlewares/file-upload');
 const { userRoles } = require('../user/user.constants');
 const validateRequestBody = require('../../middlewares/validate-request-body');
 const {
@@ -26,9 +27,10 @@ router
   .route('/')
   .get(getProducts)
   .post(
-    validateRequestBody(productCreateValidationSchema),
     authenticate,
     authorize(userRoles.seller),
+    fileUpload.array('newImages', 10),
+    validateRequestBody(productCreateValidationSchema),
     createProduct,
   );
 
@@ -38,9 +40,10 @@ router
   .route('/:productId')
   .get(getProduct)
   .patch(
-    validateRequestBody(productUpdateValidationSchema),
     authenticate,
     authorize(userRoles.seller),
+    fileUpload.array('newImages', 10),
+    validateRequestBody(productUpdateValidationSchema),
     updateProduct,
   )
   .delete(authenticate, authorize(userRoles.seller), deleteProduct);

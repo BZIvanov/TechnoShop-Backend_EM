@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const slugify = require('slugify');
+const { v4: uuidv4 } = require('uuid');
 
 const Product = require('./product.model');
 const Shop = require('../shop/shop.model');
@@ -114,6 +115,36 @@ const getProduct = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, product });
 });
 
+const uploadFilesToCloudinary = async (files) => {
+  const uploadPromises = files.map(
+    (file) =>
+      new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          {
+            public_id: uuidv4(),
+            resource_type: 'auto',
+            folder: 'categories',
+          },
+          (uploadError, uploadResult) => {
+            if (uploadError) {
+              reject(uploadError);
+            } else {
+              resolve(uploadResult);
+            }
+          },
+        );
+
+        uploadStream.end(file.buffer);
+      }),
+  );
+
+  const uploadResults = await Promise.all(uploadPromises);
+  return uploadResults.map((uploadResult) => ({
+    publicId: uploadResult.public_id,
+    imageUrl: uploadResult.secure_url,
+  }));
+};
+
 const createProduct = catchAsync(async (req, res, next) => {
   const productData = { ...req.body };
 
@@ -135,8 +166,11 @@ const createProduct = catchAsync(async (req, res, next) => {
     );
   }
 
+  const uploadResults = await uploadFilesToCloudinary(req.files || []);
+
   productData.slug = slugify(req.body.title);
   productData.shop = shop._id;
+  productData.images = uploadResults;
 
   const product = await Product.create(productData);
 
@@ -145,17 +179,42 @@ const createProduct = catchAsync(async (req, res, next) => {
 
 const updateProduct = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
+  const productData = { ...req.body };
+  const newImageFiles = req.files;
 
-  const product = await Product.findByIdAndUpdate(productId, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  const product = await Product.findById(productId);
 
   if (!product) {
     return next(new AppError('Product not found', httpStatus.NOT_FOUND));
   }
 
-  res.status(httpStatus.OK).json({ success: true, product });
+  product.images
+    .filter((productImage) => {
+      const imagesToKeep = productData.existingImages || [];
+      return !imagesToKeep.includes(productImage.publicId);
+    })
+    .map((productImage) => productImage.publicId)
+    .forEach(async (uploadedImageToRemove) => {
+      await cloudinary.uploader.destroy(uploadedImageToRemove);
+    });
+
+  const uploadedImagesToKeep = product.images.filter((productImage) => {
+    const imagesToKeep = productData.existingImages || [];
+    return imagesToKeep.includes(productImage.publicId);
+  });
+
+  const uploadResults = await uploadFilesToCloudinary(newImageFiles || []);
+
+  const updatedProduct = await Product.findByIdAndUpdate(
+    productId,
+    { ...productData, images: [...uploadedImagesToKeep, ...uploadResults] },
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
+
+  res.status(httpStatus.OK).json({ success: true, product: updatedProduct });
 });
 
 const deleteProduct = catchAsync(async (req, res, next) => {
