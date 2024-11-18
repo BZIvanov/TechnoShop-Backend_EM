@@ -30,6 +30,7 @@ const schema = new Schema(
       required: [true, 'Product description is required'],
       maxlength: 2000,
       text: true,
+      trim: true,
     },
     price: {
       type: Number,
@@ -86,6 +87,14 @@ const schema = new Schema(
         },
       },
     ],
+    averageRating: {
+      type: Number,
+      default: 0,
+    },
+    reviewCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true },
 );

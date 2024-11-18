@@ -269,20 +269,23 @@ describe('Product routes', () => {
       const response = await request(app)
         .post('/v1/products')
         .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({
-          title: 'Test Product 123456789',
-          description: 'Some test product 123456789',
-          price: 21.24,
-          quantity: 234,
-          shipping: 'No',
-          color: 'Blue',
-          brand: 'Test product brand 123456789',
-          images: [],
-          category: categories[0]._id,
-          subcategories: [
-            '61b27f4a8c18d90664b9b7f3',
-            '61b27f4e8c18d90664b9b7f9',
-          ],
+        .field('title', 'Test Product 123456789')
+        .field('description', 'Some test product 123456789')
+        .field('price', 21.24)
+        .field('quantity', 234)
+        .field('shipping', 'No')
+        .field('color', 'Blue')
+        .field('brand', 'Test product brand 123456789')
+        .field('category', categories[0]._id)
+        .field('subcategories', '61b27f4a8c18d90664b9b7f3')
+        .field('subcategories', '61b27f4e8c18d90664b9b7f9')
+        .attach('newImages', Buffer.from('mock-image-data-1'), {
+          filename: 'test-image-1.jpg',
+          contentType: 'image/jpeg',
+        })
+        .attach('newImages', Buffer.from('mock-image-data-2'), {
+          filename: 'test-image-2.jpg',
+          contentType: 'image/jpeg',
         })
         .expect('Content-Type', /application\/json/)
         .expect(201);
@@ -299,17 +302,18 @@ describe('Product routes', () => {
       const response = await request(app)
         .post('/v1/products')
         .set('Cookie', [`jwt=${signJwtToken(users[8]._id)}`])
-        .send({
-          title: 'Test product 238900',
-          description: 'Test product description 238900',
-          price: 21.24,
-          quantity: 234,
-          shipping: 'No',
-          color: 'Blue',
-          brand: 'Test brand 238900',
-          images: [],
-          category: categories[0]._id,
-          subcategories: ['61b27f4a8c18d90664b9b7f3'],
+        .field('title', 'Test product 238900')
+        .field('description', 'Test product description 238900')
+        .field('price', 21.24)
+        .field('quantity', 234)
+        .field('shipping', 'No')
+        .field('color', 'Blue')
+        .field('brand', 'Test brand 238900')
+        .field('category', categories[0]._id)
+        .field('subcategories', '61b27f4a8c18d90664b9b7f3')
+        .attach('newImages', Buffer.from('mock-image-data-1'), {
+          filename: 'test-image-1.jpg',
+          contentType: 'image/jpeg',
         })
         .expect('Content-Type', /application\/json/)
         .expect(403);
@@ -324,23 +328,18 @@ describe('Product routes', () => {
     test('it should return error subcategories are at least 1 subcategory is not provided', async () => {
       const response = await request(app)
         .post('/v1/products')
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
-        .send({
-          title: 'Winter jacket',
-          description: 'Very nice jacket',
-          price: 234.99,
-          quantity: 12,
-          shipping: 'Yes',
-          color: 'Brown',
-          brand: 'Cool Clothes',
-          images: [
-            {
-              publicId: '12345',
-              imageUrl: 'https://cool-images.com/winter/jackets',
-            },
-          ],
-          category: categories[1]._id,
-          subcategories: [],
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
+        .field('title', 'Winter jacket')
+        .field('description', 'Very nice jacket')
+        .field('price', 234.99)
+        .field('quantity', 12)
+        .field('shipping', 'Yes')
+        .field('color', 'Brown')
+        .field('brand', 'Cool Clothes')
+        .field('category', categories[1]._id)
+        .attach('newImages', Buffer.from('mock-image-data-1'), {
+          filename: 'test-image-1.jpg',
+          contentType: 'image/jpeg',
         })
         .expect('Content-Type', /application\/json/)
         .expect(400);
@@ -348,7 +347,7 @@ describe('Product routes', () => {
       expect(response.body).toHaveProperty('success', false);
       expect(response.body).toHaveProperty(
         'error',
-        '"subcategories" does not contain 1 required value(s)',
+        '"subcategories" is required',
       );
     });
   });
@@ -370,7 +369,7 @@ describe('Product routes', () => {
     test('it should return error if the title is too long', async () => {
       const response = await request(app)
         .patch(`/v1/products/${products[0]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .send({
           title:
             'Some very long testing title with length more than 32 characters',
@@ -388,7 +387,7 @@ describe('Product routes', () => {
     test('it should return error if we are updating category with invalid id type', async () => {
       const response = await request(app)
         .patch(`/v1/products/${products[0]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .send({ title: 'New cool title', category: 'invalid-id' })
         .expect('Content-Type', /application\/json/)
         .expect(400);
@@ -403,7 +402,7 @@ describe('Product routes', () => {
     test('it should return error for too high price', async () => {
       const response = await request(app)
         .patch(`/v1/products/${products[0]._id}`)
-        .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
+        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .send({ price: 100000 })
         .expect('Content-Type', /application\/json/)
         .expect(400);
