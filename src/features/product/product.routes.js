@@ -6,7 +6,6 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-  rateProduct,
   getSimilarProducts,
   getProductBrands,
 } = require('./product.controllers');
@@ -18,7 +17,6 @@ const validateRequestBody = require('../../middlewares/validate-request-body');
 const {
   productCreateValidationSchema,
   productUpdateValidationSchema,
-  productRateValidationSchema,
 } = require('./product.validationSchema');
 
 const router = express.Router({ mergeParams: true });
@@ -47,14 +45,6 @@ router
     updateProduct,
   )
   .delete(authenticate, authorize(userRoles.seller), deleteProduct);
-
-router
-  .route('/:productId/rate')
-  .patch(
-    validateRequestBody(productRateValidationSchema),
-    authenticate,
-    rateProduct,
-  );
 
 router.route('/:productId/similar').get(getSimilarProducts);
 

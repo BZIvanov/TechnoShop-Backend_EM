@@ -37,12 +37,7 @@ const productUpdateValidationSchema = Joi.object({
   brand: Joi.string().trim(true).max(32),
 });
 
-const productRateValidationSchema = Joi.object({
-  rating: Joi.number().integer().positive().min(1).max(5).required(),
-});
-
 module.exports = {
   productCreateValidationSchema,
   productUpdateValidationSchema,
-  productRateValidationSchema,
 };

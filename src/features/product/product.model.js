@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const { productModel, yesNo } = require('./product.constants');
-const { userModel } = require('../user/user.constants');
 const { shopModel } = require('../shop/shop.constants');
 const { categoryModel } = require('../category/category.constants');
 const { subcategoryModel } = require('../subcategory/subcategory.constants');
@@ -76,17 +75,6 @@ const schema = new Schema(
       required: [true, 'Please provide a brand name'],
       maxLength: [50, 'Product brand should be at most 50 characters'],
     },
-    ratings: [
-      {
-        stars: {
-          type: Number,
-        },
-        postedBy: {
-          type: Schema.ObjectId,
-          ref: userModel,
-        },
-      },
-    ],
     averageRating: {
       type: Number,
       default: 0,

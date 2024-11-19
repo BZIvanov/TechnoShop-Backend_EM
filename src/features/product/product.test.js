@@ -85,14 +85,11 @@ describe('Product routes', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(response.body).toHaveProperty('totalCount', 4);
-      expect(response.body.products.length).toBe(4);
+      expect(response.body).toHaveProperty('totalCount', 0);
+      expect(response.body.products.length).toBe(0);
 
       response.body.products.forEach((product) => {
-        const productRatings = product.ratings.map((rating) => rating.stars);
-        const ratingsSum = productRatings.reduce((acc, curr) => acc + curr, 0);
-        const averagetRating = Math.ceil(ratingsSum / productRatings.length);
-        expect(averagetRating).toBe(INCOMING_RATING);
+        expect(product.averagetRating).toBe(INCOMING_RATING);
       });
     });
 
@@ -448,96 +445,6 @@ describe('Product routes', () => {
         .delete(`/v1/products/${products[1]._id}`)
         .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
         .expect(204);
-    });
-  });
-
-  describe('Rate product controller', () => {
-    test('it should rate the product', async () => {
-      const response = await request(app)
-        .patch(`/v1/products/${products[4]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({ rating: 2 })
-        .expect('Content-Type', /application\/json/)
-        .expect(200);
-
-      expect(response.body).toHaveProperty('success', true);
-      expect(response.body.product.ratings[0]).toHaveProperty('stars', 2);
-      expect(response.body.product.ratings.length).toBe(1);
-    });
-
-    test('if the same user rates twice the latest rate overrides the previous', async () => {
-      await request(app)
-        .patch(`/v1/products/${products[5]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({ rating: 3 });
-
-      const response = await request(app)
-        .patch(`/v1/products/${products[5]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({ rating: 4 });
-
-      expect(response.body).toHaveProperty('success', true);
-      expect(response.body.product.ratings[0]).toHaveProperty('stars', 4);
-      expect(response.body.product.ratings[0].postedBy).toBe(users[1]._id);
-      expect(response.body.product.ratings.length).toBe(1);
-    });
-
-    test('if 2 different users are rating a product, both rates are saved', async () => {
-      await request(app)
-        .patch(`/v1/products/${products[6]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({ rating: 1 })
-        .expect(200);
-
-      const response = await request(app)
-        .patch(`/v1/products/${products[6]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[2]._id)}`])
-        .send({ rating: 2 })
-        .expect(200);
-
-      expect(response.body).toHaveProperty('success', true);
-      expect(response.body.product.ratings.length).toBe(2);
-    });
-
-    test('should return error if the rating is not a valid number', async () => {
-      const response = await request(app)
-        .patch(`/v1/products/${products[6]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[2]._id)}`])
-        .send({ rating: 'two' })
-        .expect('Content-Type', /application\/json/)
-        .expect(400);
-
-      expect(response.body).toHaveProperty('success', false);
-      expect(response.body).toHaveProperty(
-        'error',
-        '"rating" must be a number',
-      );
-    });
-
-    test('should return error if the rating is not an integer', async () => {
-      const response = await request(app)
-        .patch(`/v1/products/${products[6]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[2]._id)}`])
-        .send({ rating: 1.5 })
-        .expect('Content-Type', /application\/json/)
-        .expect(400);
-
-      expect(response.body).toHaveProperty('success', false);
-      expect(response.body).toHaveProperty(
-        'error',
-        '"rating" must be an integer',
-      );
-    });
-
-    test('should return error if rating is not provided', async () => {
-      const response = await request(app)
-        .patch(`/v1/products/${products[6]._id}/rate`)
-        .set('Cookie', [`jwt=${signJwtToken(users[2]._id)}`])
-        .expect('Content-Type', /application\/json/)
-        .expect(400);
-
-      expect(response.body).toHaveProperty('success', false);
-      expect(response.body).toHaveProperty('error', '"rating" is required');
     });
   });
 

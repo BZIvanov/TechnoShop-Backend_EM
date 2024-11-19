@@ -11,7 +11,6 @@
     "shipping": "No",
     "color": "Brown",
     "brand": "Milky Dream",
-    "ratings": [],
     "images": [],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["619ec482ae78a56725405654"]
@@ -28,7 +27,6 @@
     "shipping": "No",
     "color": "Ice transparent",
     "brand": "Alaskian drinks",
-    "ratings": [],
     "images": [],
     "category": "6199475565bcf27b80cfe574",
     "subcategories": ["6199477765bcf27b80cfe57f", "61b2835c75d5581f5508836a"]
@@ -45,7 +43,6 @@
     "shipping": "Yes",
     "color": "Light blue",
     "brand": "Comfy clothes",
-    "ratings": [],
     "images": [],
     "category": "619a5b86aabbae42fc6b8253",
     "subcategories": ["61b27f548c18d90664b9b7ff"]
@@ -62,7 +59,6 @@
     "shipping": "Yes",
     "color": "Cyan",
     "brand": "Timesey",
-    "ratings": [],
     "images": [],
     "category": "6199476765bcf27b80cfe57a",
     "subcategories": [
@@ -83,7 +79,6 @@
     "shipping": "Yes",
     "color": "Red",
     "brand": "Fastey",
-    "ratings": [],
     "images": [],
     "category": "6199474c65bcf27b80cfe56e",
     "subcategories": ["61b2ee7f1bee8d2b7644b6e0"]
@@ -100,7 +95,6 @@
     "shipping": "Yes",
     "color": "Gray",
     "brand": "Future2050",
-    "ratings": [],
     "images": [],
     "category": "6199474c65bcf27b80cfe56e",
     "subcategories": ["61b2ee7f1bee8d2b7644b6e0", "63ac83fec7d4970364449974"]
@@ -117,7 +111,6 @@
     "shipping": "Yes",
     "color": "Multiple",
     "brand": "Cool clothes",
-    "ratings": [],
     "images": [],
     "category": "619a5b86aabbae42fc6b8253",
     "subcategories": ["61b2ecfcdf32b367e09fd7fd", "61b2ecfedf32b367e09fd800"]
@@ -134,7 +127,6 @@
     "shipping": "Yes",
     "color": "Black",
     "brand": "Asius",
-    "ratings": [],
     "images": [
       {
         "publicId": "f52b174b",
@@ -156,10 +148,6 @@
     "shipping": "Yes",
     "color": "Dark green",
     "brand": "Think itt",
-    "ratings": [
-      { "stars": 4, "postedBy": "6171c8cf168d11250b4e15dc" },
-      { "stars": 3, "postedBy": "6171cb4b168d11250b4e15df" }
-    ],
     "images": [
       {
         "publicId": "a52b174b",
@@ -181,7 +169,6 @@
     "shipping": "No",
     "color": "Dark brown",
     "brand": "Herb herb herb",
-    "ratings": [{ "stars": 5, "postedBy": "6171c360168d11250b4e15d9" }],
     "images": [],
     "category": "6199475565bcf27b80cfe574",
     "subcategories": ["61b2835c75d5581f5508836a"]
@@ -198,11 +185,6 @@
     "shipping": "No",
     "color": "Light green",
     "brand": "Comfy gloves",
-    "ratings": [
-      { "stars": 3, "postedBy": "6171c360168d11250b4e15d9" },
-      { "stars": 3, "postedBy": "6171c8cf168d11250b4e15dc" },
-      { "stars": 4, "postedBy": "6171cb4b168d11250b4e15df" }
-    ],
     "images": [],
     "category": "619a5b86aabbae42fc6b8253",
     "subcategories": ["63ac8c84a5ea72fd475748ab"]
@@ -219,12 +201,6 @@
     "shipping": "Yes",
     "color": "Red",
     "brand": "Sweetestest",
-    "ratings": [
-      { "stars": 5, "postedBy": "6171c360168d11250b4e15d9" },
-      { "stars": 4, "postedBy": "6171c8cf168d11250b4e15dc" },
-      { "stars": 3, "postedBy": "6171cb4b168d11250b4e15df" },
-      { "stars": 5, "postedBy": "63ac935cf2bb507ce39da8a2" }
-    ],
     "images": [],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["619ec482ae78a56725405654"]
@@ -241,11 +217,6 @@
     "shipping": "Yes",
     "color": "Blue",
     "brand": "Sweetestest",
-    "ratings": [
-      { "stars": 4, "postedBy": "6171c360168d11250b4e15d9" },
-      { "stars": 3, "postedBy": "6171c8cf168d11250b4e15dc" },
-      { "stars": 3, "postedBy": "6171cb4b168d11250b4e15df" }
-    ],
     "images": [],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["619ec482ae78a56725405654"]
@@ -262,7 +233,6 @@
     "shipping": "Yes",
     "color": "White",
     "brand": "Cam Survcam",
-    "ratings": [{ "stars": 5, "postedBy": "63ac935cf2bb507ce39da8a2" }],
     "images": [],
     "category": "63ac94c1cdc1fa5f101c139d",
     "subcategories": ["63ac9521e08d67c60a6ea76c"]
@@ -279,10 +249,6 @@
     "shipping": "Yes",
     "color": "Dark blue",
     "brand": "Cam Survcam",
-    "ratings": [
-      { "stars": 5, "postedBy": "63ac935cf2bb507ce39da8a2" },
-      { "stars": 4, "postedBy": "6171cb4b168d11250b4e15df" }
-    ],
     "images": [],
     "category": "63ac94c1cdc1fa5f101c139d",
     "subcategories": ["63ac9521e08d67c60a6ea76c"]
@@ -299,7 +265,6 @@
     "shipping": "No",
     "color": "Green",
     "brand": "Delicious foods",
-    "ratings": [],
     "images": [],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["6199479265bcf27b80cfe588"]
@@ -316,7 +281,6 @@
     "shipping": "Yes",
     "color": "Blue",
     "brand": "Xoiyami",
-    "ratings": [],
     "images": [],
     "category": "65847c2d1d02915686907446",
     "subcategories": ["65847c6e94b7f49f65683bc1"]
@@ -333,7 +297,6 @@
     "shipping": "No",
     "color": "Red",
     "brand": "Think itt",
-    "ratings": [],
     "images": [],
     "category": "65847c2d1d02915686907446",
     "subcategories": ["65847c6e94b7f49f65683bc1"]
@@ -350,11 +313,6 @@
     "shipping": "Yes",
     "color": "Black",
     "brand": "HMA",
-    "ratings": [
-      { "stars": 3, "postedBy": "63ac935cf2bb507ce39da8a2" },
-      { "stars": 4, "postedBy": "63bdc0e114e911b1a4333eb6" },
-      { "stars": 4, "postedBy": "63cd0626c4b3aeaf0ac560b4" }
-    ],
     "images": [
       {
         "publicId": "b52b174y91",
@@ -380,7 +338,6 @@
     "shipping": "Yes",
     "color": "Red",
     "brand": "Heineil",
-    "ratings": [],
     "images": [
       {
         "publicId": "y51a1324y988",

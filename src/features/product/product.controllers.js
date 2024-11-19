@@ -13,19 +13,6 @@ const {
   shopPaymentStatuses,
 } = require('../shop/shop.constants');
 
-const handleRating = (rating) =>
-  Product.aggregate([
-    {
-      $project: {
-        document: '$$ROOT',
-        ceiledAverage: {
-          $ceil: { $avg: '$ratings.stars' }, // calculate the average for all the product's ratings and store the value in prop ceiledAverage
-        },
-      },
-    },
-    { $match: { ceiledAverage: parseInt(rating, 10) } }, // filter only products matching our calculated stars average
-  ]);
-
 const handleQueryParams = async (params) => {
   const {
     text,
@@ -39,8 +26,6 @@ const handleQueryParams = async (params) => {
     subcategory,
   } = params;
 
-  const aggregates = rating && (await handleRating(rating));
-
   const build = {
     ...(text && { $text: { $search: text } }), // this will work on fields with text property in the model
     ...(price && {
@@ -53,7 +38,7 @@ const handleQueryParams = async (params) => {
     ...(subcategories && {
       subcategories: { $in: subcategories.split(',') },
     }),
-    ...(rating && { _id: aggregates }),
+    ...(rating && { averageRating: rating }),
     ...(shipping && { shipping }),
     ...(brands && { brand: { $in: brands.split(',') } }),
     ...(category && { category }), // category from params will override categories from query
@@ -233,41 +218,6 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   res.status(httpStatus.NO_CONTENT).json();
 });
 
-const rateProduct = catchAsync(async (req, res) => {
-  const { productId } = req.params;
-  const { rating: userRating } = req.body;
-
-  const product = await Product.findById(productId);
-
-  const existingRating = product.ratings.find(
-    (rating) => rating.postedBy.toString() === req.user._id.toString(),
-  );
-
-  if (existingRating) {
-    await Product.updateOne(
-      {
-        ratings: { $elemMatch: existingRating },
-      },
-      { $set: { 'ratings.$.stars': userRating } },
-      { new: true },
-    );
-  } else {
-    await Product.findByIdAndUpdate(
-      product._id,
-      {
-        $push: { ratings: { stars: userRating, postedBy: req.user._id } },
-      },
-      { new: true },
-    );
-  }
-
-  const updatedProduct = await Product.findById(productId)
-    .populate('category')
-    .populate('subcategories');
-
-  res.status(httpStatus.OK).json({ success: true, product: updatedProduct });
-});
-
 const getSimilarProducts = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
   const { perPage } = req.query;
@@ -314,7 +264,6 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
-  rateProduct,
   getSimilarProducts,
   getProductBrands,
 };
