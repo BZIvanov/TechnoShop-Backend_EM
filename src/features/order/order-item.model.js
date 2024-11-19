@@ -2,29 +2,29 @@ const { Schema, model } = require('mongoose');
 
 const {
   orderModel,
-  orderDeliveryStatuses,
-  orderPaymentStatuses,
+  orderItemModel,
+  orderItemDeliveryStatuses,
+  orderItemPaymentStatuses,
 } = require('./order.constants');
-const { productModel } = require('../product/product.constants');
-const { userModel } = require('../user/user.constants');
-const { couponModel } = require('../coupon/coupon.constants');
 const { shopModel } = require('../shop/shop.constants');
+const { couponModel } = require('../coupon/coupon.constants');
+const Product = require('../product/product.model');
 
 const schema = new Schema(
   {
-    buyer: {
+    parentOrder: {
       type: Schema.ObjectId,
-      ref: userModel,
+      ref: orderModel,
+    },
+    shop: {
+      type: Schema.ObjectId,
+      ref: shopModel,
     },
     products: [
       {
-        shop: {
-          type: Schema.ObjectId,
-          ref: shopModel,
-        },
         product: {
           type: Schema.ObjectId,
-          ref: productModel,
+          ref: Product,
         },
         count: {
           type: Number,
@@ -36,13 +36,13 @@ const schema = new Schema(
     },
     deliveryStatus: {
       type: String,
-      default: orderDeliveryStatuses.PENDING,
-      enum: Object.values(orderDeliveryStatuses),
+      default: orderItemDeliveryStatuses.PENDING,
+      enum: Object.values(orderItemDeliveryStatuses),
     },
     paymentStatus: {
       type: String,
-      default: orderPaymentStatuses.PENDING,
-      enum: Object.values(orderPaymentStatuses),
+      default: orderItemPaymentStatuses.PENDING,
+      enum: Object.values(orderItemPaymentStatuses),
     },
     coupon: {
       type: Schema.ObjectId,
@@ -55,4 +55,4 @@ const schema = new Schema(
   { timestamps: true },
 );
 
-module.exports = model(orderModel, schema);
+module.exports = model(orderItemModel, schema);

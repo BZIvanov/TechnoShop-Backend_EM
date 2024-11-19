@@ -7,22 +7,22 @@ const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 const { userRoles } = require('../user/user.constants');
 
-const getOrders = catchAsync(async (req, res) => {
+const getBuyerOrders = catchAsync(async (req, res) => {
   const { sortColumn = 'createdAt', order = 'desc', page, perPage } = req.query;
 
   const pageNumber = parseInt(page, 10) || 0;
   const perPageNumber = parseInt(perPage, 10) || 5;
 
-  const builder = { orderedBy: req.user._id };
+  const builder = { buyer: req.user._id };
   if (req.user.role === userRoles.admin) {
-    delete builder.orderedBy;
+    delete builder.buyer;
   }
 
   const orders = await Order.find(builder)
     .skip(pageNumber * perPageNumber)
     .limit(perPageNumber)
     .populate('coupon', 'name discount')
-    .populate('orderedBy', '_id username')
+    .populate('buyer', '_id username')
     .populate('products.product', '_id title price')
     .sort([[sortColumn, order]])
     .exec();
@@ -31,7 +31,7 @@ const getOrders = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, orders, totalCount });
 });
 
-const createOrder = catchAsync(async (req, res, next) => {
+const createBuyerOrder = catchAsync(async (req, res, next) => {
   const currentUser = req.user;
   const { cart, address, coupon: couponName } = req.body;
 
@@ -39,8 +39,8 @@ const createOrder = catchAsync(async (req, res, next) => {
     products: cart,
     deliveryAddress: address,
     coupon: undefined,
-    orderedBy: currentUser._id,
-    totalAmount: 0,
+    buyer: currentUser._id,
+    totalPrice: 0,
   };
 
   const coupon = await Coupon.findOne({ name: couponName });
@@ -77,15 +77,15 @@ const createOrder = catchAsync(async (req, res, next) => {
     );
   }
 
-  const totalAmount = products.reduce((acc, curr) => {
+  const totalPrice = products.reduce((acc, curr) => {
     const cartProduct = cart.find(
       (cartItem) => cartItem.product === curr._id.toString(),
     );
     return acc + curr.price * cartProduct.count;
   }, 0);
-  orderData.totalAmount = coupon
-    ? totalAmount - totalAmount * (coupon.discount / 100)
-    : totalAmount;
+  orderData.totalPrice = coupon
+    ? totalPrice - totalPrice * (coupon.discount / 100)
+    : totalPrice;
 
   // update quantity and sold values for each product
   const bulkOption = cart.map((cartItem) => ({
@@ -103,15 +103,15 @@ const createOrder = catchAsync(async (req, res, next) => {
 
 const updateOrderStatus = catchAsync(async (req, res) => {
   const { orderId } = req.params;
-  const { orderStatus } = req.body;
+  const { deliveryStatus } = req.body;
 
   const order = await Order.findByIdAndUpdate(
     orderId,
-    { orderStatus },
+    { deliveryStatus },
     { new: true },
   )
     .populate('coupon', 'name discount')
-    .populate('orderedBy', '_id username')
+    .populate('buyer', '_id username')
     .populate('products.product', '_id title price')
     .exec();
 
@@ -119,7 +119,7 @@ const updateOrderStatus = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  getOrders,
-  createOrder,
+  getBuyerOrders,
+  createBuyerOrder,
   updateOrderStatus,
 };

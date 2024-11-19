@@ -74,8 +74,8 @@ describe('Order routes', () => {
       const totalPrice = product1TotalPrice + product2TotalPrice;
       expect(response.body).toHaveProperty('success', true);
       expect(response.body).toHaveProperty('order');
-      expect(response.body.order.totalAmount).toBe(totalPrice);
-      expect(response.body.order.orderStatus).toBe('Not Processed');
+      expect(response.body.order.totalPrice).toBe(totalPrice);
+      expect(response.body.order.deliveryStatus).toBe('pending');
     });
 
     test('it should create an order with correct total price and deducted coupon', async () => {
@@ -100,7 +100,7 @@ describe('Order routes', () => {
       const priceWithDiscount = totalPrice - totalPrice * couponDiscountPercent;
       expect(response.body).toHaveProperty('success', true);
       expect(response.body).toHaveProperty('order');
-      expect(response.body.order.totalAmount).toBe(priceWithDiscount);
+      expect(response.body.order.totalPrice).toBe(priceWithDiscount);
     });
 
     test('it should reduce the product quantity and increase sold value for the ordered product', async () => {
@@ -166,19 +166,19 @@ describe('Order routes', () => {
       const response = await request(app)
         .patch(`/v1/orders/${orders[0]._id}`)
         .set('Cookie', [`jwt=${signJwtToken(users[0]._id)}`])
-        .send({ orderStatus: 'Completed' })
+        .send({ deliveryStatus: 'shipped' })
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
       expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('order.orderStatus', 'Completed');
+      expect(response.body).toHaveProperty('order.deliveryStatus', 'shipped');
     });
 
     test('it should return an error if the user is not admin', async () => {
       const response = await request(app)
         .patch(`/v1/orders/${orders[0]._id}`)
         .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({ orderStatus: 'Cancelled' })
+        .send({ deliveryStatus: 'canceled' })
         .expect('Content-Type', /application\/json/)
         .expect(403);
 
