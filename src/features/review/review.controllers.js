@@ -26,6 +26,17 @@ const getProductReviews = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, reviews, totalCount });
 });
 
+const getMyProductReview = catchAsync(async (req, res, next) => {
+  const { productId } = req.params;
+
+  const review = await Review.findOne({
+    product: productId,
+    user: req.user._id,
+  });
+
+  res.status(httpStatus.OK).json({ success: true, review });
+});
+
 const reviewProduct = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const { productId } = req.params;
@@ -43,7 +54,7 @@ const reviewProduct = catchAsync(async (req, res, next) => {
     const oldRating = review.rating;
 
     review.rating = rating;
-    review.comment = comment;
+    review.comment = comment || '';
     await review.save();
 
     // update product's average rating (subtract the old rating, add the new one)
@@ -56,7 +67,7 @@ const reviewProduct = catchAsync(async (req, res, next) => {
       user: userId,
       product: productId,
       rating,
-      comment,
+      comment: comment || '',
     });
     await review.save();
 
@@ -132,6 +143,7 @@ const getAggregatedProductReviews = catchAsync(async (req, res) => {
 
 module.exports = {
   getProductReviews,
+  getMyProductReview,
   reviewProduct,
   getAggregatedProductReviews,
 };

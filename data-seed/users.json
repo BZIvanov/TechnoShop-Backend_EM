@@ -39,7 +39,11 @@
     "password": "12qwAS!@",
     "address": "Some city 1, Some street 123",
     "role": "buyer",
-    "registerMethod": "email"
+    "registerMethod": "email",
+    "avatar": {
+      "publicId": "avatars/151ede1a-8e39-2eb1-8a60-53d7b095a513",
+      "imageUrl": "https://picsum.photos/200/300"
+    }
   },
   {
     "_id": "6171c360168d11250b4e15d9",

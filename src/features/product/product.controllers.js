@@ -89,7 +89,7 @@ const getProduct = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
 
   const product = await Product.findById(productId)
-    .populate('shop', '_id shopInfo')
+    .populate('shop', '_id shopInfo activityStatus paymentStatus')
     .populate('category')
     .populate('subcategories');
 

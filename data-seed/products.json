@@ -11,7 +11,12 @@
     "shipping": "No",
     "color": "Brown",
     "brand": "Milky Dream",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122223009",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["619ec482ae78a56725405654"]
   },
@@ -27,7 +32,12 @@
     "shipping": "No",
     "color": "Ice transparent",
     "brand": "Alaskian drinks",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122223005",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199475565bcf27b80cfe574",
     "subcategories": ["6199477765bcf27b80cfe57f", "61b2835c75d5581f5508836a"]
   },
@@ -43,7 +53,12 @@
     "shipping": "Yes",
     "color": "Light blue",
     "brand": "Comfy clothes",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122223002",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "619a5b86aabbae42fc6b8253",
     "subcategories": ["61b27f548c18d90664b9b7ff"]
   },
@@ -59,7 +74,12 @@
     "shipping": "Yes",
     "color": "Cyan",
     "brand": "Timesey",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122223000",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199476765bcf27b80cfe57a",
     "subcategories": [
       "61b2eb3c8026fa02fca82724",
@@ -79,7 +99,12 @@
     "shipping": "Yes",
     "color": "Red",
     "brand": "Fastey",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222299",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199474c65bcf27b80cfe56e",
     "subcategories": ["61b2ee7f1bee8d2b7644b6e0"]
   },
@@ -95,7 +120,12 @@
     "shipping": "Yes",
     "color": "Gray",
     "brand": "Future2050",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222188",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199474c65bcf27b80cfe56e",
     "subcategories": ["61b2ee7f1bee8d2b7644b6e0", "63ac83fec7d4970364449974"]
   },
@@ -111,7 +141,12 @@
     "shipping": "Yes",
     "color": "Multiple",
     "brand": "Cool clothes",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222215",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "619a5b86aabbae42fc6b8253",
     "subcategories": ["61b2ecfcdf32b367e09fd7fd", "61b2ecfedf32b367e09fd800"]
   },
@@ -130,7 +165,7 @@
     "images": [
       {
         "publicId": "f52b174b",
-        "imageUrl": "https://my-images.com/bb92ccb81c31.jpg"
+        "imageUrl": "https://picsum.photos/200/300"
       }
     ],
     "category": "6199474c65bcf27b80cfe56e",
@@ -151,7 +186,7 @@
     "images": [
       {
         "publicId": "a52b174b",
-        "imageUrl": "https://my-images.com/aa92ccb21c31.jpg"
+        "imageUrl": "https://picsum.photos/200/300"
       }
     ],
     "category": "6199474c65bcf27b80cfe56e",
@@ -169,7 +204,12 @@
     "shipping": "No",
     "color": "Dark brown",
     "brand": "Herb herb herb",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222211",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199475565bcf27b80cfe574",
     "subcategories": ["61b2835c75d5581f5508836a"]
   },
@@ -185,7 +225,12 @@
     "shipping": "No",
     "color": "Light green",
     "brand": "Comfy gloves",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222210",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "619a5b86aabbae42fc6b8253",
     "subcategories": ["63ac8c84a5ea72fd475748ab"]
   },
@@ -201,7 +246,12 @@
     "shipping": "Yes",
     "color": "Red",
     "brand": "Sweetestest",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222229",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["619ec482ae78a56725405654"]
   },
@@ -217,7 +267,12 @@
     "shipping": "Yes",
     "color": "Blue",
     "brand": "Sweetestest",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222228",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["619ec482ae78a56725405654"]
   },
@@ -233,7 +288,12 @@
     "shipping": "Yes",
     "color": "White",
     "brand": "Cam Survcam",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222227",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "63ac94c1cdc1fa5f101c139d",
     "subcategories": ["63ac9521e08d67c60a6ea76c"]
   },
@@ -249,7 +309,12 @@
     "shipping": "Yes",
     "color": "Dark blue",
     "brand": "Cam Survcam",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222226",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "63ac94c1cdc1fa5f101c139d",
     "subcategories": ["63ac9521e08d67c60a6ea76c"]
   },
@@ -265,7 +330,12 @@
     "shipping": "No",
     "color": "Green",
     "brand": "Delicious foods",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222225",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "6199475165bcf27b80cfe571",
     "subcategories": ["6199479265bcf27b80cfe588"]
   },
@@ -281,7 +351,16 @@
     "shipping": "Yes",
     "color": "Blue",
     "brand": "Xoiyami",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222223",
+        "imageUrl": "https://picsum.photos/200/300"
+      },
+      {
+        "publicId": "11111122222224",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "65847c2d1d02915686907446",
     "subcategories": ["65847c6e94b7f49f65683bc1"]
   },
@@ -297,7 +376,12 @@
     "shipping": "No",
     "color": "Red",
     "brand": "Think itt",
-    "images": [],
+    "images": [
+      {
+        "publicId": "11111122222222",
+        "imageUrl": "https://picsum.photos/200/300"
+      }
+    ],
     "category": "65847c2d1d02915686907446",
     "subcategories": ["65847c6e94b7f49f65683bc1"]
   },
@@ -316,11 +400,11 @@
     "images": [
       {
         "publicId": "b52b174y91",
-        "imageUrl": "https://my-images.com/43434ergeg654.jpg"
+        "imageUrl": "https://picsum.photos/200/300"
       },
       {
         "publicId": "b89b12344c00",
-        "imageUrl": "https://my-images.com/hrthrtyty5645678.jpg"
+        "imageUrl": "https://picsum.photos/200/300"
       }
     ],
     "category": "659d187551f8161f43bbd0f6",
@@ -341,7 +425,7 @@
     "images": [
       {
         "publicId": "y51a1324y988",
-        "imageUrl": "https://my-images.com/bevferer53345.jpg"
+        "imageUrl": "https://picsum.photos/200/300"
       }
     ],
     "category": "659d18fb5fc0774b04a67b80",
