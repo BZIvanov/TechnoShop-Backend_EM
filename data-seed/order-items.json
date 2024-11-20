@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "_id": "673e1745484048e6cb2bc562",
+    "parentOrder": "673e1745484048e6cb2bc55d",
+    "shop": "673388361024072350f03cf1",
+    "products": [
+      {
+        "product": "63ac82d5930fb240f96f813b",
+        "count": 2
+      },
+      {
+        "product": "61b2835a75d5581f55088367",
+        "count": 1
+      }
+    ],
+    "totalPrice": 4311.935,
+    "deliveryStatus": "pending",
+    "paymentStatus": "pending",
+    "deliveryAddress": "Test delivery street 12345"
+  },
+  {
+    "_id": "673e1745484048e6cb2bc565",
+    "parentOrder": "673e1745484048e6cb2bc55d",
+    "shop": "6733892686021073778fb542",
+    "products": [
+      {
+        "product": "61b2f043da40b3a0c6597c51",
+        "count": 2
+      }
+    ],
+    "totalPrice": 35.4,
+    "deliveryStatus": "pending",
+    "paymentStatus": "pending",
+    "deliveryAddress": "Test delivery street 12345"
+  }
+]

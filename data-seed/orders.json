@@ -1,143 +1,27 @@
 [
   {
-    "_id": "63dab1f372ea2415c76ac4cc",
-    "buyer": "6171c360168d11250b4e15d9",
-    "deliveryAddress": "My cool street 23.",
+    "_id": "673e1745484048e6cb2bc55d",
+    "buyer": "6717d0d1c28f835782943df7",
     "products": [
       {
-        "count": 1,
-        "product": "61b2eb398026fa02fca82721"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "totalPrice": 39.99
-  },
-  {
-    "_id": "63dabee61d02e47f7f499458",
-    "buyer": "6171c360168d11250b4e15d9",
-    "deliveryAddress": "My cool street 23.",
-    "products": [
-      {
-        "count": 2,
-        "product": "63ac8bd9077389c9bf2aba6d"
+        "shop": "673388361024072350f03cf1",
+        "product": "63ac82d5930fb240f96f813b",
+        "count": 2
       },
       {
-        "count": 3,
-        "product": "63ac929bc5f6d4c21a4d3b49"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "totalPrice": 289.25
-  },
-  {
-    "_id": "63db6f698c56ee62f2876b5c",
-    "buyer": "6171c8cf168d11250b4e15dc",
-    "deliveryAddress": "My cool street 25.",
-    "coupon": "63bdbcc10498459fbbbfbb9a",
-    "products": [
-      {
-        "count": 1,
-        "product": "61b2eb3e8026fa02fca82727"
+        "shop": "673388361024072350f03cf1",
+        "product": "61b2835a75d5581f55088367",
+        "count": 1
       },
       {
-        "count": 1,
-        "product": "61b2edd54e7a9ba6a1d20753"
-      },
-      {
-        "count": 3,
-        "product": "61b2f043da40b3a0c6597c51"
+        "shop": "6733892686021073778fb542",
+        "product": "61b2f043da40b3a0c6597c51",
+        "count": 2
       }
     ],
+    "totalPrice": 4347.335,
     "deliveryStatus": "pending",
-    "totalPrice": 1450.5975
-  },
-  {
-    "_id": "658f048fde6b0dc145e91e0b",
-    "buyer": "63ac935cf2bb507ce39da8a2",
-    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 245",
-    "products": [
-      {
-        "count": 2,
-        "product": "61b2eb398026fa02fca82721"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "totalPrice": 79.98
-  },
-  {
-    "_id": "658f0563d614111c91b4fdda",
-    "buyer": "63ac935cf2bb507ce39da8a2",
-    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 245",
-    "products": [
-      {
-        "count": 1,
-        "product": "65886459dc4a2af87ea9320f"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "coupon": "63bdbcbba6735509ef3fdc67",
-    "totalPrice": 1225.25
-  },
-  {
-    "_id": "658f0653449d96fed86dbc27",
-    "buyer": "63ac93eeb6693b670ebb1e6c",
-    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 128",
-    "products": [
-      {
-        "count": 3,
-        "product": "61b2835a75d5581f55088367"
-      },
-      {
-        "count": 4,
-        "product": "63ac8839f93c9f9c90e0430c"
-      },
-      {
-        "count": 8,
-        "product": "63ac929bc5f6d4c21a4d3b49"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "coupon": "63bdbf1e1d78436e73ed4c19",
-    "totalPrice": 931.822
-  },
-  {
-    "_id": "658f078208f0b50d5fd44bb5",
-    "buyer": "6171c8cf168d11250b4e15dc",
-    "deliveryAddress": "Blvd. My cool blvd 23, My cool street 11",
-    "products": [
-      {
-        "count": 4,
-        "product": "65847d214ab354f9cf0be2a9"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "totalPrice": 2363.6
-  },
-  {
-    "_id": "658f0bd94ef14c8d6c88d747",
-    "buyer": "6171c360168d11250b4e15d9",
-    "deliveryAddress": "My cool street 23.",
-    "products": [
-      {
-        "count": 1,
-        "product": "63ac82d5930fb240f96f813b"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "totalPrice": 2150.5
-  },
-  {
-    "_id": "658f0c7b6e83b818258bb100",
-    "buyer": "6171c360168d11250b4e15d9",
-    "deliveryAddress": "My cool street 23.",
-    "products": [
-      {
-        "count": 2,
-        "product": "65847d214ab354f9cf0be2a9"
-      }
-    ],
-    "deliveryStatus": "pending",
-    "coupon": "63bdc0611e48c5ef188de328",
-    "totalPrice": 921.804
+    "paymentStatus": "pending",
+    "deliveryAddress": "Test delivery street 12345"
   }
 ]

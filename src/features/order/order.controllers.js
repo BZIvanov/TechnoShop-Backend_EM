@@ -7,47 +7,158 @@ const Product = require('../product/product.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 const { userRoles } = require('../user/user.constants');
+const { orderPaymentStatuses } = require('./order.constants');
+
+const getBuyerOrdersQueryParams = (params) => {
+  const { buyer, deliveryStatus } = params;
+
+  const build = {
+    buyer,
+    ...(deliveryStatus && { deliveryStatus }),
+  };
+
+  return build;
+};
 
 const getBuyerOrders = catchAsync(async (req, res) => {
-  const { sortColumn = 'createdAt', order = 'desc', page, perPage } = req.query;
+  const {
+    sortColumn = 'createdAt',
+    sortOrder,
+    page,
+    perPage,
+    deliveryStatus,
+  } = req.query;
 
   const pageNumber = parseInt(page, 10) || 0;
   const perPageNumber = parseInt(perPage, 10) || 5;
 
-  const builder = { buyer: req.user._id };
+  const builder = await getBuyerOrdersQueryParams({
+    buyer: req.user._id,
+    deliveryStatus,
+  });
+
   if (req.user.role === userRoles.admin) {
     delete builder.buyer;
+
+    // use aggragation, because for the admin we want to display the main order and all seller order items included
+    const orders = await Order.aggregate([
+      { $match: builder },
+      {
+        $lookup: {
+          from: 'orderitems',
+          localField: '_id',
+          foreignField: 'parentOrder',
+          as: 'orderItems',
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'buyer',
+          foreignField: '_id',
+          as: 'buyer',
+        },
+      },
+      {
+        $unwind: {
+          path: '$buyer',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'products.product',
+          foreignField: '_id',
+          as: 'productDetails',
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          buyer: {
+            _id: 1,
+            username: 1,
+          },
+          products: 1,
+          productDetails: {
+            _id: 1,
+            title: 1,
+            price: 1,
+            discount: 1,
+          },
+          orderItems: 1,
+          totalPrice: 1,
+          deliveryStatus: 1,
+          paymentStatus: 1,
+          deliveryAddress: 1,
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      },
+      { $sort: { [sortColumn]: parseInt(sortOrder, 10) || -1 } },
+      { $skip: (pageNumber - 1) * perPageNumber },
+      { $limit: perPageNumber },
+    ]);
+
+    const totalCount = await Order.countDocuments(builder);
+
+    res.status(httpStatus.OK).json({ success: true, orders, totalCount });
+  } else {
+    const orders = await Order.find(builder)
+      .skip(pageNumber * perPageNumber)
+      .limit(perPageNumber)
+      .populate('coupon', 'name discount')
+      .populate('buyer', '_id username')
+      .populate('products.product', '_id title price')
+      .populate('products.shop', 'shopInfo')
+      .sort([[sortColumn, parseInt(sortOrder, 10) || -1]])
+      .exec();
+
+    const totalCount = await Order.where(builder).countDocuments();
+
+    res.status(httpStatus.OK).json({ success: true, orders, totalCount });
   }
-
-  const orders = await Order.find(builder)
-    .skip(pageNumber * perPageNumber)
-    .limit(perPageNumber)
-    .populate('coupon', 'name discount')
-    .populate('buyer', '_id username')
-    .populate('products.product', '_id title price')
-    .sort([[sortColumn, order]])
-    .exec();
-  const totalCount = await Order.where(builder).countDocuments();
-
-  res.status(httpStatus.OK).json({ success: true, orders, totalCount });
 });
 
 const createBuyerOrder = catchAsync(async (req, res, next) => {
   const currentUser = req.user;
   const { cart, address, coupon: couponName } = req.body;
 
+  const originalProducts = await Product.find({
+    _id: cart.map((cartProduct) => cartProduct.product),
+  }).exec();
+
+  const insufficientQuantityProduct = originalProducts.find(
+    (originalProduct) => {
+      const currentCartProduct = cart.find(
+        (cartProduct) => cartProduct.product === originalProduct._id.toString(),
+      );
+
+      return originalProduct.quantity < currentCartProduct.count;
+    },
+  );
+  if (insufficientQuantityProduct) {
+    return next(
+      new AppError('Insufficient product quantity', httpStatus.BAD_REQUEST),
+    );
+  }
+
   const orderData = {
-    products: cart,
+    products: [],
     deliveryAddress: address,
     coupon: undefined,
     buyer: currentUser._id,
     totalPrice: 0,
+    paymentStatus: orderPaymentStatuses.PAID,
   };
 
+  // check for coupon validity and assign value if valid
   const coupon = await Coupon.findOne({ name: couponName });
   if (coupon) {
     const currentDateTime = new Date();
     const expirationDateTime = new Date(coupon.expirationDate);
+
     if (currentDateTime > expirationDateTime) {
       return next(
         new AppError(
@@ -60,37 +171,20 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
     orderData.coupon = coupon._id;
   }
 
-  const products = await Product.find({
-    _id: cart.map((cartProduct) => cartProduct.product),
-  }).exec();
-
-  const insufficientQuantityProduct = products.find((product) => {
-    const currentCartProduct = cart.find(
-      (cartProduct) => cartProduct.product === product._id.toString(),
-    );
-
-    return product.quantity < currentCartProduct.count;
-  });
-
-  if (insufficientQuantityProduct) {
-    return next(
-      new AppError('Insufficient product quantity', httpStatus.BAD_REQUEST),
-    );
-  }
-
-  const totalPrice = products.reduce((acc, curr) => {
+  // calculate total buyer order price based on the original products
+  const totalBuyerOrderPrice = originalProducts.reduce((acc, curr) => {
     const cartProduct = cart.find((cp) => cp.product === curr._id.toString());
 
     let tempPrice = curr.price * cartProduct.count;
     if (curr.discount > 0) {
-      tempPrice -= curr.price * curr.discount;
+      tempPrice -= curr.price * (curr.discount / 100);
     }
 
     return acc + tempPrice;
   }, 0);
   orderData.totalPrice = coupon
-    ? totalPrice - totalPrice * (coupon.discount / 100)
-    : totalPrice;
+    ? totalBuyerOrderPrice - totalBuyerOrderPrice * (coupon.discount / 100)
+    : totalBuyerOrderPrice;
 
   // update quantity and sold values for each product
   const bulkOption = cart.map((cartProduct) => ({
@@ -104,29 +198,28 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
   await Product.bulkWrite(bulkOption, {});
 
   // assign product's shop to the orders products
-  orderData.products = orderData.products.map((orderProduct) => {
-    const productShop = products.find(
-      (product) => product._id.toString() === orderProduct.product,
+  orderData.products = cart.map((cartProduct) => {
+    const productShop = originalProducts.find(
+      (originalProduct) =>
+        originalProduct._id.toString() === cartProduct.product,
     );
-    return { ...orderProduct, shop: productShop.shop };
+    return { ...cartProduct, shop: productShop.shop.toString() };
   });
 
   // create buyer order
   const order = await new Order(orderData).save();
 
-  // create seller(s) order
+  // create seller(s) orders
   const sellersOrderProductsData = orderData.products.reduce(
     (accumulator, currentValue) => {
-      const shopId = currentValue.shop.toString();
-
-      if (!accumulator[shopId]) {
-        accumulator[shopId] = [];
+      if (!accumulator[currentValue.shop]) {
+        accumulator[currentValue.shop] = [];
       }
 
-      accumulator[shopId].push({
+      accumulator[currentValue.shop].push({
         product: currentValue.product,
         count: currentValue.count,
-        shop: shopId,
+        shop: currentValue.shop,
       });
 
       return accumulator;
@@ -135,18 +228,17 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
   );
 
   Object.keys(sellersOrderProductsData).forEach(async (shopId) => {
-    const sellerOrderTotalPrice = products
-      .filter((product) => product.shop.toString() === shopId)
+    const sellerOrderTotalPrice = originalProducts
+      .filter((originalProduct) => originalProduct.shop.toString() === shopId)
       .reduce((acc, curr) => {
         const cartProduct = orderData.products.find(
           (orderDataProduct) =>
-            orderDataProduct.product === curr._id.toString() &&
-            orderDataProduct.shop.toString() === curr.shop.toString(),
+            orderDataProduct.product === curr._id.toString(),
         );
 
         let tempPrice = curr.price * cartProduct.count;
         if (curr.discount > 0) {
-          tempPrice -= curr.price * curr.discount;
+          tempPrice -= curr.price * (curr.discount / 100);
         }
 
         return acc + tempPrice;
