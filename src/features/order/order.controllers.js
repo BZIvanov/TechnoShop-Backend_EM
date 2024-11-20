@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 
 const Order = require('./order.model');
+const OrderItem = require('./order-item.model');
 const Coupon = require('../coupon/coupon.model');
 const Product = require('../product/product.model');
 const catchAsync = require('../../middlewares/catch-async');
@@ -60,7 +61,7 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
   }
 
   const products = await Product.find({
-    _id: cart.map((cartItem) => cartItem.product),
+    _id: cart.map((cartProduct) => cartProduct.product),
   }).exec();
 
   const insufficientQuantityProduct = products.find((product) => {
@@ -79,24 +80,90 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
 
   const totalPrice = products.reduce((acc, curr) => {
     const cartProduct = cart.find((cp) => cp.product === curr._id.toString());
-    return acc + curr.price * cartProduct.count;
+
+    let tempPrice = curr.price * cartProduct.count;
+    if (curr.discount > 0) {
+      tempPrice -= curr.price * curr.discount;
+    }
+
+    return acc + tempPrice;
   }, 0);
   orderData.totalPrice = coupon
     ? totalPrice - totalPrice * (coupon.discount / 100)
     : totalPrice;
 
   // update quantity and sold values for each product
-  const bulkOption = cart.map((cartItem) => ({
+  const bulkOption = cart.map((cartProduct) => ({
     updateOne: {
-      filter: { _id: cartItem.product },
-      update: { $inc: { quantity: -cartItem.count, sold: +cartItem.count } },
+      filter: { _id: cartProduct.product },
+      update: {
+        $inc: { quantity: -cartProduct.count, sold: +cartProduct.count },
+      },
     },
   }));
   await Product.bulkWrite(bulkOption, {});
 
+  // assign product's shop to the orders products
+  orderData.products = orderData.products.map((orderProduct) => {
+    const productShop = products.find(
+      (product) => product._id.toString() === orderProduct.product,
+    );
+    return { ...orderProduct, shop: productShop.shop };
+  });
+
+  // create buyer order
   const order = await new Order(orderData).save();
 
-  res.status(httpStatus.CREATED).json({ success: true, order });
+  // create seller(s) order
+  const sellersOrderProductsData = orderData.products.reduce(
+    (accumulator, currentValue) => {
+      const shopId = currentValue.shop.toString();
+
+      if (!accumulator[shopId]) {
+        accumulator[shopId] = [];
+      }
+
+      accumulator[shopId].push({
+        product: currentValue.product,
+        count: currentValue.count,
+        shop: shopId,
+      });
+
+      return accumulator;
+    },
+    {},
+  );
+
+  Object.keys(sellersOrderProductsData).forEach(async (shopId) => {
+    const sellerOrderTotalPrice = products
+      .filter((product) => product.shop.toString() === shopId)
+      .reduce((acc, curr) => {
+        const cartProduct = orderData.products.find(
+          (orderDataProduct) =>
+            orderDataProduct.product === curr._id.toString() &&
+            orderDataProduct.shop.toString() === curr.shop.toString(),
+        );
+
+        let tempPrice = curr.price * cartProduct.count;
+        if (curr.discount > 0) {
+          tempPrice -= curr.price * curr.discount;
+        }
+
+        return acc + tempPrice;
+      }, 0);
+
+    await new OrderItem({
+      parentOrder: order._id,
+      shop: shopId,
+      products: sellersOrderProductsData[shopId],
+      totalPrice: sellerOrderTotalPrice,
+      deliveryAddress: address,
+    }).save();
+  });
+
+  res
+    .status(httpStatus.CREATED)
+    .json({ success: true, message: 'Order created', order });
 });
 
 const updateOrderStatus = catchAsync(async (req, res) => {

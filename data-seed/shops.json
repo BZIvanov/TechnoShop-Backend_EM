@@ -3,12 +3,22 @@
     "_id": "673388361024072350f03cf1",
     "user": "6717cf9b37759d96eaf2dccb",
     "activityStatus": "active",
-    "paymentStatus": "paid"
+    "paymentStatus": "paid",
+    "shopInfo": {
+      "name": "Shop 1",
+      "country": "BG",
+      "city": "Sofia"
+    }
   },
   {
     "_id": "6733892686021073778fb542",
     "user": "6717d0d0c28f835782943df5",
     "activityStatus": "active",
-    "paymentStatus": "paid"
+    "paymentStatus": "paid",
+    "shopInfo": {
+      "name": "Shop 2",
+      "country": "BG",
+      "city": "Sofia"
+    }
   }
 ]
