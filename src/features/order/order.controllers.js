@@ -78,9 +78,7 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
   }
 
   const totalPrice = products.reduce((acc, curr) => {
-    const cartProduct = cart.find(
-      (cartItem) => cartItem.product === curr._id.toString(),
-    );
+    const cartProduct = cart.find((cp) => cp.product === curr._id.toString());
     return acc + curr.price * cartProduct.count;
   }, 0);
   orderData.totalPrice = coupon

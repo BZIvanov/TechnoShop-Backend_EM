@@ -4,14 +4,18 @@ const productCreateValidationSchema = Joi.object({
   title: Joi.string().trim(true).min(2).max(32).required(),
   description: Joi.string().max(2000).required(),
   price: Joi.number().positive().min(0.01).max(99999).required(),
+  discount: Joi.number().min(0.01).max(99.9),
   category: Joi.string()
     .regex(/^[0-9a-fA-F]{24}$/, 'Invalid id')
     .required(),
-  subcategories: Joi.array()
-    .items(
-      Joi.string()
-        .regex(/^[0-9a-fA-F]{24}$/, 'Invalid id')
-        .required(),
+  subcategories: Joi.alternatives()
+    .try(
+      Joi.array().items(
+        Joi.string()
+          .regex(/^[0-9a-fA-F]{24}$/, 'Invalid id')
+          .required(),
+      ),
+      Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid id'),
     )
     .required(),
   quantity: Joi.number().positive().required(),
@@ -25,8 +29,10 @@ const productUpdateValidationSchema = Joi.object({
   title: Joi.string().trim(true).min(2).max(32),
   description: Joi.string().max(2000),
   price: Joi.number().positive().min(0.01).max(99999),
+  discount: Joi.number().min(0.01).max(99.9),
   category: Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid id'),
-  subcategories: Joi.array().items(
+  subcategories: Joi.alternatives().try(
+    Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid id')),
     Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid id'),
   ),
   quantity: Joi.number().positive(),

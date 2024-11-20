@@ -35,6 +35,10 @@ const schema = new Schema(
       type: Number,
       required: true,
     },
+    discount: {
+      type: Number,
+      default: 0,
+    },
     category: {
       type: Schema.ObjectId,
       ref: categoryModel,
