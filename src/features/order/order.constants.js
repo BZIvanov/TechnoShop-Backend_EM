@@ -4,8 +4,15 @@ const orderItemModel = 'orderItem';
 
 const orderDeliveryStatuses = {
   PENDING: 'pending',
-  PARTIALLY_SHIPPED: 'partiallyShipped', // before all sellers ship their products
-  SHIPPED: 'shipped',
+  PARTIALLY_DELIVERED: 'partiallyDelivered', // before all sellers ship their products
+  DELIVERED: 'delivered',
+  PARTIALLY_CANCELED: 'partiallyCanceled',
+  CANCELED: 'canceled',
+};
+
+const orderItemDeliveryStatuses = {
+  PENDING: 'pending',
+  DELIVERED: 'delivered',
   CANCELED: 'canceled',
 };
 
@@ -14,13 +21,6 @@ const orderPaymentStatuses = {
   PAID: 'paid',
   FAILED: 'failed',
   REFUNDED: 'refunded',
-};
-
-const orderItemDeliveryStatuses = {
-  PENDING: 'pending',
-  SHIPPED: 'shipped',
-  DELIVERED: 'delivered',
-  CANCELED: 'canceled',
 };
 
 const orderItemPaymentStatuses = {

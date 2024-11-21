@@ -4,10 +4,15 @@ const Order = require('./order.model');
 const OrderItem = require('./order-item.model');
 const Coupon = require('../coupon/coupon.model');
 const Product = require('../product/product.model');
+const Shop = require('../shop/shop.model');
 const catchAsync = require('../../middlewares/catch-async');
 const AppError = require('../../utils/app-error');
 const { userRoles } = require('../user/user.constants');
-const { orderPaymentStatuses } = require('./order.constants');
+const {
+  orderDeliveryStatuses,
+  orderItemDeliveryStatuses,
+  orderPaymentStatuses,
+} = require('./order.constants');
 
 const getBuyerOrdersQueryParams = (params) => {
   const { buyer, deliveryStatus } = params;
@@ -119,6 +124,48 @@ const getBuyerOrders = catchAsync(async (req, res) => {
 
     res.status(httpStatus.OK).json({ success: true, orders, totalCount });
   }
+});
+
+const getSellerOrdersQueryParams = (params) => {
+  const { shop, deliveryStatus } = params;
+
+  const build = {
+    shop,
+    ...(deliveryStatus && { deliveryStatus }),
+  };
+
+  return build;
+};
+
+const getSellerOrders = catchAsync(async (req, res) => {
+  const {
+    sortColumn = 'createdAt',
+    sortOrder,
+    page,
+    perPage,
+    deliveryStatus,
+  } = req.query;
+
+  const pageNumber = parseInt(page, 10) || 1;
+  const perPageNumber = parseInt(perPage, 10) || 5;
+
+  const shop = await Shop.findOne({ user: req.user._id });
+
+  const builder = await getSellerOrdersQueryParams({
+    shop: shop._id,
+    deliveryStatus,
+  });
+
+  const orders = await OrderItem.find(builder)
+    .skip((pageNumber - 1) * perPageNumber)
+    .limit(perPageNumber)
+    .populate('coupon', 'name discount')
+    .populate('products.product', '_id title price')
+    .sort({ [sortColumn]: parseInt(sortOrder, 10) || -1 });
+
+  const totalCount = await OrderItem.where(builder).countDocuments();
+
+  res.status(httpStatus.OK).json({ success: true, orders, totalCount });
 });
 
 const createBuyerOrder = catchAsync(async (req, res, next) => {
@@ -258,25 +305,51 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
     .json({ success: true, message: 'Order created', order });
 });
 
-const updateOrderStatus = catchAsync(async (req, res) => {
-  const { orderId } = req.params;
+const updateOrderDeliveryStatus = catchAsync(async (req, res, next) => {
+  const { orderItemId } = req.params;
   const { deliveryStatus } = req.body;
 
-  const order = await Order.findByIdAndUpdate(
-    orderId,
-    { deliveryStatus },
-    { new: true },
-  )
-    .populate('coupon', 'name discount')
-    .populate('buyer', '_id username')
-    .populate('products.product', '_id title price')
-    .exec();
+  const orderItem = await OrderItem.findById(orderItemId);
 
-  res.status(httpStatus.OK).json({ success: true, order });
+  if (!orderItem) {
+    return next(new AppError('Order item not found', httpStatus.NOT_FOUND));
+  }
+
+  orderItem.deliveryStatus = deliveryStatus;
+  await orderItem.save();
+
+  const allOrderItems = await OrderItem.find({
+    parentOrder: orderItem.parentOrder,
+  });
+
+  const allDelivered = allOrderItems.every(
+    (item) => item.deliveryStatus === orderDeliveryStatuses.DELIVERED,
+  );
+  const allCanceled = allOrderItems.every(
+    (item) => item.deliveryStatus === orderDeliveryStatuses.CANCELED,
+  );
+
+  let newParentOrderStatus;
+  if (deliveryStatus === orderItemDeliveryStatuses.DELIVERED) {
+    newParentOrderStatus = allDelivered
+      ? orderDeliveryStatuses.DELIVERED
+      : orderDeliveryStatuses.PARTIALLY_DELIVERED;
+  } else if (deliveryStatus === orderItemDeliveryStatuses.CANCELED) {
+    newParentOrderStatus = allCanceled
+      ? orderDeliveryStatuses.CANCELED
+      : orderDeliveryStatuses.PARTIALLY_CANCELED;
+  }
+
+  await Order.findByIdAndUpdate(orderItem.parentOrder, {
+    deliveryStatus: newParentOrderStatus,
+  });
+
+  res.status(httpStatus.OK).json({ success: true, order: orderItem });
 });
 
 module.exports = {
   getBuyerOrders,
+  getSellerOrders,
   createBuyerOrder,
-  updateOrderStatus,
+  updateOrderDeliveryStatus,
 };

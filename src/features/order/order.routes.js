@@ -2,8 +2,9 @@ const express = require('express');
 
 const {
   getBuyerOrders,
+  getSellerOrders,
   createBuyerOrder,
-  updateOrderStatus,
+  updateOrderDeliveryStatus,
 } = require('./order.controllers');
 const authenticate = require('../../middlewares/authenticate');
 const authorize = require('../../middlewares/authorize');
@@ -21,7 +22,11 @@ router
   .post(authenticate, authorize(userRoles.buyer), createBuyerOrder);
 
 router
-  .route('/:orderId')
-  .patch(authenticate, authorize(userRoles.admin), updateOrderStatus);
+  .route('/seller')
+  .get(authenticate, authorize(userRoles.seller), getSellerOrders);
+
+router
+  .route('/seller/:orderItemId')
+  .patch(authenticate, authorize(userRoles.seller), updateOrderDeliveryStatus);
 
 module.exports = router;
