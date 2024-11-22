@@ -9,6 +9,7 @@ const Product = require('../src/features/product/product.model');
 const Coupon = require('../src/features/coupon/coupon.model');
 const Wishlist = require('../src/features/wishlist/wishlist.model');
 const Order = require('../src/features/order/order.model');
+const OrderItem = require('../src/features/order/order-item.model');
 const users = require('./users.json');
 const shops = require('./shops.json');
 const categories = require('./categories.json');
@@ -17,6 +18,7 @@ const products = require('./products.json');
 const coupons = require('./coupons.json');
 const wishlists = require('./wishlists.json');
 const orders = require('./orders.json');
+const orderItems = require('./order-items.json');
 
 mongoose.connect(ENV_VARS.DATABASE_URI, {});
 
@@ -30,6 +32,7 @@ const seedData = async () => {
     await Coupon.deleteMany();
     await Wishlist.deleteMany();
     await Order.deleteMany();
+    await OrderItem.deleteMany();
 
     await User.create(users);
     await Shop.create(shops);
@@ -39,6 +42,7 @@ const seedData = async () => {
     await Coupon.create(coupons);
     await Wishlist.create(wishlists);
     await Order.create(orders);
+    await OrderItem.create(orderItems);
 
     console.log('Data seeded');
     process.exit();

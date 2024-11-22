@@ -289,7 +289,7 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
 
     let tempPrice = curr.price * cartProduct.count;
     if (curr.discount > 0) {
-      tempPrice -= curr.price * (curr.discount / 100);
+      tempPrice -= tempPrice * (curr.discount / 100);
     }
 
     return acc + tempPrice;
@@ -350,7 +350,7 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
 
         let tempPrice = curr.price * cartProduct.count;
         if (curr.discount > 0) {
-          tempPrice -= curr.price * (curr.discount / 100);
+          tempPrice -= tempPrice * (curr.discount / 100);
         }
 
         return acc + tempPrice;
