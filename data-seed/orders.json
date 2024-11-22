@@ -21,7 +21,48 @@
     ],
     "totalPrice": 4347.335,
     "deliveryStatus": "pending",
-    "paymentStatus": "pending",
+    "paymentStatus": "paid",
     "deliveryAddress": "Test delivery street 12345"
+  },
+  {
+    "_id": "673f92bd66b21c2eeab95f35",
+    "buyer": "6717d0d1c28f835782943df7",
+    "products": [
+      {
+        "shop": "673388361024072350f03cf1",
+        "product": "63ac8839f93c9f9c90e0430c",
+        "count": 3
+      }
+    ],
+    "totalPrice": 279.18,
+    "deliveryStatus": "delivered",
+    "paymentStatus": "paid",
+    "deliveryAddress": "Test delivery street 12345"
+  },
+  {
+    "_id": "673f960454c8aa0af43cf84c",
+    "buyer": "6171c360168d11250b4e15d9",
+    "products": [
+      {
+        "shop": "673388361024072350f03cf1",
+        "product": "65847977e75142439b745622",
+        "count": 2
+      },
+      {
+        "shop": "673388361024072350f03cf1",
+        "product": "61b2835a75d5581f55088367",
+        "count": 3
+      },
+      {
+        "shop": "6733892686021073778fb542",
+        "product": "61b2edd54e7a9ba6a1d2075",
+        "count": 1
+      }
+    ],
+    "totalPrice": 1745.54425,
+    "deliveryStatus": "pending",
+    "paymentStatus": "paid",
+    "coupon": "63bdbcb2febf8fae06927545",
+    "deliveryAddress": "Test delivery street 12349"
   }
 ]

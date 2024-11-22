@@ -47,10 +47,10 @@ const getBuyerOrders = catchAsync(async (req, res) => {
 
     // use aggragation, because for the admin we want to display the main order and all seller order items included
     const orders = await Order.aggregate([
-      { $match: builder },
+      { $match: builder }, // Match based on admin's filter criteria
       {
         $lookup: {
-          from: 'orderitems',
+          from: 'orderitems', // Join OrderItems based on parentOrder
           localField: '_id',
           foreignField: 'parentOrder',
           as: 'orderItems',
@@ -58,51 +58,116 @@ const getBuyerOrders = catchAsync(async (req, res) => {
       },
       {
         $lookup: {
-          from: 'users',
+          from: 'shops', // Join shops to enrich orderItems with shop details
+          localField: 'orderItems.shop',
+          foreignField: '_id',
+          as: 'shopDetails',
+        },
+      },
+      {
+        $lookup: {
+          from: 'products', // Join products to enrich orderItems.products with product details
+          localField: 'orderItems.products.product',
+          foreignField: '_id',
+          as: 'productDetails',
+        },
+      },
+      {
+        $lookup: {
+          from: 'users', // Join users to enrich buyer info
           localField: 'buyer',
           foreignField: '_id',
           as: 'buyer',
         },
       },
       {
+        $lookup: {
+          from: 'coupons',
+          localField: 'coupon',
+          foreignField: '_id',
+          as: 'couponDetails',
+        },
+      },
+      {
         $unwind: {
-          path: '$buyer',
+          path: '$buyer', // Unwind buyer array
           preserveNullAndEmptyArrays: true,
         },
       },
       {
-        $lookup: {
-          from: 'products',
-          localField: 'products.product',
-          foreignField: '_id',
-          as: 'productDetails',
+        $addFields: {
+          orderItems: {
+            $map: {
+              input: '$orderItems',
+              as: 'orderItem',
+              in: {
+                _id: '$$orderItem._id',
+                shop: {
+                  $arrayElemAt: [
+                    {
+                      $filter: {
+                        input: '$shopDetails',
+                        as: 'shop',
+                        cond: { $eq: ['$$shop._id', '$$orderItem.shop'] },
+                      },
+                    },
+                    0,
+                  ],
+                },
+                products: {
+                  $map: {
+                    input: '$$orderItem.products',
+                    as: 'product',
+                    in: {
+                      product: {
+                        $arrayElemAt: [
+                          {
+                            $filter: {
+                              input: '$productDetails',
+                              as: 'productDetail',
+                              cond: {
+                                $eq: [
+                                  '$$productDetail._id',
+                                  '$$product.product',
+                                ],
+                              },
+                            },
+                          },
+                          0,
+                        ],
+                      },
+                      count: '$$product.count',
+                    },
+                  },
+                },
+                totalPrice: '$$orderItem.totalPrice',
+                deliveryStatus: '$$orderItem.deliveryStatus',
+                paymentStatus: '$$orderItem.paymentStatus',
+                deliveryAddress: '$$orderItem.deliveryAddress',
+                createdAt: '$$orderItem.createdAt',
+                updatedAt: '$$orderItem.updatedAt',
+              },
+            },
+          },
         },
       },
       {
         $project: {
           _id: 1,
-          buyer: {
-            _id: 1,
-            username: 1,
-          },
+          buyer: { _id: 1, username: 1 },
           products: 1,
-          productDetails: {
-            _id: 1,
-            title: 1,
-            price: 1,
-            discount: 1,
-          },
-          orderItems: 1,
           totalPrice: 1,
           deliveryStatus: 1,
           paymentStatus: 1,
           deliveryAddress: 1,
           createdAt: 1,
           updatedAt: 1,
+          orderItems: 1, // Include enriched orderItems
+          couponDetails: 1,
         },
       },
       { $sort: { [sortColumn]: parseInt(sortOrder, 10) || -1 } },
-      { $skip: (pageNumber - 1) * perPageNumber },
+      { $skip: pageNumber * perPageNumber },
       { $limit: perPageNumber },
     ]);
 
@@ -295,8 +360,13 @@ const createBuyerOrder = catchAsync(async (req, res, next) => {
       parentOrder: order._id,
       shop: shopId,
       products: sellersOrderProductsData[shopId],
-      totalPrice: sellerOrderTotalPrice,
+      totalPrice: coupon
+        ? sellerOrderTotalPrice -
+          sellerOrderTotalPrice * (coupon.discount / 100)
+        : sellerOrderTotalPrice,
       deliveryAddress: address,
+      paymentStatus: orderPaymentStatuses.PAID,
+      coupon: order.coupon,
     }).save();
   });
 
