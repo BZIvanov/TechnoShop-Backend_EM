@@ -43,7 +43,7 @@ const getShops = catchAsync(async (req, res, next) => {
 const getShop = catchAsync(async (req, res, next) => {
   const { shopId } = req.params;
 
-  const shop = await Shop.findById(shopId);
+  const shop = await Shop.findById(shopId).populate('user', 'username email');
 
   if (!shop) {
     return next(new AppError('Shop not found', httpStatus.NOT_FOUND));
