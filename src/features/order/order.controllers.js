@@ -417,9 +417,103 @@ const updateOrderDeliveryStatus = catchAsync(async (req, res, next) => {
   res.status(httpStatus.OK).json({ success: true, order: orderItem });
 });
 
+const getBuyerOrdersStats = catchAsync(async (req, res, next) => {
+  const isBuyer = req.user.role === userRoles.buyer;
+
+  const matchStage = isBuyer ? { $match: { buyer: req.user._id } } : {};
+
+  const stats = await Order.aggregate([
+    ...(isBuyer ? [matchStage] : []),
+    {
+      $group: {
+        _id: '$deliveryStatus',
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const totalOrders = stats.reduce((sum, stat) => sum + stat.count, 0);
+  const pendingOrders =
+    stats.find((stat) => stat._id === orderDeliveryStatuses.PENDING)?.count ||
+    0;
+  const canceledOrders =
+    stats.find((stat) => stat._id === orderDeliveryStatuses.CANCELED)?.count ||
+    0;
+
+  const totalOrderPriceResult = await Order.aggregate([
+    ...(isBuyer ? [matchStage] : []),
+    {
+      $group: {
+        _id: null,
+        totalPrice: { $sum: '$totalPrice' },
+      },
+    },
+  ]);
+  const totalPrice =
+    totalOrderPriceResult.length > 0 ? totalOrderPriceResult[0].totalPrice : 0;
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    totalOrders,
+    pendingOrders,
+    canceledOrders,
+    totalPrice,
+  });
+});
+
+const getSellerOrdersStats = catchAsync(async (req, res, next) => {
+  const shop = await Shop.findOne({ user: req.user._id });
+
+  if (!shop) {
+    return next(new AppError('Shop not found', httpStatus.NOT_FOUND));
+  }
+
+  const matchStage = { $match: { shop: shop._id } };
+
+  const stats = await OrderItem.aggregate([
+    matchStage,
+    {
+      $group: {
+        _id: '$deliveryStatus',
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const totalOrders = stats.reduce((sum, stat) => sum + stat.count, 0);
+  const pendingOrders =
+    stats.find((stat) => stat._id === orderItemDeliveryStatuses.PENDING)
+      ?.count || 0;
+  const canceledOrders =
+    stats.find((stat) => stat._id === orderItemDeliveryStatuses.CANCELED)
+      ?.count || 0;
+
+  const totalOrderPriceResult = await OrderItem.aggregate([
+    matchStage,
+    {
+      $group: {
+        _id: null,
+        totalPrice: { $sum: '$totalPrice' },
+      },
+    },
+  ]);
+  const totalPrice =
+    totalOrderPriceResult.length > 0 ? totalOrderPriceResult[0].totalPrice : 0;
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    totalOrders,
+    pendingOrders,
+    canceledOrders,
+    totalPrice,
+  });
+});
+
 module.exports = {
   getBuyerOrders,
   getSellerOrders,
   createBuyerOrder,
   updateOrderDeliveryStatus,
+  getBuyerOrdersStats,
+  getSellerOrdersStats,
 };
