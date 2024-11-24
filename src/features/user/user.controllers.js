@@ -7,11 +7,13 @@ const cloudinary = require('../../providers/cloudinary');
 const sendEmail = require('../../providers/mailer');
 const User = require('./user.model');
 const Shop = require('../shop/shop.model');
+const Chat = require('../chat/chat.model');
 const AppError = require('../../utils/app-error');
 const catchAsync = require('../../middlewares/catch-async');
 const { signJwtToken } = require('./utils/jwtToken');
 const { setJwtCookie, clearJwtCookie } = require('./utils/jwtCookie');
 const { cookieName, userRoles } = require('./user.constants');
+const { chatTypes } = require('../chat/chat.constants');
 const { ENV_VARS } = require('../../config/environment');
 
 const register = catchAsync(async (req, res, next) => {
@@ -30,9 +32,20 @@ const register = catchAsync(async (req, res, next) => {
     registerMethod,
   });
 
-  // create a Shop for newly registered sellers
+  // create a Shop and Chat with admin for newly registered sellers
   if (role === userRoles.seller) {
     await Shop.create({ user: newUser._id });
+
+    const adminUser = await User.findOne({ role: userRoles.admin });
+    const chat = new Chat({
+      participants: [
+        { user: adminUser._id, role: userRoles.admin },
+        { user: newUser._id, role: userRoles.seller },
+      ],
+      chatType: chatTypes.sellerAdmin,
+      messages: [],
+    });
+    await chat.save();
   }
 
   const token = signJwtToken(newUser._id);

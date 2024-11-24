@@ -9,6 +9,7 @@ const reviewRoutes = require('../../features/review/review.routes');
 const couponRoutes = require('../../features/coupon/coupon.routes');
 const orderRoutes = require('../../features/order/order.routes');
 const wishlistRoutes = require('../../features/wishlist/wishlist.routes');
+const chatRoutes = require('../../features/chat/chat.routes');
 
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.use('/reviews', reviewRoutes);
 router.use('/coupons', couponRoutes);
 router.use('/orders', orderRoutes);
 router.use('/wishlists', wishlistRoutes);
+router.use('/chats', chatRoutes);
 
 module.exports = router;
