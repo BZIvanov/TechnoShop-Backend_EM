@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "67437c4f5fea3bb176461a67",
+    "participants": [
+      { "user": "619ea4b3ae78a567254055f7", "role": "admin" },
+      { "user": "6717cf9b37759d96eaf2dccb", "role": "seller" }
+    ],
+    "chatType": "seller-admin"
+  },
+  {
+    "_id": "6744660a526ae26032ed1f3b",
+    "participants": [
+      { "user": "619ea4b3ae78a567254055f7", "role": "admin" },
+      { "user": "6717d0d0c28f835782943df5", "role": "seller" }
+    ],
+    "chatType": "seller-admin"
+  }
+]

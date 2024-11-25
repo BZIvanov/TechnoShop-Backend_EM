@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "674388335fea3bb176461b03",
+    "chat": "6744660a526ae26032ed1f3b",
+    "sender": "6717d0d0c28f835782943df5",
+    "content": "Test message seller to admin"
+  },
+  {
+    "_id": "674388365fea3bb176461b0a",
+    "chat": "6744660a526ae26032ed1f3b",
+    "sender": "619ea4b3ae78a567254055f7",
+    "content": "Test reply admin to seller"
+  }
+]
