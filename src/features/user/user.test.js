@@ -427,7 +427,7 @@ describe('User routes', () => {
         .post('/v1/users/reset-password')
         .send({
           token: resetToken,
-          newPassword: '3Eio!#689',
+          password: '3Eio!#689',
         })
         .expect('Content-Type', /application\/json/)
         .expect(200);
@@ -444,7 +444,7 @@ describe('User routes', () => {
         .post('/v1/users/reset-password')
         .send({
           token: '4ba681b26bb397ebebf16315cc821c8d723c4813',
-          newPassword: '1Eio!#689',
+          password: '1Eio!#689',
         })
         .expect('Content-Type', /application\/json/)
         .expect(400);

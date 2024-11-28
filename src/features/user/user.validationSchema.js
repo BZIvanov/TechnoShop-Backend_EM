@@ -43,7 +43,7 @@ const forgotPasswordValidationSchema = Joi.object({
 });
 
 const resetPasswordValidationSchema = Joi.object({
-  newPassword: passwordSchema,
+  password: passwordSchema,
   token: tokenSchema,
 });
 

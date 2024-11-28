@@ -156,7 +156,7 @@ const forgotPassword = catchAsync(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetUrl = `${ENV_VARS.FRONTEND_URL}/reset-password/${resetToken}`;
+  const resetUrl = `${ENV_VARS.FRONTEND_URL}/auth/reset-password/${resetToken}`;
   const text = `Here is your password reset URL:\n\n${resetUrl}`;
 
   try {
@@ -181,7 +181,7 @@ const forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 const resetPassword = catchAsync(async (req, res, next) => {
-  const { token, newPassword } = req.body;
+  const { token, password } = req.body;
 
   const resetPasswordToken = crypto
     .createHash('sha256')
@@ -197,7 +197,7 @@ const resetPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('Invalid token', httpStatus.BAD_REQUEST));
   }
 
-  user.password = newPassword;
+  user.password = password;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
   await user.save();
