@@ -138,7 +138,9 @@ const updatePassword = catchAsync(async (req, res, next) => {
 
   user.password = newPassword;
   await user.save();
-  res.status(httpStatus.OK).json({ success: true });
+  res
+    .status(httpStatus.OK)
+    .json({ success: true, message: 'Password updated successfully' });
 });
 
 const forgotPassword = catchAsync(async (req, res, next) => {
