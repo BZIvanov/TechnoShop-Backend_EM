@@ -14,7 +14,9 @@ const getSubcategories = catchAsync(async (req, res) => {
     .populate('categoryId')
     .sort({ createdAt: -1 });
 
-  res.status(httpStatus.OK).json({ success: true, subcategories });
+  res
+    .status(httpStatus.OK)
+    .json({ success: true, subcategories, totalCount: subcategories.length });
 });
 
 const getGroupedSubcategories = catchAsync(async (req, res) => {

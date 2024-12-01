@@ -11,7 +11,9 @@ const AppError = require('../../utils/app-error');
 const getCategories = catchAsync(async (req, res) => {
   const categories = await Category.find().sort({ createdAt: -1 });
 
-  res.status(httpStatus.OK).json({ success: true, categories });
+  res
+    .status(httpStatus.OK)
+    .json({ success: true, categories, totalCount: categories.length });
 });
 
 const getCategory = catchAsync(async (req, res, next) => {

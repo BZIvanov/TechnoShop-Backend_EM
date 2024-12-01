@@ -81,5 +81,25 @@
     "deliveryStatus": "pending",
     "paymentStatus": "paid",
     "deliveryAddress": "Test delivery street 12349"
+  },
+  {
+    "_id": "674c68f40888b14f954a689b",
+    "parentOrder": "674c68f40888b14f954a6897",
+    "shop": "673388361024072350f03cf1",
+    "products": [
+      {
+        "product": "61b3c1ba2e08a393a510a3f2",
+        "count": 1
+      },
+      {
+        "product": "63ac8839f93c9f9c90e0430c",
+        "count": 2
+      }
+    ],
+    "totalPrice": 2605.2325,
+    "deliveryStatus": "pending",
+    "paymentStatus": "paid",
+    "coupon": "63bdbcb2febf8fae06927545",
+    "deliveryAddress": "Some city 11, Some street 12"
   }
 ]

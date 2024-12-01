@@ -2,19 +2,19 @@
   {
     "_id": "61b280ee8cbd2875f94ed9fb",
     "shop": "673388361024072350f03cf1",
-    "title": "Milky Chocolate",
-    "slug": "milky-chocolate",
-    "description": "Delicious chocolate made with a lot of milk. Best chocolate you ever had.",
+    "title": "Product 1",
+    "slug": "product-1",
+    "description": "This versatile product 1 combines quality and functionality, making it perfect for everyday use.",
     "price": 3.45,
     "discount": 0,
     "quantity": 2265,
     "sold": 235,
     "shipping": "No",
     "color": "Brown",
-    "brand": "Milky Dream",
+    "brand": "Brand 1",
     "images": [
       {
-        "publicId": "11111122223009",
+        "publicId": "products/11111",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -24,19 +24,19 @@
   {
     "_id": "61b2835a75d5581f55088367",
     "shop": "673388361024072350f03cf1",
-    "title": "Alaskian",
-    "slug": "alaskian",
-    "description": "The best and most clean vodka in the world. It carries the spring of the north lands.",
+    "title": "Product 2",
+    "slug": "product-2",
+    "description": "This versatile product 2 combines quality and functionality, making it perfect for everyday use.",
     "price": 12.15,
     "discount": 10,
     "quantity": 45,
     "sold": 11,
     "shipping": "No",
     "color": "Ice transparent",
-    "brand": "Alaskian drinks",
+    "brand": "Brand 2",
     "images": [
       {
-        "publicId": "11111122223005",
+        "publicId": "products/11112",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -46,19 +46,19 @@
   {
     "_id": "61b2eb398026fa02fca82721",
     "shop": "6733892686021073778fb542",
-    "title": "Winter blouse",
-    "slug": "winter-blouse",
-    "description": "Perfect for the winter and the cold months. Very warm and comfortable.",
+    "title": "Product 3",
+    "slug": "product-3",
+    "description": "Crafted with precision, this product 3 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 39.99,
     "discount": 0,
     "quantity": 22,
     "sold": 35,
     "shipping": "Yes",
     "color": "Light blue",
-    "brand": "Comfy clothes",
+    "brand": "Brand 3",
     "images": [
       {
-        "publicId": "11111122223002",
+        "publicId": "products/11113",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -68,19 +68,19 @@
   {
     "_id": "61b2eb3e8026fa02fca82727",
     "shop": "673388361024072350f03cf1",
-    "title": "Watch Timesey 23",
-    "slug": "watch-timesey-23",
-    "description": "Best watches you could have. Very good looking and very comfortable. Outstanding quality.",
+    "title": "Product 4",
+    "slug": "product-4",
+    "description": "This versatile product 4 combines quality and functionality, making it perfect for everyday use.",
     "price": 78.49,
     "discount": 15,
     "quantity": 5,
     "sold": 1,
     "shipping": "Yes",
     "color": "Cyan",
-    "brand": "Timesey",
+    "brand": "Brand 4",
     "images": [
       {
-        "publicId": "11111122223000",
+        "publicId": "products/11114",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -94,19 +94,19 @@
   {
     "_id": "61b2edd54e7a9ba6a1d20753",
     "shop": "6733892686021073778fb542",
-    "title": "Laptop Fastey ASG-24",
-    "slug": "laptop-fastey-asg-24",
-    "description": "The best performering laptop. Suitable for work and gaming. This is the laptop with the best display on the market at the moment.",
+    "title": "Product 5",
+    "slug": "product-5",
+    "description": "Crafted with precision, this product 5 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 1799,
     "discount": 0,
     "quantity": 12,
     "sold": 3,
     "shipping": "Yes",
     "color": "Red",
-    "brand": "Fastey",
+    "brand": "Brand 5",
     "images": [
       {
-        "publicId": "11111122222299",
+        "publicId": "products/11115",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -116,19 +116,19 @@
   {
     "_id": "65886459dc4a2af87ea9320f",
     "shop": "673388361024072350f03cf1",
-    "title": "Laptop ThinP12",
-    "slug": "laptop-thinp12",
-    "description": "Thin laptop of new generation.",
+    "title": "Product 6",
+    "slug": "product-6",
+    "description": "Crafted with precision, this product 6 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 2450.5,
     "discount": 0,
     "quantity": 200,
     "sold": 18,
     "shipping": "Yes",
     "color": "Gray",
-    "brand": "Future2050",
+    "brand": "Brand 6",
     "images": [
       {
-        "publicId": "11111122222188",
+        "publicId": "products/11116",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -138,19 +138,19 @@
   {
     "_id": "61b2f043da40b3a0c6597c51",
     "shop": "6733892686021073778fb542",
-    "title": "Cotton T-shirts",
-    "slug": "cotton-t-shirts",
-    "description": "T-shirts of different sizes and stamps. Perfect for a gift. Buy them now for an incredible price.",
+    "title": "Product 7",
+    "slug": "product-7",
+    "description": "Crafted with precision, this product 7 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 18.88,
     "discount": 12.5,
     "quantity": 279,
     "sold": 51,
     "shipping": "Yes",
     "color": "Multiple",
-    "brand": "Cool clothes",
+    "brand": "Brand 7",
     "images": [
       {
-        "publicId": "11111122222215",
+        "publicId": "products/11117",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -160,19 +160,19 @@
   {
     "_id": "61b3c1ba2e08a393a510a3f2",
     "shop": "673388361024072350f03cf1",
-    "title": "Asius ZXC-213",
-    "slug": "asius-zxc-213",
-    "description": "New generation laptops. Fastest video card, very good on RAM. Limited fans edition.",
+    "title": "Product 8",
+    "slug": "product-8",
+    "description": "This versatile product 8 combines quality and functionality, making it perfect for everyday use.",
     "price": 2579.99,
     "discount": 0,
     "quantity": 25,
     "sold": 2,
     "shipping": "Yes",
     "color": "Black",
-    "brand": "Asius",
+    "brand": "Brand 8",
     "images": [
       {
-        "publicId": "f52b174b",
+        "publicId": "products/11118",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -182,19 +182,19 @@
   {
     "_id": "63ac82d5930fb240f96f813b",
     "shop": "673388361024072350f03cf1",
-    "title": "Thin iP 3x56",
-    "slug": "thin-ip-3x56",
-    "description": "Laptop for general usage. it is built for all use cases.",
+    "title": "Product 9",
+    "slug": "product-9",
+    "description": "Crafted with precision, this product 9 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 2150.5,
     "discount": 0,
     "quantity": 80,
     "sold": 5,
     "shipping": "Yes",
     "color": "Dark green",
-    "brand": "Think itt",
+    "brand": "Brand 9",
     "images": [
       {
-        "publicId": "a52b174b",
+        "publicId": "products/11119",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -204,19 +204,19 @@
   {
     "_id": "63ac8839f93c9f9c90e0430c",
     "shop": "673388361024072350f03cf1",
-    "title": "Herb liqueur",
-    "slug": "herb-liqueur",
-    "description": "Very nice drink. It contains specially selected mix of herbs which are good for both winter and the summer.",
+    "title": "Product 10",
+    "slug": "product-10",
+    "description": "Crafted with precision, this product 10 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 99,
     "discount": 18,
     "quantity": 500,
     "sold": 120,
     "shipping": "No",
     "color": "Dark brown",
-    "brand": "Herb herb herb",
+    "brand": "Brand 10",
     "images": [
       {
-        "publicId": "11111122222211",
+        "publicId": "products/11120",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -226,19 +226,19 @@
   {
     "_id": "63ac8bd9077389c9bf2aba6d",
     "shop": "673388361024072350f03cf1",
-    "title": "Garden Gloves",
-    "slug": "garden-gloves",
-    "description": "Very nice garden gloves. Make the work pleasure using this gloves. They are soft and comfortable.",
+    "title": "Product 11",
+    "slug": "product-11",
+    "description": "This versatile product 11 combines quality and functionality, making it perfect for everyday use.",
     "price": 35.8,
     "discount": 24,
     "quantity": 75,
     "sold": 11,
     "shipping": "No",
     "color": "Light green",
-    "brand": "Comfy gloves",
+    "brand": "Brand 11",
     "images": [
       {
-        "publicId": "11111122222210",
+        "publicId": "products/11121",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -248,19 +248,19 @@
   {
     "_id": "63ac929bc5f6d4c21a4d3b49",
     "shop": "6733892686021073778fb542",
-    "title": "Cherry cake",
-    "slug": "cherry-cake",
-    "description": "The most delicious cake in the world.",
+    "title": "Product 12",
+    "slug": "product-12",
+    "description": "Crafted with precision, this product 12 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 72.55,
     "discount": 0,
     "quantity": 38,
     "sold": 21,
     "shipping": "Yes",
     "color": "Red",
-    "brand": "Sweetestest",
+    "brand": "Brand 12",
     "images": [
       {
-        "publicId": "11111122222229",
+        "publicId": "products/11122",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -270,19 +270,19 @@
   {
     "_id": "63ac99572e4016415dd814ed",
     "shop": "673388361024072350f03cf1",
-    "title": "Blueberry cake",
-    "slug": "blueberry-cake",
-    "description": "Just amazing.",
+    "title": "Product 13",
+    "slug": "product-13",
+    "description": "Crafted with precision, this product 13 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 103.5,
     "discount": 35,
     "quantity": 54,
     "sold": 32,
     "shipping": "Yes",
     "color": "Blue",
-    "brand": "Sweetestest",
+    "brand": "Brand 12",
     "images": [
       {
-        "publicId": "11111122222228",
+        "publicId": "products/11123",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -292,19 +292,19 @@
   {
     "_id": "63ac958faa47b0f59a4dc4eb",
     "shop": "6733892686021073778fb542",
-    "title": "Cam 23-XPS Long Zoom",
-    "slug": "cam-23-xps-long-zoom",
-    "description": "The best surveillance camera in the world.",
+    "title": "Product 14",
+    "slug": "product-14",
+    "description": "Crafted with precision, this product 14 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 3620.9,
     "discount": 0,
     "quantity": 130,
     "sold": 28,
     "shipping": "Yes",
     "color": "White",
-    "brand": "Cam Survcam",
+    "brand": "Brand 13",
     "images": [
       {
-        "publicId": "11111122222227",
+        "publicId": "products/11124",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -314,19 +314,19 @@
   {
     "_id": "63ac981d3ee1fed08f8b7977",
     "shop": "673388361024072350f03cf1",
-    "title": "Cam 52-LTS Mid range",
-    "slug": "cam-52-lts-mid-range",
-    "description": "Very good surveillance camera.",
+    "title": "Product 15",
+    "slug": "product-15",
+    "description": "This versatile product 15 combines quality and functionality, making it perfect for everyday use.",
     "price": 1215.78,
     "discount": 0,
     "quantity": 200,
     "sold": 44,
     "shipping": "Yes",
     "color": "Dark blue",
-    "brand": "Cam Survcam",
+    "brand": "Brand 13",
     "images": [
       {
-        "publicId": "11111122222226",
+        "publicId": "products/11125",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -336,19 +336,19 @@
   {
     "_id": "65847977e75142439b745622",
     "shop": "673388361024072350f03cf1",
-    "title": "Watermelon",
-    "slug": "watermelon",
-    "description": "Staying hydrated is important for your body to function properly.",
+    "title": "Product 16",
+    "slug": "product-16",
+    "description": "Crafted with precision, this product 16 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 1.59,
     "discount": 0,
     "quantity": 5800,
     "sold": 250,
     "shipping": "No",
     "color": "Green",
-    "brand": "Delicious foods",
+    "brand": "Brand 14",
     "images": [
       {
-        "publicId": "11111122222225",
+        "publicId": "products/11126",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -358,23 +358,23 @@
   {
     "_id": "65847d214ab354f9cf0be2a9",
     "shop": "6733892686021073778fb542",
-    "title": "Xoiyami NS245",
-    "slug": "xoiyami-ns245",
-    "description": "Get one of the latest and the best phones.",
+    "title": "Product 17",
+    "slug": "product-17",
+    "description": "Crafted with precision, this product 17 offers durability and reliability to meet your needs. Its sleek design and premium materials ensure both style and performance.",
     "price": 590.9,
     "discount": 15,
     "quantity": 45,
     "sold": 3,
     "shipping": "Yes",
     "color": "Blue",
-    "brand": "Xoiyami",
+    "brand": "Brand 15",
     "images": [
       {
-        "publicId": "11111122222223",
+        "publicId": "products/11127",
         "imageUrl": "https://picsum.photos/200/300"
       },
       {
-        "publicId": "11111122222224",
+        "publicId": "products/11128",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -384,19 +384,19 @@
   {
     "_id": "6590022b06bb0f180787a4da",
     "shop": "673388361024072350f03cf1",
-    "title": "Out of Stock XYZ",
-    "slug": "out-of-stock-xyz",
-    "description": "This is a test product with 0 quantity left in stock.",
+    "title": "Product 18",
+    "slug": "product-18",
+    "description": "This versatile product 18 combines quality and functionality, making it perfect for everyday use.",
     "price": 590,
     "discount": 0,
     "quantity": 0,
     "sold": 80,
     "shipping": "No",
     "color": "Red",
-    "brand": "Think itt",
+    "brand": "Brand 9",
     "images": [
       {
-        "publicId": "11111122222222",
+        "publicId": "products/11129",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -406,23 +406,23 @@
   {
     "_id": "65a18e3636e41b27639e2650",
     "shop": "673388361024072350f03cf1",
-    "title": "Torch HMA Pro 258909",
-    "slug": "torch-hma-pro-258909",
-    "description": "High quality product. Perfect for any working conditions",
+    "title": "Product 19",
+    "slug": "product-19",
+    "description": "This versatile product 19 combines quality and functionality, making it perfect for everyday use.",
     "price": 44.99,
     "discount": 0,
     "quantity": 180,
     "sold": 18,
     "shipping": "Yes",
     "color": "Black",
-    "brand": "HMA",
+    "brand": "Brand 16",
     "images": [
       {
-        "publicId": "b52b174y91",
+        "publicId": "products/11130",
         "imageUrl": "https://picsum.photos/200/300"
       },
       {
-        "publicId": "b89b12344c00",
+        "publicId": "products/11131",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],
@@ -432,19 +432,19 @@
   {
     "_id": "65a1903d693b6e69a3cae3db",
     "shop": "673388361024072350f03cf1",
-    "title": "Heineil TUD-48435 912",
-    "slug": "heineil-tud-48435-912",
-    "description": "The perfect machine for your needs",
+    "title": "Product 20",
+    "slug": "product-20",
+    "description": "This versatile product 20 combines quality and functionality, making it perfect for everyday use.",
     "price": 89.99,
     "discount": 18,
     "quantity": 290,
     "sold": 3,
     "shipping": "Yes",
     "color": "Red",
-    "brand": "Heineil",
+    "brand": "Brand 17",
     "images": [
       {
-        "publicId": "y51a1324y988",
+        "publicId": "products/11132",
         "imageUrl": "https://picsum.photos/200/300"
       }
     ],

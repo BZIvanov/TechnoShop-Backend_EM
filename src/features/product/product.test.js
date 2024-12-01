@@ -208,7 +208,7 @@ describe('Product routes', () => {
 
       expect(response.body.products.length).toBe(3);
       expect(response.body.products[0].sold).toBe(250);
-      expect(response.body.products[0].title).toBe('Watermelon');
+      expect(response.body.products[0].title).toBe('Product 16');
       expect(response.body.products[1].sold).toBe(235);
     });
 
@@ -223,10 +223,10 @@ describe('Product routes', () => {
     test('it should get products if complete search text is provided', async () => {
       const response = await request(app)
         .get('/v1/products')
-        .query({ perPage: 12, text: 'laptop' });
+        .query({ perPage: 12, text: 'product 1' });
 
-      expect(response.body.products.length).toBe(2);
-      expect(response.body.products[0].title).toContain('Laptop');
+      expect(response.body.products.length).toBe(12);
+      expect(response.body.products[0].title).toContain('Product 1');
     });
   });
 
@@ -354,12 +354,12 @@ describe('Product routes', () => {
       const response = await request(app)
         .patch(`/v1/products/${products[0]._id}`)
         .set('Cookie', [`jwt=${signJwtToken(users[1]._id)}`])
-        .send({ title: 'Dark Chocolate' })
+        .send({ title: 'Test Title 1' })
         .expect('Content-Type', /application\/json/)
         .expect(200);
 
-      expect(products[0]).toHaveProperty('title', 'Milky Chocolate');
-      expect(response.body).toHaveProperty('product.title', 'Dark Chocolate');
+      expect(products[0]).toHaveProperty('title', 'Product 1');
+      expect(response.body).toHaveProperty('product.title', 'Test Title 1');
       expect(response.body).toHaveProperty('product.price', 3.45);
     });
 
@@ -489,8 +489,8 @@ describe('Product routes', () => {
       expect(response.body).toHaveProperty('success', true);
       expect(Array.isArray(response.body.brands)).toBe(true);
       expect(response.body.brands.length).toBe(17);
-      expect(response.body.brands).toContain('Asius');
-      expect(response.body.brands).toContain('Future2050');
+      expect(response.body.brands).toContain('Brand 1');
+      expect(response.body.brands).toContain('Brand 14');
     });
   });
 });

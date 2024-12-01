@@ -1,170 +1,170 @@
 [
   {
     "_id": "6199477765bcf27b80cfe57f",
-    "name": "Vodka",
-    "slug": "vodka",
+    "name": "Subcategory1-c3",
+    "slug": "subcategory1-c3",
     "categoryId": "6199475565bcf27b80cfe574"
   },
   {
     "_id": "61b2835c75d5581f5508836a",
-    "name": "Alcohol",
-    "slug": "alcohol",
+    "name": "Subcategory2-c3",
+    "slug": "subcategory2-c3",
     "categoryId": "6199475565bcf27b80cfe574"
   },
   {
     "_id": "6199478a65bcf27b80cfe585",
-    "name": "Water",
-    "slug": "water",
+    "name": "Subcategory3-c3",
+    "slug": "subcategory3-c3",
     "categoryId": "6199475565bcf27b80cfe574"
   },
   {
     "_id": "6199479265bcf27b80cfe588",
-    "name": "Juice",
-    "slug": "juice",
+    "name": "Subcategory4-c3",
+    "slug": "subcategory4-c3",
     "categoryId": "6199475565bcf27b80cfe574"
   },
   {
     "_id": "61994f541cba2ad4dea614ef",
-    "name": "Lasagna",
-    "slug": "lasagna",
+    "name": "Subcategory5-c2",
+    "slug": "subcategory5-c2",
     "categoryId": "6199475165bcf27b80cfe571"
   },
   {
     "_id": "619a5b94aabbae42fc6b8259",
-    "name": "Croissants",
-    "slug": "croissants",
+    "name": "Subcategory6-c2",
+    "slug": "subcategory6-c2",
     "categoryId": "6199475165bcf27b80cfe571"
   },
   {
     "_id": "619ec482ae78a56725405654",
-    "name": "Chocolate",
-    "slug": "chocolate",
+    "name": "Subcategory7-c2",
+    "slug": "subcategory7-c2",
     "categoryId": "6199475165bcf27b80cfe571"
   },
   {
     "_id": "61b27f4a8c18d90664b9b7f3",
-    "name": "Shoes",
-    "slug": "shoes",
+    "name": "Subcategory8-c5",
+    "slug": "subcategory8-c5",
     "categoryId": "619a5b86aabbae42fc6b8253"
   },
   {
     "_id": "61b27f4e8c18d90664b9b7f9",
-    "name": "Shirts",
-    "slug": "shirts",
+    "name": "Subcategory9-c5",
+    "slug": "subcategory9-c5",
     "categoryId": "619a5b86aabbae42fc6b8253"
   },
   {
     "_id": "61b27f528c18d90664b9b7fc",
-    "name": "Skirts",
-    "slug": "skirts",
+    "name": "Subcategory10-c5",
+    "slug": "subcategory10-c5",
     "categoryId": "619a5b86aabbae42fc6b8253"
   },
   {
     "_id": "61b27f548c18d90664b9b7ff",
-    "name": "Blouses",
-    "slug": "blouses",
+    "name": "Subcategory11-c5",
+    "slug": "subcategory11-c5",
     "categoryId": "619a5b86aabbae42fc6b8253"
   },
   {
     "_id": "63ac8c84a5ea72fd475748ab",
-    "name": "Other clothes",
-    "slug": "other-clothes",
+    "name": "Subcategory12-c5",
+    "slug": "subcategory12-c5",
     "categoryId": "619a5b86aabbae42fc6b8253"
   },
   {
     "_id": "61b27f568c18d90664b9b802",
-    "name": "Parfums",
-    "slug": "parfums",
+    "name": "Subcategory13-c4",
+    "slug": "subcategory13-c4",
     "categoryId": "6199476765bcf27b80cfe57a"
   },
   {
     "_id": "61b2eb3c8026fa02fca82724",
-    "name": "Watches",
-    "slug": "watches",
+    "name": "Subcategory14-c4",
+    "slug": "subcategory14-c4",
     "categoryId": "6199476765bcf27b80cfe57a"
   },
   {
     "_id": "61b2ecfcdf32b367e09fd7fd",
-    "name": "Men",
-    "slug": "men",
+    "name": "Subcategory15-c4",
+    "slug": "subcategory15-c4",
     "categoryId": "6199476765bcf27b80cfe57a"
   },
   {
     "_id": "61b2ecfedf32b367e09fd800",
-    "name": "Women",
-    "slug": "women",
+    "name": "Subcategory16-c4",
+    "slug": "subcategory16-c4",
     "categoryId": "6199476765bcf27b80cfe57a"
   },
   {
     "_id": "61b2ee7f1bee8d2b7644b6e0",
-    "name": "High-Tech",
-    "slug": "high-tech",
+    "name": "Subcategory17-c1",
+    "slug": "subcategory17-c1",
     "categoryId": "6199474c65bcf27b80cfe56e"
   },
   {
     "_id": "63ac83fec7d4970364449974",
-    "name": "Personal laptops",
-    "slug": "personal-laptops",
+    "name": "Subcategory18-c1",
+    "slug": "subcategory18-c1",
     "categoryId": "6199474c65bcf27b80cfe56e"
   },
   {
     "_id": "63ac95020fc52bfb9ff5910f",
-    "name": "Web cameras",
-    "slug": "web-cameras",
+    "name": "Subcategory19-c6",
+    "slug": "subcategory19-c6",
     "categoryId": "63ac94c1cdc1fa5f101c139d"
   },
   {
     "_id": "63ac9521e08d67c60a6ea76c",
-    "name": "Surveillance cameras",
-    "slug": "surveillance-cameras",
+    "name": "Subcategory20-c6",
+    "slug": "subcategory20-c6",
     "categoryId": "63ac94c1cdc1fa5f101c139d"
   },
   {
     "_id": "65847a1f0bcf4aae15b56f3d",
-    "name": "Healthy",
-    "slug": "healthy",
+    "name": "Subcategory21-c2",
+    "slug": "subcategory21-c2",
     "categoryId": "6199475165bcf27b80cfe571"
   },
   {
     "_id": "65847c6e94b7f49f65683bc1",
-    "name": "Phones",
-    "slug": "phones",
+    "name": "Subcategory22-c9",
+    "slug": "subcategory22-c9",
     "categoryId": "65847c2d1d02915686907446"
   },
   {
     "_id": "659d267eaba7b01a9c7f9ef6",
-    "name": "Drill Machines",
-    "slug": "drill-machines",
+    "name": "Subcategory23-c13",
+    "slug": "subcategory23-c13",
     "categoryId": "659d18fb5fc0774b04a67b80"
   },
   {
     "_id": "659d26c143919004530aafbe",
-    "name": "Electrical Screwdrivers",
-    "slug": "electrical-screwdrivers",
+    "name": "Subcategory24-c13",
+    "slug": "subcategory24-c13",
     "categoryId": "659d18fb5fc0774b04a67b80"
   },
   {
     "_id": "659d26f5fa356b65bc1f39ad",
-    "name": "Hand Tools",
-    "slug": "hand-tools",
+    "name": "Subcategory25-c14",
+    "slug": "subcategory25-c14",
     "categoryId": "659d19005fc0774b04a67b84"
   },
   {
     "_id": "659d27294cfefa69bce76716",
-    "name": "Printers",
-    "slug": "printers",
+    "name": "Subcategory26-c12",
+    "slug": "subcategory26-c12",
     "categoryId": "659d18cea9813470e436308a"
   },
   {
     "_id": "659d27304cfefa69bce7671b",
-    "name": "Scanners",
-    "slug": "scanners",
+    "name": "Subcategory27-c12",
+    "slug": "subcategory27-c12",
     "categoryId": "659d18cea9813470e436308a"
   },
   {
     "_id": "659d27ab0c8567fc7a2c8a1d",
-    "name": "Flashlights",
-    "slug": "flashlights",
+    "name": "Subcategory28-c11",
+    "slug": "subcategory28-c11",
     "categoryId": "659d187551f8161f43bbd0f6"
   }
 ]
