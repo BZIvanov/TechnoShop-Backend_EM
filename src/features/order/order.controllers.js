@@ -37,158 +37,168 @@ const getBuyerOrders = catchAsync(async (req, res) => {
   const pageNumber = parseInt(page, 10) || 0;
   const perPageNumber = parseInt(perPage, 10) || 5;
 
-  const builder = await getBuyerOrdersQueryParams({
+  const builder = getBuyerOrdersQueryParams({
     buyer: req.user._id,
     deliveryStatus,
   });
 
-  if (req.user.role === userRoles.admin) {
-    delete builder.buyer;
+  const orders = await Order.find(builder)
+    .skip(pageNumber * perPageNumber)
+    .limit(perPageNumber)
+    .populate('coupon', 'name discount')
+    .populate('buyer', '_id username')
+    .populate('products.product', '_id title price')
+    .populate('products.shop', 'shopInfo')
+    .sort([[sortColumn, parseInt(sortOrder, 10) || -1]])
+    .exec();
 
-    // use aggragation, because for the admin we want to display the main order and all seller order items included
-    const orders = await Order.aggregate([
-      { $match: builder }, // Match based on admin's filter criteria
-      {
-        $lookup: {
-          from: 'orderitems', // Join OrderItems based on parentOrder
-          localField: '_id',
-          foreignField: 'parentOrder',
-          as: 'orderItems',
-        },
+  const totalCount = await Order.where(builder).countDocuments();
+
+  res.status(httpStatus.OK).json({ success: true, orders, totalCount });
+});
+
+const getAdminOrders = catchAsync(async (req, res) => {
+  const {
+    sortColumn = 'createdAt',
+    sortOrder,
+    page,
+    perPage,
+    deliveryStatus,
+  } = req.query;
+
+  const pageNumber = parseInt(page, 10) || 0;
+  const perPageNumber = parseInt(perPage, 10) || 5;
+
+  const builder = {
+    ...(deliveryStatus && { deliveryStatus }),
+  };
+
+  // use aggragation, because for the admin we want to display the main order and all seller order items included
+  const orders = await Order.aggregate([
+    { $match: builder }, // Match based on admin's filter criteria
+    {
+      $lookup: {
+        from: 'orderitems', // Join OrderItems based on parentOrder
+        localField: '_id',
+        foreignField: 'parentOrder',
+        as: 'orderItems',
       },
-      {
-        $lookup: {
-          from: 'shops', // Join shops to enrich orderItems with shop details
-          localField: 'orderItems.shop',
-          foreignField: '_id',
-          as: 'shopDetails',
-        },
+    },
+    {
+      $lookup: {
+        from: 'shops', // Join shops to enrich orderItems with shop details
+        localField: 'orderItems.shop',
+        foreignField: '_id',
+        as: 'shopDetails',
       },
-      {
-        $lookup: {
-          from: 'products', // Join products to enrich orderItems.products with product details
-          localField: 'orderItems.products.product',
-          foreignField: '_id',
-          as: 'productDetails',
-        },
+    },
+    {
+      $lookup: {
+        from: 'products', // Join products to enrich orderItems.products with product details
+        localField: 'orderItems.products.product',
+        foreignField: '_id',
+        as: 'productDetails',
       },
-      {
-        $lookup: {
-          from: 'users', // Join users to enrich buyer info
-          localField: 'buyer',
-          foreignField: '_id',
-          as: 'buyer',
-        },
+    },
+    {
+      $lookup: {
+        from: 'users', // Join users to enrich buyer info
+        localField: 'buyer',
+        foreignField: '_id',
+        as: 'buyer',
       },
-      {
-        $lookup: {
-          from: 'coupons',
-          localField: 'coupon',
-          foreignField: '_id',
-          as: 'couponDetails',
-        },
+    },
+    {
+      $lookup: {
+        from: 'coupons',
+        localField: 'coupon',
+        foreignField: '_id',
+        as: 'couponDetails',
       },
-      {
-        $unwind: {
-          path: '$buyer', // Unwind buyer array
-          preserveNullAndEmptyArrays: true,
-        },
+    },
+    {
+      $unwind: {
+        path: '$buyer', // Unwind buyer array
+        preserveNullAndEmptyArrays: true,
       },
-      {
-        $addFields: {
-          orderItems: {
-            $map: {
-              input: '$orderItems',
-              as: 'orderItem',
-              in: {
-                _id: '$$orderItem._id',
-                shop: {
-                  $arrayElemAt: [
-                    {
-                      $filter: {
-                        input: '$shopDetails',
-                        as: 'shop',
-                        cond: { $eq: ['$$shop._id', '$$orderItem.shop'] },
-                      },
-                    },
-                    0,
-                  ],
-                },
-                products: {
-                  $map: {
-                    input: '$$orderItem.products',
-                    as: 'product',
-                    in: {
-                      product: {
-                        $arrayElemAt: [
-                          {
-                            $filter: {
-                              input: '$productDetails',
-                              as: 'productDetail',
-                              cond: {
-                                $eq: [
-                                  '$$productDetail._id',
-                                  '$$product.product',
-                                ],
-                              },
-                            },
-                          },
-                          0,
-                        ],
-                      },
-                      count: '$$product.count',
+    },
+    {
+      $addFields: {
+        orderItems: {
+          $map: {
+            input: '$orderItems',
+            as: 'orderItem',
+            in: {
+              _id: '$$orderItem._id',
+              shop: {
+                $arrayElemAt: [
+                  {
+                    $filter: {
+                      input: '$shopDetails',
+                      as: 'shop',
+                      cond: { $eq: ['$$shop._id', '$$orderItem.shop'] },
                     },
                   },
-                },
-                totalPrice: '$$orderItem.totalPrice',
-                deliveryStatus: '$$orderItem.deliveryStatus',
-                paymentStatus: '$$orderItem.paymentStatus',
-                deliveryAddress: '$$orderItem.deliveryAddress',
-                createdAt: '$$orderItem.createdAt',
-                updatedAt: '$$orderItem.updatedAt',
+                  0,
+                ],
               },
+              products: {
+                $map: {
+                  input: '$$orderItem.products',
+                  as: 'product',
+                  in: {
+                    product: {
+                      $arrayElemAt: [
+                        {
+                          $filter: {
+                            input: '$productDetails',
+                            as: 'productDetail',
+                            cond: {
+                              $eq: ['$$productDetail._id', '$$product.product'],
+                            },
+                          },
+                        },
+                        0,
+                      ],
+                    },
+                    count: '$$product.count',
+                  },
+                },
+              },
+              totalPrice: '$$orderItem.totalPrice',
+              deliveryStatus: '$$orderItem.deliveryStatus',
+              paymentStatus: '$$orderItem.paymentStatus',
+              deliveryAddress: '$$orderItem.deliveryAddress',
+              createdAt: '$$orderItem.createdAt',
+              updatedAt: '$$orderItem.updatedAt',
             },
           },
         },
       },
-      {
-        $project: {
-          _id: 1,
-          buyer: { _id: 1, username: 1 },
-          products: 1,
-          totalPrice: 1,
-          deliveryStatus: 1,
-          paymentStatus: 1,
-          deliveryAddress: 1,
-          createdAt: 1,
-          updatedAt: 1,
-          orderItems: 1, // Include enriched orderItems
-          couponDetails: 1,
-        },
+    },
+    {
+      $project: {
+        _id: 1,
+        buyer: { _id: 1, username: 1 },
+        products: 1,
+        totalPrice: 1,
+        deliveryStatus: 1,
+        paymentStatus: 1,
+        deliveryAddress: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        orderItems: 1, // Include enriched orderItems
+        couponDetails: 1,
       },
-      { $sort: { [sortColumn]: parseInt(sortOrder, 10) || -1 } },
-      { $skip: pageNumber * perPageNumber },
-      { $limit: perPageNumber },
-    ]);
+    },
+    { $sort: { [sortColumn]: parseInt(sortOrder, 10) || -1 } },
+    { $skip: pageNumber * perPageNumber },
+    { $limit: perPageNumber },
+  ]);
 
-    const totalCount = await Order.countDocuments(builder);
+  const totalCount = await Order.countDocuments(builder);
 
-    res.status(httpStatus.OK).json({ success: true, orders, totalCount });
-  } else {
-    const orders = await Order.find(builder)
-      .skip(pageNumber * perPageNumber)
-      .limit(perPageNumber)
-      .populate('coupon', 'name discount')
-      .populate('buyer', '_id username')
-      .populate('products.product', '_id title price')
-      .populate('products.shop', 'shopInfo')
-      .sort([[sortColumn, parseInt(sortOrder, 10) || -1]])
-      .exec();
-
-    const totalCount = await Order.where(builder).countDocuments();
-
-    res.status(httpStatus.OK).json({ success: true, orders, totalCount });
-  }
+  res.status(httpStatus.OK).json({ success: true, orders, totalCount });
 });
 
 const getSellerOrdersQueryParams = (params) => {
@@ -511,6 +521,7 @@ const getSellerOrdersStats = catchAsync(async (req, res, next) => {
 
 module.exports = {
   getBuyerOrders,
+  getAdminOrders,
   getSellerOrders,
   createBuyerOrder,
   updateOrderDeliveryStatus,

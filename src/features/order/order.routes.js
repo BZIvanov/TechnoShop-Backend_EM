@@ -2,6 +2,7 @@ const express = require('express');
 
 const {
   getBuyerOrders,
+  getAdminOrders,
   getSellerOrders,
   createBuyerOrder,
   updateOrderDeliveryStatus,
@@ -16,12 +17,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(
-    authenticate,
-    authorize(userRoles.buyer, userRoles.admin),
-    getBuyerOrders,
-  )
+  .get(authenticate, authorize(userRoles.buyer), getBuyerOrders)
   .post(authenticate, authorize(userRoles.buyer), createBuyerOrder);
+
+// the buyer order plus the seller order items
+router
+  .route('/admin')
+  .get(authenticate, authorize(userRoles.admin), getAdminOrders);
 
 router
   .route('/stats')
