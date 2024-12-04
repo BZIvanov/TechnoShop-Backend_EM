@@ -1,7 +1,7 @@
 // this file is loading the dotenv file so all environment variables should reexported from this file
 require('dotenv').config();
 
-module.exports.ENV_VARS = {
+const ENV_VARS = {
   NODE_ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   DATABASE_URI: process.env.DATABASE_URI,
@@ -16,4 +16,16 @@ module.exports.ENV_VARS = {
   SMTP_PASSWORD: process.env.SMTP_PASSWORD,
   FROM_EMAIL: process.env.FROM_EMAIL,
   FROM_NAME: process.env.FROM_NAME,
+};
+
+Object.keys(ENV_VARS).forEach((envVar) => {
+  if (!ENV_VARS[envVar]) {
+    throw new Error(
+      `No value was provided for environment variable: ${envVar}. Check your .env file`,
+    );
+  }
+});
+
+module.exports = {
+  ENV_VARS,
 };

@@ -95,7 +95,7 @@ const updateCategory = catchAsync(async (req, res, next) => {
       category.image.publicId,
     );
 
-    if (removeResult !== 'ok') {
+    if (removeResult !== 'ok' && removeResult !== 'not found') {
       return next(
         new AppError(
           'Remove category image error',
