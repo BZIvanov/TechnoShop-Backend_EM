@@ -23,7 +23,9 @@ const getCoupons = catchAsync(async (req, res) => {
 const createCoupon = catchAsync(async (req, res) => {
   const coupon = await new Coupon(req.body).save();
 
-  res.status(httpStatus.CREATED).json({ success: true, coupon });
+  res
+    .status(httpStatus.CREATED)
+    .json({ success: true, coupon, message: 'Coupon created' });
 });
 
 const deleteCoupon = catchAsync(async (req, res, next) => {
