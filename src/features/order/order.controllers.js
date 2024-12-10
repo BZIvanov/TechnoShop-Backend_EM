@@ -221,7 +221,7 @@ const getSellerOrders = catchAsync(async (req, res) => {
     deliveryStatus,
   } = req.query;
 
-  const pageNumber = parseInt(page, 10) || 1;
+  const pageNumber = parseInt(page, 10) || 0;
   const perPageNumber = parseInt(perPage, 10) || 5;
 
   const shop = await Shop.findOne({ user: req.user._id });
@@ -232,7 +232,7 @@ const getSellerOrders = catchAsync(async (req, res) => {
   });
 
   const orders = await OrderItem.find(builder)
-    .skip((pageNumber - 1) * perPageNumber)
+    .skip(pageNumber * perPageNumber)
     .limit(perPageNumber)
     .populate('coupon', 'name discount')
     .populate('products.product', '_id title price')

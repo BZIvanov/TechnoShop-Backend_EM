@@ -70,11 +70,11 @@ const getProducts = catchAsync(async (req, res) => {
     ...rest,
   });
 
-  const pageNumber = parseInt(page, 10) || 1;
+  const pageNumber = parseInt(page, 10) || 0;
   const perPageNumber = parseInt(perPage, 10) || 12;
 
   const products = await Product.find(builder)
-    .skip((pageNumber - 1) * perPageNumber)
+    .skip(pageNumber * perPageNumber)
     .limit(perPageNumber)
     .populate('category')
     .populate('subcategories')

@@ -29,7 +29,7 @@ const productUpdateValidationSchema = Joi.object({
   title: Joi.string().trim(true).min(2).max(32),
   description: Joi.string().max(2000),
   price: Joi.number().positive().min(0.01).max(99999),
-  discount: Joi.number().min(0.01).max(99.9),
+  discount: Joi.number().min(0.01).max(99.9).optional(),
   category: Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid id'),
   subcategories: Joi.alternatives().try(
     Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid id')),
@@ -37,7 +37,10 @@ const productUpdateValidationSchema = Joi.object({
   ),
   quantity: Joi.number().positive(),
   newImages: Joi.array().items(Joi.any()),
-  existingImages: Joi.array().items(Joi.string()),
+  existingImages: Joi.alternatives().try(
+    Joi.array().items(Joi.string()),
+    Joi.string(),
+  ),
   shipping: Joi.string().valid('Yes', 'No'),
   color: Joi.string().trim(true).max(32),
   brand: Joi.string().trim(true).max(32),

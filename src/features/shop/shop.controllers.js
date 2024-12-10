@@ -26,11 +26,11 @@ const getShops = catchAsync(async (req, res, next) => {
 
   const builder = await getShopsQueryParams({ activityStatus });
 
-  const pageNumber = parseInt(page, 10) || 1;
+  const pageNumber = parseInt(page, 10) || 0;
   const perPageNumber = parseInt(perPage, 10) || 5;
 
   const shops = await Shop.find(builder)
-    .skip((pageNumber - 1) * perPageNumber)
+    .skip(pageNumber * perPageNumber)
     .limit(perPageNumber)
     .populate('user', 'username email')
     .sort({ [sortColumn]: parseInt(order, 10) || -1 });
