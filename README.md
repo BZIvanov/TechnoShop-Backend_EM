@@ -1,18 +1,27 @@
 # Techno Shop Backend
 
+Techno shop backend app.
+
 ## Server setup
 
 Run `npm install` in the root folder (package.json) to install dependencies.
 
-Update `.env` file with correct values. The current ones are fake serving as an example.
+Update `.env` file with correct values. You will have to provide the 3rd party providers credentials and some are predefined.
 
 Run `npm run dev` to start the server in development mode.
 
 ### Prerequisites
 
-- MongoDB v7.0.11 local installation
+- Node.js v20 or higher
+- MongoDB v8 or higher local installation
 
-## Mailtrap setup
+## 3rd party providers
+
+This app is currently using Mailtrap and Cloudinary. You will have to create your accounts to get your credentials.
+
+### Mailtrap
+
+Setup steps:
 
 1. Create an account in Mailtrap.
 2. Click _Add Project_ if you don't have one already.
@@ -20,16 +29,20 @@ Run `npm run dev` to start the server in development mode.
 4. Now after you have Project and Inbox click the settings icon for the Inbox.
 5. From the _SMTP Settings_ tab from the _Integrations_ dropdown, select Node.js nodemailer and there you can find the username and password for the .env file.
 
-## Cloudinary setup
+### Cloudinary
+
+Setup steps:
 
 1. Create your account [here](https://cloudinary.com/).
 2. In the Dashboard under account details you can get your cloud name, api key and secret.
 
-## Testing
+## Scripts
+
+### Testing
 
 The test command in package.json file are valid for setting environment variable for Windows.
 
-## Seeding test data
+### Seeding test data
 
 Run `npm run seed-data` in the root folder (package.json) to seed dummy data. Note that the seeding data is also used in the tests.
 
@@ -39,4 +52,4 @@ Currently all endpoints are prefixed with `/v1`, if at some point you want to in
 
 ## Tech Stack
 
-`Express`, `Mongoose`
+`Express`, `MongoDB`, `Mongoose`
